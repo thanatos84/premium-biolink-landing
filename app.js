@@ -67,6 +67,19 @@ const THEME_BOX_DEFAULTS = {
 };
 
 /**
+ * Escapa caracteres especiales HTML para renderizar texto seguro
+ */
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+/**
  * Genera el elemento HTML del icono de forma flexible e inteligente
  */
 function getIconHtml(iconName, isWhite = false) {
@@ -208,16 +221,82 @@ function renderActionBar() {
 /**
  * 3. Renderiza la sección del Perfil (Avatar, Nombre, Bio)
  */
+function isVideoAvatar(url) {
+  if (!url) return false;
+  return url.toLowerCase().endsWith(".mp4") || url.toLowerCase().endsWith(".webm") || url.toLowerCase().endsWith(".mov");
+}
+
+function renderBanner() {
+  const bannerContainer = document.getElementById("profile-banner");
+  if (!bannerContainer) return;
+
+  const p = CONFIG.profile;
+  const banner = p.headerBanner;
+  
+  const showBanner = banner && banner.show && banner.url && banner.url.trim() !== "";
+  
+  if (showBanner) {
+    document.body.classList.add("has-banner");
+    bannerContainer.style.display = "block";
+    
+    const isVideo = banner.type === "video" || banner.url.toLowerCase().endsWith(".mp4") || banner.url.toLowerCase().endsWith(".webm");
+    const currentUrl = banner.url;
+    
+    if (window.currentBannerUrl !== currentUrl || window.currentBannerType !== banner.type) {
+      if (isVideo) {
+        bannerContainer.innerHTML = `
+          <video autoplay loop muted playsinline>
+            <source src="${currentUrl}" type="video/mp4">
+          </video>
+        `;
+      } else {
+        bannerContainer.innerHTML = `<img src="${currentUrl}" alt="Banner de cabecera" onerror="this.parentNode.style.display='none'; document.body.classList.remove('has-banner');">`;
+      }
+      window.currentBannerUrl = currentUrl;
+      window.currentBannerType = banner.type;
+    }
+  } else {
+    document.body.classList.remove("has-banner");
+    bannerContainer.style.display = "none";
+    bannerContainer.innerHTML = "";
+    window.currentBannerUrl = "";
+    window.currentBannerType = "";
+  }
+}
+
 function renderProfile() {
   if (typeof CONFIG === "undefined") return;
 
   const p = CONFIG.profile;
-  const avatarImg = document.getElementById("profile-avatar");
-  if (avatarImg) {
-    avatarImg.src = p.avatar || "profile.jpg";
-    avatarImg.onerror = () => {
-      avatarImg.src = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=250&q=80";
-    };
+  
+  // Renderizar banner primero
+  renderBanner();
+
+  const avatarContainer = document.getElementById("profile-avatar-container");
+  if (avatarContainer) {
+    const avatarUrl = p.avatar || "profile.jpg";
+    const isVideo = p.avatarType === "video" || isVideoAvatar(avatarUrl);
+    
+    if (isVideo) {
+      avatarContainer.innerHTML = `
+        <video id="profile-avatar-video" class="avatar-img" autoplay loop muted playsinline>
+          <source src="${avatarUrl}" type="video/mp4">
+        </video>
+      `;
+    } else {
+      avatarContainer.innerHTML = `
+        <img id="profile-avatar" src="${avatarUrl}" alt="Foto de perfil de ${p.name}" class="avatar-img" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=250&q=80'">
+      `;
+    }
+
+    // Aplicar tamaño y forma
+    const size = p.avatarSize || 100;
+    avatarContainer.style.setProperty("--avatar-size", `${size}px`);
+
+    // Limpiar clases de forma antiguas
+    avatarContainer.className = "avatar-wrapper";
+    const shape = p.avatarShape || "circle";
+    avatarContainer.classList.add(`avatar-shape-${shape}`);
   }
 
   const nameEl = document.getElementById("profile-name");
@@ -252,7 +331,7 @@ function renderProfile() {
         const classes = shouldApplyParaBox ? 'class="card-mode"' : '';
         const styles = shouldApplyParaBox ? `style="--profile-box-bg: ${rgbaBg}; --profile-box-border: rgba(255, 255, 255, 0.08);"` : '';
         
-        return `<p ${classes} ${styles}>${text}</p>`;
+        return `<p ${classes} ${styles}>${escapeHtml(text)}</p>`;
       }).join('');
       bioEl.style.display = "block";
     } else {
@@ -343,7 +422,7 @@ function renderContent() {
       secDiv.style.animation = `pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
       secDiv.style.animationDelay = animationDelay;
       secDiv.style.opacity = 0;
-      secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${item.title}</span>`;
+      secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.title)}</span>`;
       
       // Aplicar caja de lectura si está activada
       const card = CONFIG.theme && CONFIG.theme.profileCard;
@@ -400,7 +479,7 @@ function renderContent() {
 
       a.innerHTML = `
         <div class="link-icon-container">${getIconHtml(item.icon)}</div>
-        <div class="link-title">${item.title}</div>
+        <div class="link-title">${escapeHtml(item.title)}</div>
         <i class="fas fa-chevron-right link-arrow"></i>
       `;
 

@@ -13,13 +13,23 @@ const CONFIG = {
   profile: {
     name: "Jona",               // Tu nombre principal
     verified: true,             // ¿Mostrar check azul de verificado? (true/false)
-    avatar: "profile.jpg",       // Archivo de tu foto. Debe estar en la misma carpeta.
+    avatar: "profile.jpg",       // Archivo de tu foto o vídeo de perfil.
+    avatarType: "image",       // Tipo de avatar ("image" o "video")
+    avatarShape: "rounded",     // Forma del avatar ("circle", "square", "rounded", etc.)
+    avatarSize: 160,         // Tamaño del avatar en px
     title: "Senior Systems & Infrastructure Engineer ☁️", // Tu cargo/título (aparecerá en negrita)
+    
+    // Banner/Cabecera superior personalizado (Imagen o Video)
+    headerBanner: {
+      show: true,
+      type: "video",
+      url: "https://www.pexels.com/download/video/33987219/"
+    },
     
     // Tu biografía. Cada elemento en la lista es un párrafo nuevo.
     bio: [
       { text: "Apasionado de la fotografía, la montaña y el buen café 🏔️📸☕\nConectando infraestructura compleja de día y disfrutando de buenas conversaciones con una cerveza fría de noche. ✨🍻\nEmpático, curioso y siempre listo para una gran charla en excelente compañía. 👥", showBox: true },
-      { text: "esto es una prueba", showBox: true }
+      { text: "", showBox: false }
     ],
     
     // Datos de contacto para la tarjeta digital (.vcf / VCard)

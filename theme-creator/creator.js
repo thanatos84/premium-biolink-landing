@@ -168,6 +168,23 @@ function loadConfigValues() {
     if (p.avatar) document.getElementById("input-avatar").value = p.avatar;
     if (p.title) document.getElementById("input-title").value = p.title;
     
+    // Cargar nuevas configuraciones de avatar
+    const avatarType = p.avatarType || "image";
+    const avatarShape = p.avatarShape || "circle";
+    const avatarSize = p.avatarSize || 100;
+    
+    document.getElementById("select-profile-avatar-type").value = avatarType;
+    document.getElementById("select-profile-avatar-shape").value = avatarShape;
+    document.getElementById("input-profile-avatar-size").value = avatarSize;
+    document.getElementById("val-profile-avatar-size").textContent = `${avatarSize}px`;
+
+    // Cargar banner
+    const banner = p.headerBanner || { show: false, type: "image", url: "" };
+    document.getElementById("input-profile-banner-show").checked = !!banner.show;
+    document.getElementById("select-profile-banner-type").value = banner.type || "image";
+    document.getElementById("input-profile-banner-url").value = banner.url || "";
+    document.getElementById("group-profile-banner-details").style.display = banner.show ? "flex" : "none";
+    
     // Cargar biografía dinámica
     if (p.bio && Array.isArray(p.bio)) {
       profileBio = p.bio.map(para => {
@@ -537,6 +554,16 @@ function renderActionBarPreview() {
   actionBar.style.display = visibleCount === 0 ? "none" : "flex";
 }
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function getIconHtml(iconName, isWhite = false) {
   if (!iconName) return '';
   const iconStr = iconName.trim();
@@ -564,7 +591,9 @@ function initFormBindings() {
     "select-button-anim", "input-accent-color", "input-qr-url",
     "input-footer-show", "input-footer-text", "input-footer-link-text",
     "input-footer-link-url", "input-footer-extra",
-    "select-bg-type", "input-bg-url"
+    "select-bg-type", "input-bg-url",
+    "select-profile-avatar-type", "select-profile-avatar-shape",
+    "select-profile-banner-type", "input-profile-banner-url"
   ];
 
   inputs.forEach(id => {
@@ -578,6 +607,26 @@ function initFormBindings() {
       updateLivePreview();
     });
   });
+
+  // Vinculaciones específicas para Banner
+  const bannerShowInput = document.getElementById("input-profile-banner-show");
+  const bannerDetailsGroup = document.getElementById("group-profile-banner-details");
+  if (bannerShowInput && bannerDetailsGroup) {
+    bannerShowInput.addEventListener("change", () => {
+      bannerDetailsGroup.style.display = bannerShowInput.checked ? "flex" : "none";
+      updateLivePreview();
+    });
+  }
+
+  // Vinculaciones específicas para Slider de Tamaño de Avatar
+  const avatarSizeInput = document.getElementById("input-profile-avatar-size");
+  const avatarSizeVal = document.getElementById("val-profile-avatar-size");
+  if (avatarSizeInput && avatarSizeVal) {
+    avatarSizeInput.addEventListener("input", () => {
+      avatarSizeVal.textContent = `${avatarSizeInput.value}px`;
+      updateLivePreview();
+    });
+  }
 
   // Enlazar controles de cajas de lectura (modo tarjeta)
   const boxShowCheck = document.getElementById("input-profile-box-show");
@@ -900,6 +949,14 @@ function updateLivePreview() {
   const bgType = document.getElementById("select-bg-type").value;
   const bgUrl = document.getElementById("input-bg-url").value;
 
+  const avatarType = document.getElementById("select-profile-avatar-type").value;
+  const avatarShape = document.getElementById("select-profile-avatar-shape").value;
+  const avatarSize = parseInt(document.getElementById("input-profile-avatar-size").value);
+
+  const bannerShow = document.getElementById("input-profile-banner-show").checked;
+  const bannerType = document.getElementById("select-profile-banner-type").value;
+  const bannerUrl = document.getElementById("input-profile-banner-url").value;
+
   // Actualizar tema en body
   document.body.className = "creator-body";
   document.body.classList.add(`theme-${theme}`);
@@ -994,7 +1051,7 @@ function updateLivePreview() {
         const classes = shouldApplyParaBox ? 'class="card-mode"' : '';
         const styles = shouldApplyParaBox ? `style="--profile-box-bg: ${rgbaColor}; --profile-box-border: rgba(255, 255, 255, 0.08);"` : '';
         
-        return `<p ${classes} ${styles}>${text}</p>`;
+        return `<p ${classes} ${styles}>${escapeHtml(text)}</p>`;
       }).join("");
       bioPreviewEl.style.display = "block";
     } else {
@@ -1003,11 +1060,64 @@ function updateLivePreview() {
     }
   }
   
-  const avatarImg = document.getElementById("preview-profile-avatar");
-  avatarImg.src = avatar.startsWith("http") || avatar.startsWith("./") ? avatar : `../${avatar}`;
-  avatarImg.onerror = () => {
-    avatarImg.src = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=250&q=80";
-  };
+  const previewAvatarContainer = document.getElementById("preview-profile-avatar-container");
+  if (previewAvatarContainer) {
+    const finalAvatarUrl = avatar.startsWith("http") || avatar.startsWith("./") || avatar.startsWith("../") ? avatar : `../${avatar}`;
+    const isVideo = avatarType === "video" || finalAvatarUrl.toLowerCase().endsWith(".mp4") || finalAvatarUrl.toLowerCase().endsWith(".webm");
+    
+    if (isVideo) {
+      previewAvatarContainer.innerHTML = `
+        <video id="preview-profile-avatar-video" class="avatar-img" autoplay loop muted playsinline>
+          <source src="${finalAvatarUrl}" type="video/mp4">
+        </video>
+      `;
+    } else {
+      previewAvatarContainer.innerHTML = `
+        <img id="preview-profile-avatar" src="${finalAvatarUrl}" alt="Preview Avatar" class="avatar-img" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=250&q=80'">
+      `;
+    }
+    
+    // Aplicar tamaño y forma
+    previewAvatarContainer.style.setProperty("--avatar-size", `${avatarSize}px`);
+    
+    // Cambiar clases de forma
+    previewAvatarContainer.className = "avatar-wrapper";
+    previewAvatarContainer.classList.add(`avatar-shape-${avatarShape}`);
+  }
+
+  // Renderizar banner en el simulador
+  const previewBanner = document.getElementById("preview-profile-banner");
+  if (previewBanner) {
+    const showBanner = bannerShow && bannerUrl && bannerUrl.trim() !== "";
+    
+    if (showBanner) {
+      if (previewFrame) previewFrame.classList.add("has-banner");
+      previewBanner.style.display = "block";
+      
+      const isVideo = bannerType === "video" || bannerUrl.toLowerCase().endsWith(".mp4") || bannerUrl.toLowerCase().endsWith(".webm");
+      const finalUrl = bannerUrl.startsWith("http") || bannerUrl.startsWith("./") || bannerUrl.startsWith("../") ? bannerUrl : `../${bannerUrl}`;
+      
+      if (window.currentPreviewBannerUrl !== finalUrl || window.currentPreviewBannerType !== bannerType) {
+        if (isVideo) {
+          previewBanner.innerHTML = `
+            <video autoplay loop muted playsinline>
+              <source src="${finalUrl}" type="video/mp4">
+            </video>
+          `;
+        } else {
+          previewBanner.innerHTML = `<img src="${finalUrl}" alt="Preview Banner" onerror="this.parentNode.style.display='none'; document.querySelector('.preview-frame-container').classList.remove('has-banner');">`;
+        }
+        window.currentPreviewBannerUrl = finalUrl;
+        window.currentPreviewBannerType = bannerType;
+      }
+    } else {
+      if (previewFrame) previewFrame.classList.remove("has-banner");
+      previewBanner.style.display = "none";
+      previewBanner.innerHTML = "";
+      window.currentPreviewBannerUrl = "";
+      window.currentPreviewBannerType = "";
+    }
+  }
 
   // Helper para aplicar estilos de tarjeta de lectura en el simulador
   const applyCardModePreview = (element, shouldApply) => {
@@ -1073,7 +1183,7 @@ function updateLivePreview() {
           secDiv.style.setProperty('--profile-box-border', 'rgba(255, 255, 255, 0.08)');
         }
 
-        secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${item.title}</span>`;
+        secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.title)}</span>`;
         contentListEl.appendChild(secDiv);
       } else if (item.type === "separator") {
         const sepDiv = document.createElement("div");
@@ -1090,7 +1200,7 @@ function updateLivePreview() {
 
         a.innerHTML = `
           <div class="link-icon-container">${getIconHtml(item.icon)}</div>
-          <div class="link-title">${item.title}</div>
+          <div class="link-title">${escapeHtml(item.title)}</div>
           <i class="fas fa-chevron-right link-arrow"></i>
         `;
         contentListEl.appendChild(a);
@@ -1727,6 +1837,14 @@ function exportConfigFile() {
   const bgType = document.getElementById("select-bg-type").value;
   const bgUrl = document.getElementById("input-bg-url").value;
 
+  const avatarType = document.getElementById("select-profile-avatar-type").value;
+  const avatarShape = document.getElementById("select-profile-avatar-shape").value;
+  const avatarSize = parseInt(document.getElementById("input-profile-avatar-size").value);
+
+  const bannerShow = document.getElementById("input-profile-banner-show").checked;
+  const bannerType = document.getElementById("select-profile-banner-type").value;
+  const bannerUrl = document.getElementById("input-profile-banner-url").value;
+
   // Formatear ordenes del diseño
   const compOrderStr = layoutComponentOrder.map(item => `"${item}"`).join(", ");
   const actOrderStr = layoutActionsOrder.map(item => `"${item}"`).join(", ");
@@ -1800,8 +1918,18 @@ const CONFIG = {
   profile: {
     name: "${name.replace(/"/g, '\\"')}",               // Tu nombre principal
     verified: ${verified},             // ¿Mostrar check azul de verificado? (true/false)
-    avatar: "${avatar.replace(/"/g, '\\"')}",       // Archivo de tu foto. Debe estar en la misma carpeta.
+    avatar: "${avatar.replace(/"/g, '\\"')}",       // Archivo de tu foto o vídeo de perfil.
+    avatarType: "${avatarType}",       // Tipo de avatar ("image" o "video")
+    avatarShape: "${avatarShape}",     // Forma del avatar ("circle", "square", "rounded", etc.)
+    avatarSize: ${avatarSize},         // Tamaño del avatar en px
     title: "${title.replace(/"/g, '\\"')}", // Tu cargo/título (aparecerá en negrita)
+    
+    // Banner/Cabecera superior personalizado (Imagen o Video)
+    headerBanner: {
+      show: ${bannerShow},
+      type: "${bannerType}",
+      url: "${bannerUrl.replace(/"/g, '\\"')}"
+    },
     
     // Tu biografía. Cada elemento en la lista es un párrafo nuevo.
     bio: [

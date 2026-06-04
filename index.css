@@ -282,16 +282,72 @@ body {
   width: 100%;
 }
 
+/* Banner/Header superior */
+.profile-banner {
+  width: 100%;
+  height: 160px; /* Altura en móviles */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: none;
+}
+
+@media (min-width: 580px) {
+  .profile-banner {
+    height: 200px; /* Altura en escritorio */
+  }
+}
+
+.profile-banner img,
+.profile-banner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Redimensiones del layout al tener banner activo */
+body.has-banner,
+.preview-frame-container.has-banner {
+  padding-top: 0 !important;
+}
+
+body.has-banner .container,
+.preview-frame-container.has-banner .preview-container {
+  margin-top: 100px !important;
+}
+
+@media (min-width: 580px) {
+  body.has-banner .container,
+  .preview-frame-container.has-banner .preview-container {
+    margin-top: 120px !important;
+  }
+}
+
 .avatar-wrapper {
   position: relative;
-  width: 100px; /* Reducido para móvil */
-  height: 100px;
+  width: var(--avatar-size, 100px) !important;
+  height: var(--avatar-size, 100px) !important;
   margin-bottom: 12px;
-  border-radius: 50%;
   padding: 3px;
   background: var(--border-gradient);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 10px var(--accent-glow);
   transition: var(--transition-smooth);
+}
+
+body.has-banner .avatar-wrapper,
+.preview-frame-container.has-banner .avatar-wrapper {
+  margin-top: -50px !important;
+  z-index: 10;
+  border: 4px solid var(--bg-color, #0b0f19);
+}
+
+@media (min-width: 580px) {
+  body.has-banner .avatar-wrapper,
+  .preview-frame-container.has-banner .avatar-wrapper {
+    margin-top: -60px !important;
+  }
 }
 
 .avatar-wrapper:hover {
@@ -302,8 +358,87 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
   border: 3px solid #0b0f19;
+  box-sizing: border-box;
+}
+
+/* Clases de formas geométricas recortadas por clip-path */
+.avatar-shape-circle,
+.avatar-shape-circle .avatar-img {
+  border-radius: 50% !important;
+  clip-path: none !important;
+}
+
+.avatar-shape-square,
+.avatar-shape-square .avatar-img {
+  border-radius: 0 !important;
+  clip-path: none !important;
+}
+
+.avatar-shape-rounded,
+.avatar-shape-rounded .avatar-img {
+  border-radius: 16% !important;
+  clip-path: none !important;
+}
+
+.avatar-shape-hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%) !important;
+  border-radius: 0 !important;
+}
+.avatar-shape-hexagon .avatar-img {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%) !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.avatar-shape-octagon {
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%) !important;
+  border-radius: 0 !important;
+}
+.avatar-shape-octagon .avatar-img {
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%) !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.avatar-shape-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+  border-radius: 0 !important;
+}
+.avatar-shape-triangle .avatar-img {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.avatar-shape-diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+  border-radius: 0 !important;
+}
+.avatar-shape-diamond .avatar-img {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.avatar-shape-heart {
+  clip-path: polygon(50% 18%, 80% 0%, 100% 20%, 100% 50%, 50% 95%, 0% 50%, 0% 20%, 20% 0%) !important;
+  border-radius: 0 !important;
+}
+.avatar-shape-heart .avatar-img {
+  clip-path: polygon(50% 18%, 80% 0%, 100% 20%, 100% 50%, 50% 95%, 0% 50%, 0% 20%, 20% 0%) !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.avatar-shape-star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%) !important;
+  border-radius: 0 !important;
+}
+.avatar-shape-star .avatar-img {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%) !important;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 body.theme-luxury .avatar-img { border-color: #060606; }

@@ -80,13 +80,68 @@
               </label>
             </div>
 
-            <div class="form-group">
-              <label for="input-avatar">Foto de Perfil (Nombre del archivo o URL)</label>
-              <input type="text" id="input-avatar" value="profile.jpg">
-              <span class="help-text">Guarda tu foto en la carpeta del proyecto con este nombre.</span>
+            <!-- Configuración del Banner de Cabecera -->
+            <p class="section-desc" style="margin-top: 15px; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; border-top: 1px solid var(--panel-border); padding-top: 12px;">Banner / Cabecera Superior</p>
+            <div class="form-group checkbox-group" style="margin-bottom: 8px;">
+              <label for="input-profile-banner-show">
+                <input type="checkbox" id="input-profile-banner-show">
+                Mostrar Banner Superior (100% Pantalla)
+              </label>
+            </div>
+            
+            <div id="group-profile-banner-details" style="display: none; flex-direction: column; gap: 8px; margin-bottom: 15px; padding-left: 12px; border-left: 2px solid var(--panel-border);">
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="select-profile-banner-type">Tipo de Banner</label>
+                  <select id="select-profile-banner-type">
+                    <option value="image">Imagen estática / GIF</option>
+                    <option value="video">Vídeo en bucle (MP4)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="input-profile-banner-url">Archivo del Banner (o URL)</label>
+                <input type="text" id="input-profile-banner-url" placeholder="Ej: banner.jpg o video-banner.mp4">
+              </div>
             </div>
 
-            <div class="form-group">
+            <p class="section-desc" style="margin-top: 15px; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; border-top: 1px solid var(--panel-border); padding-top: 12px;">Foto de Perfil</p>
+            <div class="form-group" style="margin-bottom: 8px;">
+              <label for="input-avatar">Archivo de Foto de Perfil (o URL)</label>
+              <input type="text" id="input-avatar" value="profile.jpg">
+            </div>
+
+            <!-- Configuración del Avatar -->
+            <div class="form-row" style="margin-bottom: 8px;">
+              <div class="form-group col">
+                <label for="select-profile-avatar-type">Tipo de Perfil</label>
+                <select id="select-profile-avatar-type">
+                  <option value="image">Imagen / GIF</option>
+                  <option value="video">Vídeo (MP4)</option>
+                </select>
+              </div>
+              <div class="form-group col">
+                <label for="select-profile-avatar-shape">Forma del Perfil</label>
+                <select id="select-profile-avatar-shape">
+                  <option value="circle">Circular</option>
+                  <option value="square">Cuadrado</option>
+                  <option value="rounded">Bordes Redondeados</option>
+                  <option value="hexagon">Hexágono</option>
+                  <option value="octagon">Octágono</option>
+                  <option value="triangle">Triángulo</option>
+                  <option value="diamond">Rombo</option>
+                  <option value="heart">Corazón</option>
+                  <option value="star">Estrella</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="input-profile-avatar-size">Tamaño de la Foto: <span id="val-profile-avatar-size">100px</span></label>
+              <input type="range" id="input-profile-avatar-size" min="60" max="160" step="5" value="100" style="width: 100%; accent-color: var(--color-primary);">
+            </div>
+
+            <div class="form-group" style="border-top: 1px solid var(--panel-border); padding-top: 12px;">
               <label for="input-title">Título Profesional / Cargo</label>
               <input type="text" id="input-title" value="Senior Systems & Infrastructure Engineer ☁️">
             </div>
@@ -388,12 +443,14 @@
         <canvas id="starfield" class="preview-starfield"></canvas>
         
         <div class="phone-screen">
+          <!-- Banner de Cabecera del Simulador (Imagen o Video) -->
+          <div id="preview-profile-banner" class="profile-banner"></div>
           
           <!-- Contenido renderizado de la landing page -->
           <div class="preview-container container">
             <header class="profile-header" id="preview-profile-header">
-              <div class="avatar-wrapper">
-                <img id="preview-profile-avatar" src="../profile.jpg" alt="Preview Avatar" class="avatar-img">
+              <div class="avatar-wrapper" id="preview-profile-avatar-container">
+                <!-- Generado dinámicamente en creator.js (imagen o video) -->
               </div>
               <div id="preview-profile-name-title-container" class="profile-name-title-container">
                 <div class="name-container">
