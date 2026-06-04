@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creador de Temas Visual | Jonatan Pons</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+
+  <!-- Google Fonts: Outfit e Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Estilos del Creador -->
+  <link rel="stylesheet" href="creator.css">
+  
+  <!-- Enlace a los estilos de la Landing Page para la previsualización directa -->
+  <link rel="stylesheet" href="../index.css">
+</head>
+<body class="creator-body">
+
+  <div class="app-layout">
+    
+    <!-- ==========================================================
+         PANEL IZQUIERDO: CONTROLES DEL EDITOR
+         ========================================================== -->
+    <aside class="editor-panel">
+      <header class="editor-header">
+        <div class="logo">
+          <i class="fas fa-sliders-h logo-icon"></i>
+          <div>
+            <h1>Creador de Temas</h1>
+            <p>Diseña tu Landing Page en tiempo real</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="btn-export" class="btn btn-primary">
+            <i class="fas fa-download"></i> Exportar config.js
+          </button>
+        </div>
+      </header>
+
+      <div class="editor-scroll">
+        <!-- SECCIÓN 0: Estructura de la Página -->
+        <details open class="editor-section">
+          <summary><i class="fas fa-sort"></i> Estructura y Orden de la Página</summary>
+          <div class="section-content">
+            <p class="section-desc">Arrastra y suelta los bloques principales para reordenar la estructura general de tu Landing Page.</p>
+            <div id="layout-order-container" class="drag-list">
+              <!-- Cargado dinámicamente -->
+            </div>
+            
+            <p class="section-desc" style="margin-top: 20px; border-top: 1px solid var(--panel-border); padding-top: 15px;">
+              Configura y reordena los botones de la barra de acciones rápidas (Guardar, Compartir, QR).
+            </p>
+            <div id="actions-order-container" class="drag-list">
+              <!-- Cargado dinámicamente -->
+            </div>
+          </div>
+        </details>
+
+        <!-- SECCIÓN 1: Perfil -->
+        <details open class="editor-section">
+          <summary><i class="far fa-user"></i> Información del Perfil</summary>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="input-name">Nombre</label>
+              <input type="text" id="input-name" value="Jona">
+            </div>
+            
+            <div class="form-group checkbox-group">
+              <label for="input-verified">
+                <input type="checkbox" id="input-verified" checked>
+                Mostrar Check Azul de Verificado
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="input-avatar">Foto de Perfil (Nombre del archivo o URL)</label>
+              <input type="text" id="input-avatar" value="profile.jpg">
+              <span class="help-text">Guarda tu foto en la carpeta del proyecto con este nombre.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="input-title">Título Profesional / Cargo</label>
+              <input type="text" id="input-title" value="Senior Systems & Infrastructure Engineer ☁️">
+            </div>
+
+            <div class="form-group">
+              <label>Biografía (Párrafos dinámicos)</label>
+              <div id="bio-list-container" class="drag-list">
+                <!-- Cargado dinámicamente por creator.js -->
+              </div>
+              <button id="btn-add-bio" class="btn btn-secondary btn-sm" style="margin-top: 10px; margin-bottom: 0;">
+                <i class="fas fa-plus"></i> Añadir Párrafo
+              </button>
+            </div>
+
+            <p class="section-desc" style="margin-top: 20px; border-top: 1px solid var(--panel-border); padding-top: 15px; margin-bottom: 12px;">
+              Cajas de Lectura (Evita que el texto sea ilegible en vídeos y fondos brillantes).
+            </p>
+            <div class="form-group checkbox-group" style="margin-bottom: 8px;">
+              <label for="input-profile-box-show">
+                <input type="checkbox" id="input-profile-box-show">
+                Caja de Lectura en Cabecera de Perfil (Todo completo)
+              </label>
+            </div>
+            
+            <!-- Controles granulares cuando no se usa la cabecera completa -->
+            <div id="subgroup-profile-header-boxes" style="padding-left: 20px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 8px;">
+              <div class="form-group checkbox-group" style="margin-bottom: 0;">
+                <label for="input-profile-box-show-nametitle">
+                  <input type="checkbox" id="input-profile-box-show-nametitle">
+                  Caja de Lectura en Nombre + Título
+                </label>
+              </div>
+              <div class="form-group checkbox-group" style="margin-bottom: 0;">
+                <label for="input-profile-box-show-bio">
+                  <input type="checkbox" id="input-profile-box-show-bio">
+                  Caja de Lectura en toda la Biografía
+                </label>
+              </div>
+            </div>
+            <div class="form-group checkbox-group" style="margin-bottom: 8px;">
+              <label for="input-profile-box-show-section">
+                <input type="checkbox" id="input-profile-box-show-section">
+                Caja de Lectura en Secciones del Menú
+              </label>
+            </div>
+            <div class="form-group checkbox-group" style="margin-bottom: 8px;">
+              <label for="input-profile-box-show-footer">
+                <input type="checkbox" id="input-profile-box-show-footer">
+                Caja de Lectura en Pie de Página
+              </label>
+            </div>
+            
+            <div id="group-profile-box" style="display: none; flex-direction: column; gap: 12px; margin-top: 12px; padding-left: 12px; border-left: 2px solid var(--panel-border);">
+              <div class="form-group">
+                <label for="input-profile-box-color">Color de las Cajas de Lectura</label>
+                <div class="color-picker-wrapper">
+                  <input type="color" id="input-profile-box-color" value="#111928">
+                  <input type="text" id="input-profile-box-color-hex" value="#111928" placeholder="#111928">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="input-profile-box-opacity">Opacidad: <span id="val-profile-box-opacity">65%</span></label>
+                <input type="range" id="input-profile-box-opacity" min="0" max="1" step="0.05" value="0.65" style="width: 100%; accent-color: var(--color-primary);">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- SECCIÓN 2: Temas y Efectos -->
+        <details open class="editor-section">
+          <summary><i class="fas fa-palette"></i> Diseño, Fondo y Botones</summary>
+          <div class="section-content">
+            <div class="form-group">
+              <label for="select-theme">Tema Visual (Efecto en Canvas)</label>
+              <select id="select-theme">
+                <option value="space">1. Space (Estrellas flotantes 2D)</option>
+                <option value="luxury">2. Luxury (Polvo de oro en ascenso)</option>
+                <option value="crimson">3. Crimson (Brasas de fuego rojas)</option>
+                <option value="cyberpunk">4. Cyberpunk (Red plexus conectada)</option>
+                <option value="emerald">5. Emerald (Hojas místicas verdes)</option>
+                <option value="sunset">6. Sunset (Viento cálido violeta/naranja)</option>
+                <option value="frost">7. Frost (Copos de nieve cayendo)</option>
+                <option value="matrix">8. Matrix (Lluvia digital en verde)</option>
+                <option value="aurora">9. Aurora (Ondas polares fluidas)</option>
+                <option value="neon-grid">10. Neon Grid (Cuadrícula Synthwave)</option>
+                <option value="rain">11. Rain (Lluvia cayendo realista)</option>
+                <option value="hexagons">12. Hexagons (Hexágonos flotantes)</option>
+                <option value="fireflies">13. Fireflies (Luciérnagas parpadeantes)</option>
+                <option value="clouds">14. Clouds (Niebla y nubes de humo)</option>
+                <option value="retro-wave">15. Retro Wave (Atardecer ochentero)</option>
+                <option value="ocean">16. Ocean (Burbujas ascendentes)</option>
+                <option value="abyss">17. Abyss (Luces del abismo marino)</option>
+                <option value="sakura">18. Sakura (Pétalos de cerezo cayendo)</option>
+                <option value="quantum">19. Quantum (Órbitas cuánticas rápidas)</option>
+                <option value="minimal-static">20. Minimal Static (Fondo estático liso)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-bg-type">Fondo Personalizado</label>
+              <select id="select-bg-type">
+                <option value="none">Ninguno (Usar tema de partículas)</option>
+                <option value="image">Imagen estática / GIF Animado</option>
+                <option value="video">Vídeo en bucle (MP4)</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="group-bg-url" style="display: none;">
+              <label for="input-bg-url">URL / Ruta del Fondo</label>
+              <input type="text" id="input-bg-url" value="" placeholder="Ej: mi-fondo.gif o https://...">
+              <span class="help-text">Introduce un enlace a internet o la ruta del archivo que guardes en la carpeta del proyecto.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="select-button-style">Estilo de los Botones</label>
+              <select id="select-button-style">
+                <option value="glass">1. Glass (Vidrio templado translúcido)</option>
+                <option value="solid">2. Solid (Relleno color de acento)</option>
+                <option value="outline">3. Outline (Bordeado lineal limpio)</option>
+                <option value="neon">4. Neon (Resplandor neón permanente)</option>
+                <option value="3d">5. 3D (Botón mecánico presionable)</option>
+                <option value="pill">6. Pill (Bordes redondeados cápsula)</option>
+                <option value="shadow-fade">7. Shadow Fade (Sombra gigante hover)</option>
+                <option value="gradient-border">8. Gradient Border (Bordes degradados)</option>
+                <option value="cyber-brackets">9. Cyber Brackets (Corchetes a los lados)</option>
+                <option value="retro-gaming">10. Retro Gaming (8 bits pixelado)</option>
+                <option value="double-border">11. Double Border (Doble borde fino)</option>
+                <option value="vintage">12. Vintage (Papel sepia clásico)</option>
+                <option value="glass-blur">13. Glass Blur (Vidrio de alto desenfoque)</option>
+                <option value="carbon">14. Carbon (Fibra de carbono oscura)</option>
+                <option value="glow-line">15. Glow Line (Línea inferior expansiva)</option>
+                <option value="minimal">16. Minimal (Sin bordes, solo texto)</option>
+                <option value="brutalist">17. Brutalist (Bordes gruesos y sombra dura)</option>
+                <option value="split-gradient">18. Split Gradient (Medio vidrio/medio color)</option>
+                <option value="metallic">19. Metallic (Acero cepillado metálico)</option>
+                <option value="ghost">20. Ghost (Semi-invisible iluminable)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-button-anim">Animación de los Botones</label>
+              <select id="select-button-anim">
+                <option value="none">1. Ninguna (Estático, solo hover)</option>
+                <option value="shine">2. Shine (Reflejo brillante deslizable)</option>
+                <option value="pulse">3. Pulse (Latido suave tamaño y glow)</option>
+                <option value="float">4. Float (Flotación vertical independiente)</option>
+                <option value="shake">5. Shake (Vibración de alerta rápida)</option>
+                <option value="wobble">6. Wobble (Balanceo giratorio suave)</option>
+                <option value="bounce">7. Bounce (Salto elástico vertical)</option>
+                <option value="heartbeat">8. Heartbeat (Latido acelerado doble)</option>
+                <option value="spin-icon">9. Spin Icon (Giro del icono en hover)</option>
+                <option value="blur-fade">10. Blur Fade (Desenfoque cíclico)</option>
+                <option value="glow-pulse">11. Glow Pulse (Pulso de sombra trasera)</option>
+                <option value="glitch">12. Glitch (Distorsión digital rápida)</option>
+                <option value="color-cycle">13. Color Cycle (Ciclo gradual de color)</option>
+                <option value="skew">14. Skew (Inclinación lateral hover)</option>
+                <option value="expand-border">15. Expand Border (Borde expandible hover)</option>
+                <option value="wave-text">16. Wave Text (Espaciado de letras cíclico)</option>
+                <option value="shrink">17. Shrink (Reducción sutil hover)</option>
+                <option value="slide-bg">18. Slide Bg (Desplazamiento degradado)</option>
+                <option value="jello">19. Jello (Efecto gelatina hover)</option>
+                <option value="radar">20. Radar (Ondas circulares concéntricas)</option>
+                <option value="swing">21. Swing (Balanceo colgado arriba)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="input-accent-color">Color de Acento (Personalizado)</label>
+              <div class="color-picker-wrapper">
+                <input type="color" id="input-accent-color" value="#38bdf8">
+                <input type="text" id="input-accent-color-hex" value="#38bdf8" placeholder="#38bdf8">
+              </div>
+              <span class="help-text">Elige un color para los bordes y botones resaltados.</span>
+            </div>
+            
+            <div class="form-group">
+              <label for="input-qr-url">Enlace del Código QR (Hospedaje)</label>
+              <input type="text" id="input-qr-url" value="https://jonatanpons.pp.ua">
+            </div>
+          </div>
+        </details>
+
+        <!-- SECCIÓN 3: Tarjeta de Contacto (VCard) -->
+        <details class="editor-section">
+          <summary><i class="far fa-address-card"></i> Datos de Contacto (VCard)</summary>
+          <div class="section-content">
+            <p class="section-desc">Esta información se guardará en la agenda de los teléfonos cuando alguien pulse "Guardar Contacto".</p>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="input-vcard-name">Nombre</label>
+                <input type="text" id="input-vcard-name" value="Jonatan">
+              </div>
+              <div class="form-group col">
+                <label for="input-vcard-lname">Apellido</label>
+                <input type="text" id="input-vcard-lname" value="Pons">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="input-vcard-phone">Teléfono (con prefijo internacional)</label>
+              <input type="text" id="input-vcard-phone" value="+34667461868">
+            </div>
+            <div class="form-group">
+              <label for="input-vcard-email">Correo Electrónico</label>
+              <input type="text" id="input-vcard-email" value="jonatanpons@gmail.com">
+            </div>
+            <div class="form-group">
+              <label for="input-vcard-url">Sitio Web</label>
+              <input type="text" id="input-vcard-url" value="https://jonatanpons.pp.ua">
+            </div>
+          </div>
+        </details>
+
+        <!-- SECCIÓN 4: Redes Sociales Rápidas -->
+        <details class="editor-section">
+          <summary><i class="fas fa-share-alt"></i> Redes Sociales (Iconos de Cabecera)</summary>
+          <div class="section-content">
+            <p class="section-desc">Ordena e introduce tus enlaces de redes sociales rápidas.</p>
+            <div id="social-list-container" class="items-list-container">
+              <!-- Cargado dinámicamente -->
+            </div>
+            <button id="btn-add-social" class="btn btn-secondary btn-sm">
+              <i class="fas fa-plus"></i> Añadir Red Social
+            </button>
+          </div>
+        </details>
+
+        <!-- SECCIÓN 5: Enlaces y Secciones -->
+        <details class="editor-section">
+          <summary><i class="fas fa-link"></i> Contenido Vertical (Enlaces y Secciones)</summary>
+          <div class="section-content">
+            <p class="section-desc">Crea títulos de sección o botones de enlaces. Puedes usar iconos vectoriales de FontAwesome (ej: <code>whatsapp</code>, <code>fas fa-terminal</code>) o enlaces de Flaticon.</p>
+            <div id="content-list-container" class="items-list-container">
+              <!-- Cargado dinámicamente -->
+            </div>
+            <button id="btn-add-content-item" class="btn btn-secondary btn-sm">
+              <i class="fas fa-plus"></i> Añadir Botón de Enlace
+            </button>
+            <button id="btn-add-section-item" class="btn btn-secondary btn-sm">
+              <i class="fas fa-folder-plus"></i> Añadir Sección
+            </button>
+            <button id="btn-add-separator-item" class="btn btn-secondary btn-sm">
+              <i class="fas fa-arrows-alt-v"></i> Añadir Separador
+            </button>
+          </div>
+        </details>
+
+        <!-- SECCIÓN 6: Pie de Página (Footer) -->
+        <details class="editor-section">
+          <summary><i class="far fa-copyright"></i> Pie de Página (Footer)</summary>
+          <div class="section-content">
+            <div class="form-group checkbox-group">
+              <label for="input-footer-show">
+                <input type="checkbox" id="input-footer-show" checked>
+                Mostrar Pie de Página
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="input-footer-text">Texto Principal (Copyright)</label>
+              <input type="text" id="input-footer-text" value="© 2026">
+            </div>
+            <div class="form-group">
+              <label for="input-footer-link-text">Texto del Enlace</label>
+              <input type="text" id="input-footer-link-text" value="jonatanpons.pp.ua">
+            </div>
+            <div class="form-group">
+              <label for="input-footer-link-url">URL del Enlace</label>
+              <input type="text" id="input-footer-link-url" value="https://jonatanpons.pp.ua">
+            </div>
+            <div class="form-group">
+              <label for="input-footer-extra">Texto Extra (Créditos)</label>
+              <input type="text" id="input-footer-extra" value="Hecho con ✨">
+            </div>
+          </div>
+        </details>
+      </div>
+    </aside>
+
+    <!-- ==========================================================
+         PANEL DERECHO: PREVISUALIZADOR LIVE ADAPTATIVO
+         ========================================================== -->
+    <main class="preview-panel">
+      <!-- Barra de Herramientas de Dispositivos -->
+      <div class="preview-toolbar">
+        <span class="toolbar-title">Simulador</span>
+        <div class="device-selectors">
+          <button class="toolbar-btn active" data-device="mobile" title="Vista Móvil"><i class="fas fa-mobile-alt"></i> Móvil</button>
+          <button class="toolbar-btn" data-device="tablet" title="Vista Tablet"><i class="fas fa-tablet-alt"></i> Tablet</button>
+          <button class="toolbar-btn" data-device="desktop" title="Vista Escritorio"><i class="fas fa-desktop"></i> Escritorio</button>
+        </div>
+      </div>
+
+      <!-- Simulador Adaptativo -->
+      <div class="preview-frame-container device-mobile">
+        <div class="phone-speaker"></div>
+        <!-- Contenedor para vídeo de fondo personalizado en el simulador -->
+        <div id="preview-video-bg-container" class="preview-video-bg-container"></div>
+        <!-- Canvas de fondo para las partículas (dibujado en directo por el script del creador) -->
+        <canvas id="starfield" class="preview-starfield"></canvas>
+        
+        <div class="phone-screen">
+          
+          <!-- Contenido renderizado de la landing page -->
+          <div class="preview-container container">
+            <header class="profile-header" id="preview-profile-header">
+              <div class="avatar-wrapper">
+                <img id="preview-profile-avatar" src="../profile.jpg" alt="Preview Avatar" class="avatar-img">
+              </div>
+              <div id="preview-profile-name-title-container" class="profile-name-title-container">
+                <div class="name-container">
+                  <h1 id="preview-profile-name" class="profile-name">Jona</h1>
+                  <span id="preview-profile-verified" class="verified-badge"><i class="fas fa-check-circle"></i></span>
+                </div>
+                <div id="preview-profile-title" class="profile-title">Cargo</div>
+              </div>
+              <div id="preview-profile-bio" class="preview-bio">Biografía</div>
+            </header>
+
+            <div class="action-bar" id="preview-action-bar">
+              <button id="preview-btn-vcard" class="action-btn"><i class="fas fa-user-plus"></i> Contacto</button>
+              <button id="preview-btn-share" class="action-btn"><i class="fas fa-share-alt"></i> Compartir</button>
+              <button id="preview-btn-qr" class="action-btn"><i class="fas fa-qrcode"></i> Código QR</button>
+            </div>
+
+            <div id="preview-social-icons" class="social-icons-row"></div>
+            
+            <div id="preview-content-list" class="content-list"></div>
+
+            <footer id="preview-page-footer" class="footer">
+              <!-- Rellenado dinámicamente por creator.js -->
+            </footer>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Librería ligera QRious -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+  <!-- Scripts de Configuración y Creador -->
+  <script src="../config.js"></script>
+  <script src="creator.js"></script>
+</body>
+</html>
