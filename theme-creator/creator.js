@@ -1051,7 +1051,7 @@ function updateLivePreview() {
   // Renderizar campos de perfil
   document.getElementById("preview-profile-name").textContent = name;
   document.getElementById("preview-profile-verified").style.display = verified ? "inline-flex" : "none";
-  document.getElementById("preview-profile-title").textContent = title;
+  document.getElementById("preview-profile-title").innerHTML = title;
   
   // Renderizar biografía dinámica
   const bioPreviewEl = document.getElementById("preview-profile-bio");
@@ -1199,7 +1199,7 @@ function updateLivePreview() {
           secDiv.style.setProperty('--profile-box-border', 'rgba(255, 255, 255, 0.08)');
         }
 
-        secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.title)}</span>`;
+        secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${item.title}</span>`;
         contentListEl.appendChild(secDiv);
       } else if (item.type === "separator") {
         const sepDiv = document.createElement("div");
@@ -1216,7 +1216,7 @@ function updateLivePreview() {
 
         a.innerHTML = `
           <div class="link-icon-container">${getIconHtml(item.icon)}</div>
-          <div class="link-title">${escapeHtml(item.title)}</div>
+          <div class="link-title">${item.title}</div>
           <i class="fas fa-chevron-right link-arrow"></i>
         `;
         contentListEl.appendChild(a);

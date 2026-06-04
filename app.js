@@ -328,7 +328,7 @@ function renderProfile() {
   if (verifiedBadge) verifiedBadge.style.display = p.verified ? "inline-flex" : "none";
 
   const titleEl = document.getElementById("profile-title");
-  if (titleEl) titleEl.textContent = p.title;
+  if (titleEl) titleEl.innerHTML = p.title;
 
   const card = CONFIG.theme && CONFIG.theme.profileCard;
   const selectedTheme = CONFIG.theme.selectedTheme || "space";
@@ -444,7 +444,7 @@ function renderContent() {
       secDiv.style.animation = `pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
       secDiv.style.animationDelay = animationDelay;
       secDiv.style.opacity = 0;
-      secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.title)}</span>`;
+      secDiv.innerHTML = `<span>${item.icon ? item.icon + ' ' : ''}${item.title}</span>`;
       
       // Aplicar caja de lectura si está activada
       const card = CONFIG.theme && CONFIG.theme.profileCard;
@@ -501,7 +501,7 @@ function renderContent() {
 
       a.innerHTML = `
         <div class="link-icon-container">${getIconHtml(item.icon)}</div>
-        <div class="link-title">${escapeHtml(item.title)}</div>
+        <div class="link-title">${item.title}</div>
         <i class="fas fa-chevron-right link-arrow"></i>
       `;
 
