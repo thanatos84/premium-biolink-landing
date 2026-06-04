@@ -80,6 +80,28 @@ function escapeHtml(str) {
 }
 
 /**
+ * Escapa HTML pero PERMITE etiquetas <i> de FontAwesome.
+ * Uso: textos de biografía donde el usuario puede escribir iconos FA directamente.
+ * Ejemplo: "Visítame <i class="fa-brands fa-whatsapp"></i> aquí" → renderiza el icono.
+ */
+function escapeHtmlWithIcons(str) {
+  if (!str) return '';
+  // Detectar etiquetas <i class="..."> con clases FA y preservarlas
+  const FA_TAG = /<i\s+class="[^"]*fa[^"]*"[^>]*>\s*<\/i>/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+  FA_TAG.lastIndex = 0;
+  while ((match = FA_TAG.exec(str)) !== null) {
+    parts.push(escapeHtml(str.slice(lastIndex, match.index)));
+    parts.push(match[0]); // etiqueta FA intacta
+    lastIndex = FA_TAG.lastIndex;
+  }
+  parts.push(escapeHtml(str.slice(lastIndex)));
+  return parts.join('');
+}
+
+/**
  * Genera el elemento HTML del icono de forma flexible e inteligente
  */
 function getIconHtml(iconName, isWhite = false) {
@@ -331,7 +353,7 @@ function renderProfile() {
         const classes = shouldApplyParaBox ? 'class="card-mode"' : '';
         const styles = shouldApplyParaBox ? `style="--profile-box-bg: ${rgbaBg}; --profile-box-border: rgba(255, 255, 255, 0.08);"` : '';
         
-        return `<p ${classes} ${styles}>${escapeHtml(text)}</p>`;
+        return `<p ${classes} ${styles}>${escapeHtmlWithIcons(text)}</p>`;
       }).join('');
       bioEl.style.display = "block";
     } else {
