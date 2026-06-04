@@ -353,7 +353,7 @@ function renderProfile() {
         const classes = shouldApplyParaBox ? 'class="card-mode"' : '';
         const styles = shouldApplyParaBox ? `style="--profile-box-bg: ${rgbaBg}; --profile-box-border: rgba(255, 255, 255, 0.08);"` : '';
         
-        return `<p ${classes} ${styles}>${escapeHtmlWithIcons(text)}</p>`;
+        return `<p ${classes} ${styles}>${text}</p>`;
       }).join('');
       bioEl.style.display = "block";
     } else {
