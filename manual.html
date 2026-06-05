@@ -615,6 +615,10 @@
       <li class="nav-item"><a href="#hosting"><i class="fas fa-server"></i>Hostings Gratuitos</a></li>
       <li class="nav-item"><a href="#subdominios"><i class="fas fa-globe"></i>Subdominios Gratuitos</a></li>
       <li class="nav-item"><a href="#cloudflare"><i class="fas fa-cloud"></i>DNS y Cloudflare</a></li>
+      
+      <li class="nav-category">SEO & Soporte</li>
+      <li class="nav-item"><a href="#seo-og"><i class="fas fa-search"></i>SEO y Vista Previa</a></li>
+      <li class="nav-item"><a href="#faq"><i class="fas fa-question-circle"></i>Preguntas Frecuentes</a></li>
     </ul>
   </aside>
 
@@ -1619,6 +1623,106 @@ body.theme-volcano {
 
       <h4>Si tu hosting es Cloudflare Pages:</h4>
       <p>Entra en el panel de Cloudflare de tu proyecto Pages -> ve a la pestaña <strong>"Custom domains"</strong> -> haz clic en <strong>"Set up a custom domain"</strong>. Escribe tu subdominio (ej: <code>jonatandev.pp.ua</code>) y pulsa continuar. Cloudflare configurará y conectará todo automáticamente.</p>
+    </section>
+
+    <!-- SECCIÓN: SEO Y META TAGS -->
+    <section id="seo-og" class="wiki-section">
+      <h2><i class="fas fa-search"></i> SEO y Vista Previa al Compartir (Open Graph)</h2>
+      <p>Cuando compartes el enlace de tu sitio web en aplicaciones como WhatsApp, Telegram, Facebook o Discord, la plataforma genera automáticamente una <strong>tarjeta visual</strong> (burbuja de compartido) con una imagen, un título y una descripción. Esto se conoce como protocolo <strong>Open Graph (OG)</strong>.</p>
+      
+      <div class="dns-grid" style="margin-bottom: 2rem; grid-template-columns: 1fr;">
+        <div class="dns-column" style="border-left: 4px solid var(--accent-color); background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 0 8px 8px 0;">
+          <h4 style="margin-top:0; color: var(--accent-color);"><i class="fas fa-info-circle"></i> ¿Por qué no funciona dinámicamente con JavaScript?</h4>
+          <p style="font-size: 0.9rem; line-height: 1.5;">Los robots de redes sociales (crawlers o scrapers) son rastreadores muy simples. Cuando envías un enlace, el bot descarga únicamente el archivo <code>index.html</code> de tu servidor y extrae las etiquetas <code>&lt;meta&gt;</code> de su encabezado (<code>&lt;head&gt;</code>). <strong>Los bots no ejecutan código JavaScript</strong>. Por lo tanto, no pueden leer tu archivo <code>config.js</code> de manera dinámica. La única forma de que se muestren las imágenes e información correctas al compartir es teniendo las etiquetas HTML escritas de forma estática en el <code>index.html</code>.</p>
+        </div>
+      </div>
+
+      <h3>Cómo Utilizar el Simulador SEO en el Creador de Temas</h3>
+      <p>El Creador de Temas cuenta con un módulo de simulación y generación automática de etiquetas en la <strong>Sección 7: SEO y Vista Previa en Redes</strong>.</p>
+      
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Configurar los Campos SEO</h4>
+            <p>Rellena las opciones en el panel del creador:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); line-height: 1.5;">
+                <li><strong>Dominio de tu Web</strong>: Escribe la URL exacta de tu sitio (ej: <code>https://jonatanpons.pages.dev</code>). Es fundamental para que los bots ubiquen las rutas de tus imágenes.</li>
+                <li><strong>Título del Enlace</strong>: El título principal de la tarjeta. Por defecto se autogenera uniendo tu Nombre + Cargo (si no lo has modificado manualmente).</li>
+                <li><strong>Descripción</strong>: Un texto breve sobre tu web. Se pre-carga con el primer párrafo de tu biografía de forma inteligente.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Seleccionar el Origen de la Imagen</h4>
+            <p>Elige cuál quieres que sea la imagen de portada de tu tarjeta de compartido entre estas 5 opciones:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); line-height: 1.5;">
+                <li><strong>Foto de Perfil (Avatar)</strong>: Muestra tu foto o avatar principal en la tarjeta.</li>
+                <li><strong>Banner de Cabecera</strong>: Muestra el banner superior configurado.</li>
+                <li><strong>Código QR de tu Web</strong>: Genera dinámicamente un código QR escaneable directo a tu landing usando la API de QRServer. Ideal para que cualquiera pueda escanear tu tarjeta visual de compartido y acceder directamente a tu web.</li>
+                <li><strong>URL Personalizada</strong>: Introduce una ruta de archivo local (ej: <code>assets/og-image.jpg</code>) o una URL de internet.</li>
+                <li><strong>Sin Imagen</strong>: Excluye la imagen para mostrar únicamente el bloque de texto (título y descripción).</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Simular y Copiar el Código</h4>
+            <p>Observa la previsualización interactiva estilo Telegram/WhatsApp. Si estás satisfecho, haz clic en el botón <strong>"Copiar Código"</strong>. Esto copiará las etiquetas <code>&lt;meta&gt;</code> correspondientes al portapapeles.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Pegar en el archivo index.html</h4>
+            <p>Abre tu archivo <code>index.html</code> en tu ordenador utilizando cualquier editor de código o de texto. Busca el bloque <code>&lt;head&gt;</code> (cerca de la línea 1-20) y pega el código copiado dentro. Guarda el archivo y súbelo a tu hosting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: PREGUNTAS FRECUENTES (FAQ) -->
+    <section id="faq" class="wiki-section">
+      <h2><i class="fas fa-question-circle"></i> Preguntas Frecuentes y Solución de Problemas (FAQ)</h2>
+      
+      <div class="dns-grid" style="grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;">
+        
+        <!-- FAQ 1 -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-sync-alt"></i> 1. He cambiado mi información o foto de compartido, pero en WhatsApp/Telegram se sigue viendo la versión antigua. ¿Qué ocurre?</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Las redes sociales utilizan un sistema de caché de servidor muy agresivo para no saturar su ancho de banda cada vez que alguien comparte un enlace. Esto hace que "recuerden" la primera vista previa de tu web durante días o semanas.</p>
+          <h5 style="margin-bottom: 0.5rem; color: var(--text-color);">Cómo solucionarlo al instante:</h5>
+          <ul style="margin-left: 2rem; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem;">
+            <li><strong>Telegram</strong>: Habla con el bot oficial de Telegram llamado <a href="https://t.me/WebpageBot" target="_blank" style="color: var(--accent-color); text-decoration: underline;">@WebpageBot</a>. Envíale el comando <code>/updatepreview</code> y a continuación pon la dirección completa de tu sitio. El bot limpiará la caché de los servidores de Telegram de inmediato.</li>
+            <li><strong>Facebook / Messenger</strong>: Usa la herramienta oficial <a href="https://developers.facebook.com/tools/debug/" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Facebook Sharing Debugger</a>. Escribe tu URL y haz clic en "Depurar" (Debug) y luego en "Volver a extraer" (Scrape Again) para refrescar la base de datos de Meta de inmediato.</li>
+            <li><strong>WhatsApp</strong>: WhatsApp utiliza la base de datos y la caché de Facebook. Al depurar tu sitio en la herramienta de Facebook (arriba mencionada), la vista previa de WhatsApp se actualizará automáticamente en pocos minutos.</li>
+          </ul>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-clock"></i> 2. Acabo de configurar mi subdominio y mi hosting, pero al entrar a mi web me sale un error de DNS (ej: NXDOMAIN) o no carga la página.</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">No te preocupes, esto es completamente normal. Cuando creas o modificas un registro DNS (como un apuntamiento CNAME o Nameservers), los servidores DNS de todo el mundo tienen que copiar esa nueva información. Este proceso se llama <strong>propagación DNS</strong> y puede tardar desde 10 minutos hasta 24 horas según el proveedor y el TTL. Ten paciencia y comprueba el estado transcurrido un tiempo.</p>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-video-slash"></i> 3. Tengo un video configurado como banner o fondo de mi landing, pero en mi teléfono móvil no se reproduce de forma automática.</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Los navegadores web móviles modernos (Chrome, Safari, Firefox) aplican políticas de consumo de datos y batería sumamente restrictivas. Para que un video se auto-reproduzca en móviles, debe cumplir obligatoriamente tres condiciones técnicas:</p>
+          <ol style="margin-left: 2rem; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem;">
+            <li>Debe estar configurado en silencio absoluto (atributo <code>muted</code>). Si tiene pista de audio audible, el móvil bloqueará la reproducción automática por completo.</li>
+            <li>Debe tener el atributo <code>playsinline</code> para que se reproduzca dentro de la caja de la web en lugar de abrirse a pantalla completa en el reproductor nativo del móvil.</li>
+            <li>El teléfono móvil no debe estar en <strong>modo de ahorro de batería</strong>. En sistemas iOS (iPhone) y Android, el ahorro de energía desactiva por completo las animaciones pesadas y las autoreproducciones de video para prolongar la autonomía del dispositivo de forma forzada.</li>
+          </ol>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;"><i class="fas fa-check-circle" style="color: #10b981;"></i> Nota: La plantilla de la Landing Page ya cuenta con las etiquetas <code>autoplay loop muted playsinline</code> programadas por defecto de forma correcta en sus contenedores.</p>
+        </div>
+
+      </div>
     </section>
   </main>
 

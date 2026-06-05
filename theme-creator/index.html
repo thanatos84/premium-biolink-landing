@@ -417,6 +417,71 @@
             </div>
           </div>
         </details>
+
+        <!-- SECCIÓN 7: SEO y Vista Previa al Compartir -->
+        <details class="editor-section">
+          <summary><i class="fas fa-search"></i> SEO y Vista Previa en Redes</summary>
+          <div class="section-content">
+            <p class="section-desc">Configura la tarjeta que verán las personas cuando compartas el enlace de tu web en WhatsApp, Telegram, Discord, etc.</p>
+            
+            <div class="form-group">
+              <label for="input-seo-domain">Dominio de tu Web (URL absoluta)</label>
+              <input type="text" id="input-seo-domain" value="https://jonatanpons.pages.dev" placeholder="Ej: https://jonatanpons.pages.dev">
+              <span class="help-text">Obligatorio para que los bots encuentren tus fotos de banner/perfil.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="input-seo-title">Título del Enlace</label>
+              <input type="text" id="input-seo-title" placeholder="Ej: Jona | Senior Systems Engineer">
+            </div>
+
+            <div class="form-group">
+              <label for="input-seo-desc">Descripción del Enlace</label>
+              <textarea id="input-seo-desc" rows="3" placeholder="Ej: Mi portafolio de enlaces profesionales y personales..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="select-seo-image-type">Imagen del Preview</label>
+                <select id="select-seo-image-type">
+                  <option value="avatar">Usar foto de perfil (Avatar)</option>
+                  <option value="banner">Usar banner de cabecera</option>
+                  <option value="qr">Usar Código QR de la web</option>
+                  <option value="custom">URL de imagen personalizada</option>
+                  <option value="none">Sin imagen (Solo texto)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" id="group-seo-image-custom" style="display: none;">
+              <label for="input-seo-image-custom">URL de la Imagen Personalizada</label>
+              <input type="text" id="input-seo-image-custom" placeholder="Ej: https://tudominio.com/foto-compartida.jpg">
+            </div>
+
+            <!-- SIMULADOR DE BURBUJA -->
+            <p class="section-desc" style="margin-top: 15px; font-weight: 600; font-size: 0.85rem; border-top: 1px solid var(--panel-border); padding-top: 12px;">Simulación de Tarjeta en Redes</p>
+            <div class="seo-preview-card">
+              <div class="seo-preview-domain" id="preview-seo-domain-lbl">jonatanpons.pages.dev</div>
+              <div class="seo-preview-title" id="preview-seo-title-lbl">Jona | Senior Systems Engineer</div>
+              <div class="seo-preview-desc" id="preview-seo-desc-lbl">Portafolio de enlaces profesionales y personales.</div>
+              <div class="seo-preview-img-container" id="preview-seo-img-container">
+                <img src="" id="preview-seo-img" alt="Vista Previa de Compartido">
+              </div>
+            </div>
+
+            <!-- CÓDIGO META GENERADO -->
+            <div class="seo-code-container">
+              <div class="seo-code-header">
+                <span>Código Meta para <code>index.html</code></span>
+                <button id="btn-copy-seo" class="btn btn-secondary btn-sm" style="margin: 0; padding: 2px 8px; font-size: 0.7rem;">
+                  <i class="far fa-copy"></i> Copiar Código
+                </button>
+              </div>
+              <pre class="seo-code-pre"><code id="code-seo-output">Generando código...</code></pre>
+            </div>
+
+          </div>
+        </details>
       </div>
     </aside>
 

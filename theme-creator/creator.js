@@ -35,7 +35,6 @@ let layoutComponentOrder = ["profile", "actions", "socials", "content", "footer"
 let layoutActionsOrder = ["vcard", "share", "qr"];
 let layoutActionsShow = { vcard: true, share: true, qr: true };
 
-// Estado de la biografía y cajas de lectura
 let profileBio = [];
 let profileCardBoxShow = false;
 let profileCardBoxShowNameTitle = false;
@@ -44,6 +43,10 @@ let profileCardBoxShowSection = false;
 let profileCardBoxShowFooter = false;
 let profileCardBoxColor = "#111928";
 let profileCardBoxOpacity = 0.65;
+
+// Estado de sincronización inteligente de SEO
+let isSeoTitleCustom = false;
+let isSeoDescCustom = false;
 
 // Mapeo FontAwesome por defecto
 const ICON_MAP = {
@@ -785,6 +788,47 @@ function initFormBindings() {
   document.getElementById("btn-add-section-item").addEventListener("click", () => addContentItem("section"));
   document.getElementById("btn-add-separator-item").addEventListener("click", () => addContentItem("separator"));
   document.getElementById("btn-export").addEventListener("click", exportConfigFile);
+
+  // Vinculaciones del panel SEO y Vista Previa
+  const seoDomain = document.getElementById("input-seo-domain");
+  const seoTitle = document.getElementById("input-seo-title");
+  const seoDesc = document.getElementById("input-seo-desc");
+  const seoImgType = document.getElementById("select-seo-image-type");
+  const seoImgCustom = document.getElementById("input-seo-image-custom");
+
+  if (seoDomain) seoDomain.addEventListener("input", updateSeoPreview);
+  if (seoTitle) {
+    seoTitle.addEventListener("input", () => {
+      isSeoTitleCustom = true;
+      updateSeoPreview();
+    });
+  }
+  if (seoDesc) {
+    seoDesc.addEventListener("input", () => {
+      isSeoDescCustom = true;
+      updateSeoPreview();
+    });
+  }
+  if (seoImgType) seoImgType.addEventListener("change", updateSeoPreview);
+  if (seoImgCustom) seoImgCustom.addEventListener("input", updateSeoPreview);
+
+  const copySeoBtn = document.getElementById("btn-copy-seo");
+  if (copySeoBtn) {
+    copySeoBtn.addEventListener("click", () => {
+      const codeOutput = document.getElementById("code-seo-output");
+      if (!codeOutput) return;
+      const code = codeOutput.textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalHtml = copySeoBtn.innerHTML;
+        copySeoBtn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+        setTimeout(() => {
+          copySeoBtn.innerHTML = originalHtml;
+        }, 2000);
+      }).catch(err => {
+        console.error("Error al copiar al portapapeles:", err);
+      });
+    });
+  }
 }
 
 function addSocialItem() {
@@ -1270,6 +1314,11 @@ function updateLivePreview() {
   if (window.currentThemeEffect !== theme) {
     window.currentThemeEffect = theme;
     triggerBgReset(theme);
+  }
+
+  // Actualizar la Vista Previa de SEO y Generar Meta Tags
+  if (typeof updateSeoPreview === "function") {
+    updateSeoPreview();
   }
 }
 
@@ -2140,4 +2189,145 @@ ${contentString}
   
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+}
+
+/**
+ * FUNCIONES PARA EL SIMULADOR SEO Y META TAGS OPEN GRAPH
+ */
+function updateSeoPreview() {
+  const domainInput = document.getElementById("input-seo-domain");
+  const titleInput = document.getElementById("input-seo-title");
+  const descInput = document.getElementById("input-seo-desc");
+  const imageTypeSelect = document.getElementById("select-seo-image-type");
+  const imageCustomInput = document.getElementById("input-seo-image-custom");
+  const customGroup = document.getElementById("group-seo-image-custom");
+
+  if (!domainInput || !titleInput || !descInput || !imageTypeSelect) return;
+
+  let domain = domainInput.value.trim();
+  if (domain && !/^https?:\/\//i.test(domain)) {
+    domain = "https://" + domain;
+  }
+  const baseDomain = domain.replace(/\/+$/, "");
+
+  // Update domain label in simulation (without protocol)
+  const cleanDomain = baseDomain.replace(/^https?:\/\//i, '').split('/')[0];
+  const previewDomainLbl = document.getElementById("preview-seo-domain-lbl");
+  if (previewDomainLbl) {
+    previewDomainLbl.textContent = cleanDomain || "tudominio.com";
+  }
+
+  // Sincronizar de forma inteligente Título
+  const nameVal = document.getElementById("input-name") ? document.getElementById("input-name").value.trim() : "";
+  const titleVal = document.getElementById("input-title") ? document.getElementById("input-title").value.trim() : "";
+  
+  let currentTitle = titleInput.value;
+  if (!isSeoTitleCustom) {
+    currentTitle = (nameVal && titleVal) ? `${nameVal} | ${titleVal}` : (nameVal || titleVal || "");
+    titleInput.value = currentTitle;
+  }
+  const previewTitleLbl = document.getElementById("preview-seo-title-lbl");
+  if (previewTitleLbl) {
+    previewTitleLbl.textContent = currentTitle || "Título del Enlace";
+  }
+
+  // Sincronizar de forma inteligente Descripción
+  let currentDesc = descInput.value;
+  if (!isSeoDescCustom) {
+    // Tomar el primer párrafo de la biografía
+    currentDesc = (profileBio && profileBio[0] && profileBio[0].text) ? profileBio[0].text : "";
+    // Limpiar saltos de línea de la descripción para evitar que sea muy larga
+    currentDesc = currentDesc.replace(/\s+/g, ' ');
+    if (currentDesc.length > 150) {
+      currentDesc = currentDesc.substring(0, 147) + "...";
+    }
+    descInput.value = currentDesc;
+  }
+  const previewDescLbl = document.getElementById("preview-seo-desc-lbl");
+  if (previewDescLbl) {
+    previewDescLbl.textContent = currentDesc || "Descripción del Enlace";
+  }
+
+  // Mostrar u ocultar grupo de URL personalizada
+  const imgType = imageTypeSelect.value;
+  if (customGroup) {
+    customGroup.style.display = imgType === "custom" ? "flex" : "none";
+  }
+
+  // Calcular imagen de preview
+  let imageUrl = "";
+  const avatarVal = document.getElementById("input-avatar") ? document.getElementById("input-avatar").value.trim() : "";
+  const bannerVal = document.getElementById("input-profile-banner-url") ? document.getElementById("input-profile-banner-url").value.trim() : "";
+  const bannerShow = document.getElementById("input-profile-banner-show") ? document.getElementById("input-profile-banner-show").checked : false;
+
+  if (imgType === "avatar") {
+    if (avatarVal) {
+      if (/^https?:\/\//i.test(avatarVal)) {
+        imageUrl = avatarVal;
+      } else {
+        imageUrl = baseDomain ? `${baseDomain}/${avatarVal.replace(/^\.?\/+/, "")}` : avatarVal;
+      }
+    }
+  } else if (imgType === "banner") {
+    if (bannerShow && bannerVal) {
+      if (/^https?:\/\//i.test(bannerVal)) {
+        imageUrl = bannerVal;
+      } else {
+        imageUrl = baseDomain ? `${baseDomain}/${bannerVal.replace(/^\.?\/+/, "")}` : bannerVal;
+      }
+    }
+  } else if (imgType === "qr") {
+    const qrTarget = baseDomain || "https://tudominio.com";
+    imageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrTarget)}`;
+  } else if (imgType === "custom") {
+    if (imageCustomInput) {
+      imageUrl = imageCustomInput.value.trim();
+    }
+  }
+
+  const previewImgContainer = document.getElementById("preview-seo-img-container");
+  const previewImg = document.getElementById("preview-seo-img");
+
+  if (imgType === "none" || !imageUrl) {
+    if (previewImgContainer) previewImgContainer.style.display = "none";
+    if (previewImg) previewImg.src = "";
+  } else {
+    if (previewImgContainer) previewImgContainer.style.display = "block";
+    if (previewImg) {
+      previewImg.src = imageUrl;
+      previewImg.onerror = () => {
+        // Fallback en caso de que falle la carga (como rutas relativas locales)
+        previewImg.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80";
+      };
+    }
+  }
+
+  // Generar etiquetas meta
+  generateMetaTags(baseDomain || 'https://tudominio.com', currentTitle, currentDesc, imageUrl);
+}
+
+function generateMetaTags(domain, title, desc, imageUrl) {
+  const codeOutput = document.getElementById("code-seo-output");
+  if (!codeOutput) return;
+
+  let tags = `<!-- Etiquetas de compartido en redes sociales (Open Graph & Twitter) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="${domain}/">
+<meta property="og:title" content="${escapeHtml(title || '')}">
+<meta property="og:description" content="${escapeHtml(desc || '')}">`;
+
+  if (imageUrl) {
+    tags += `\n<meta property="og:image" content="${imageUrl}">`;
+  }
+
+  tags += `\n\n<!-- Etiquetas para Twitter / X -->
+<meta name="twitter:card" content="${imageUrl ? 'summary_large_image' : 'summary'}">
+<meta name="twitter:title" content="${escapeHtml(title || '')}">
+<meta name="twitter:description" content="${escapeHtml(desc || '')}">`;
+
+  if (imageUrl) {
+    tags += `\n<meta name="twitter:image" content="${imageUrl}">`;
+  }
+
+  codeOutput.textContent = tags;
 }

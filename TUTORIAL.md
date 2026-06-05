@@ -17,6 +17,8 @@ Bienvenido a la guía oficial de referencia. Este documento contiene todas las i
 10. [Hosting Gratuito (Alojamiento de tu Web)](#10-hosting-gratuito-alojamiento-de-tu-web)
 11. [Proveedores de Subdominios Gratuitos](#11-proveedores-de-subdominios-gratuitos)
 12. [Cómo Conectar tu Subdominio a tu Hosting (DNS)](#12-cómo-conectar-tu-subdominio-a-tu-hosting-dns)
+13. [SEO, Meta Tags y Vista Previa al Compartir (Open Graph)](#13-seo-meta-tags-y-vista-previa-al-compartir-open-graph)
+14. [Preguntas Frecuentes y Solución de Problemas (FAQ)](#14-preguntas-frecuentes-y-solución-de-problemas-faq)
 
 ---
 
@@ -368,3 +370,53 @@ Cloudflare es una pasarela DNS profesional totalmente gratuita. Ofrece ancho de 
 4.  **Configurar en tu Hosting**:
     *   *En GitHub Pages:* Ve a tu Repositorio -> Settings -> Pages. En "Custom Domain" escribe tu dominio (ej: `jonatan.pp.ua`) y pulsa Save. Activa la casilla "Enforce HTTPS".
     *   *En Cloudflare Pages:* Entra a tu proyecto -> pestaña Custom Domains -> Set up a Custom Domain y escribe tu dominio.
+
+---
+
+## 13. SEO, Meta Tags y Vista Previa al Compartir (Open Graph)
+Cuando compartes el enlace de tu sitio web en aplicaciones como WhatsApp, Telegram, Facebook o Discord, la plataforma genera automáticamente una **tarjeta visual** (burbuja de compartido) con una imagen, un título y una descripción. Esto se conoce como protocolo **Open Graph (OG)**.
+
+> [!IMPORTANT]
+> **¿Por qué no funciona dinámicamente con JavaScript?**
+> Los robots de redes sociales (crawlers o scrapers) son rastreadores muy simples. Cuando envías un enlace, el bot descarga únicamente el archivo `index.html` de tu servidor y lee las etiquetas `<meta>` de su encabezado (`<head>`). **Los bots no ejecutan código JavaScript**. Por lo tanto, no pueden leer tu archivo `config.js` de manera dinámica. La única forma de que se muestren las imágenes e información correctas al compartir es teniendo las etiquetas HTML escritas de forma estática en el `index.html`.
+
+### Cómo Utilizar el Simulador SEO en el Creador de Temas
+El Creador de Temas cuenta con un módulo de simulación y generación automática de etiquetas en la **Sección 7: SEO y Vista Previa en Redes**.
+
+1. **Configurar los Campos SEO**: Rellena las opciones en el panel del creador:
+   - **Dominio de tu Web**: Escribe la URL exacta de tu sitio (ej: `https://jonatanpons.pages.dev`). Es fundamental para que los bots ubiquen las rutas de tus imágenes.
+   - **Título del Enlace**: El título principal de la tarjeta. Por defecto se autogenera uniendo tu Nombre + Cargo (si no lo has modificado manualmente).
+   - **Descripción**: Un texto breve sobre tu web. Se pre-carga con el primer párrafo de tu biografía de forma inteligente.
+2. **Seleccionar el Origen de la Imagen**: Elige cuál quieres que sea la imagen de portada de tu tarjeta de compartido entre estas 5 opciones:
+   - **Foto de Perfil (Avatar)**: Muestra tu foto o avatar principal en la tarjeta.
+   - **Banner de Cabecera**: Muestra el banner superior configurado.
+   - **Código QR de tu Web**: Genera dinámicamente un código QR escaneable directo a tu landing usando la API de QRServer. Ideal para que cualquiera pueda escanear tu tarjeta visual de compartido y acceder directamente a tu web.
+   - **URL Personalizada**: Introduce una ruta de archivo local (ej: `assets/og-image.jpg`) o una URL de internet.
+   - **Sin Imagen**: Excluye la imagen para mostrar únicamente el bloque de texto (título y descripción).
+3. **Simular y Copiar el Código**: Observa la previsualización interactiva estilo Telegram/WhatsApp. Si estás satisfecho, haz clic en el botón **"Copiar Código"**. Esto copiará las etiquetas `<meta>` correspondientes al portapapeles.
+4. **Pegar en el archivo index.html**: Abre tu archivo `index.html` en tu ordenador utilizando cualquier editor de código o de texto. Busca el bloque `<head>` (cerca de la línea 1-20) y pega el código copiado dentro. Guarda el archivo y súbelo a tu hosting.
+
+---
+
+## 14. Preguntas Frecuentes y Solución de Problemas (FAQ)
+
+### ❓ 1. He cambiado mi información o foto de compartido, pero en WhatsApp/Telegram se sigue viendo la versión antigua. ¿Qué ocurre?
+Las redes sociales utilizan un sistema de caché de servidor muy agresivo para no saturar su ancho de banda cada vez que alguien comparte un enlace. Esto hace que "recuerden" la primera vista previa de tu web durante días o semanas.
+
+**Cómo solucionarlo al instante:**
+- **Telegram**: Habla con el bot oficial de Telegram llamado [@WebpageBot](https://t.me/WebpageBot). Envíale el comando `/updatepreview` y a continuación pon la dirección completa de tu sitio. El bot limpiará la caché de los servidores de Telegram de inmediato.
+- **Facebook / Messenger**: Usa la herramienta oficial [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/). Escribe tu URL y haz clic en "Depurar" (Debug) y luego en "Volver a extraer" (Scrape Again) para refrescar la base de datos de Meta de inmediato.
+- **WhatsApp**: WhatsApp utiliza la base de datos y la caché de Facebook. Al depurar tu sitio en la herramienta de Facebook (arriba mencionada), la vista previa de WhatsApp se actualizará automáticamente en pocos minutos.
+
+### ❓ 2. Acabo de configurar mi subdominio y mi hosting, pero al entrar a mi web me sale un error de DNS (ej: NXDOMAIN) o no carga la página.
+No te preocupes, esto es completamente normal. Cuando creas o modificas un registro DNS (como un apuntamiento CNAME o Nameservers), los servidores DNS de todo el mundo tienen que copiar esa nueva información. Este proceso se llama **propagación DNS** y puede tardar desde 10 minutos hasta 24 horas según el proveedor y el TTL. Ten paciencia y comprueba el estado transcurrido un tiempo.
+
+### ❓ 3. Tengo un video configurado como banner o fondo de mi landing, pero en mi teléfono móvil no se reproduce de forma automática.
+Los navegadores web móviles modernos (Chrome, Safari, Firefox) aplican políticas de consumo de datos y batería sumamente restrictivas. Para que un video se auto-reproduzca en móviles, debe cumplir obligatoriamente tres condiciones técnicas:
+1. Debe estar configurado en silencio absoluto (atributo `muted`). Si tiene pista de audio audible, el móvil bloqueará la reproducción automática por completo.
+2. Debe tener el atributo `playsinline` para que se reproduzca dentro de la caja de la web en lugar de abrirse a pantalla completa en el reproductor nativo del móvil.
+3. El teléfono móvil no debe estar en **modo de ahorro de batería**. En sistemas iOS (iPhone) y Android, el ahorro de energía desactiva por completo las animaciones pesadas y las autoreproducciones de video para prolongar la autonomía del dispositivo de forma forzada.
+
+> [!NOTE]
+> La plantilla de la Landing Page ya cuenta con las etiquetas `autoplay loop muted playsinline` programadas por defecto de forma correcta en sus contenedores.
+
