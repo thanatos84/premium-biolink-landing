@@ -208,6 +208,13 @@ function loadConfigValues() {
       document.getElementById("input-vcard-email").value = p.vCard.email !== undefined ? p.vCard.email : "";
       document.getElementById("input-vcard-url").value = p.vCard.url !== undefined ? p.vCard.url : "";
     }
+    
+    // Cargar título personalizado de la pestaña
+    if (p.pageTitle !== undefined) {
+      document.getElementById("input-web-title").value = p.pageTitle;
+    } else {
+      document.getElementById("input-web-title").value = "";
+    }
   }
 
   // Cargar tema y fondo personalizado
@@ -264,6 +271,30 @@ function loadConfigValues() {
     if (boxGroup) {
       boxGroup.style.display = (profileCardBoxShow || profileCardBoxShowNameTitle || profileCardBoxShowBio || profileCardBoxShowSection || profileCardBoxShowFooter) ? "flex" : "none";
     }
+
+    // Cargar Favicon
+    if (t.favicon) {
+      const favType = t.favicon.type || "avatar";
+      const favVal = t.favicon.value || "";
+      document.getElementById("select-favicon-type").value = favType;
+      
+      if (favType === "icon") {
+        document.getElementById("input-favicon-val-icon").value = favVal;
+        document.getElementById("group-favicon-val-icon").style.display = "flex";
+        document.getElementById("group-favicon-val-custom").style.display = "none";
+      } else if (favType === "custom") {
+        document.getElementById("input-favicon-val-custom").value = favVal;
+        document.getElementById("group-favicon-val-icon").style.display = "none";
+        document.getElementById("group-favicon-val-custom").style.display = "flex";
+      } else {
+        document.getElementById("group-favicon-val-icon").style.display = "none";
+        document.getElementById("group-favicon-val-custom").style.display = "none";
+      }
+    } else {
+      document.getElementById("select-favicon-type").value = "avatar";
+      document.getElementById("group-favicon-val-icon").style.display = "none";
+      document.getElementById("group-favicon-val-custom").style.display = "none";
+    }
   }
 
   // Cargar compartir
@@ -296,6 +327,13 @@ function loadConfigValues() {
       layoutActionsShow.qr = l.actions.showQR !== false;
     }
   }
+
+  // Cargar PWA
+  const pwa = CONFIG.pwa || { enable: false, appName: "Mi Biolink", appShortName: "Biolink" };
+  document.getElementById("input-pwa-enable").checked = !!pwa.enable;
+  document.getElementById("input-pwa-name").value = pwa.appName || "Mi Biolink";
+  document.getElementById("input-pwa-short-name").value = pwa.appShortName || "Biolink";
+  document.getElementById("group-pwa-details").style.display = pwa.enable ? "flex" : "none";
 }
 
 function renderLayoutOrderEditor() {
@@ -612,7 +650,10 @@ function initFormBindings() {
     "input-footer-link-url", "input-footer-extra",
     "select-bg-type", "input-bg-url",
     "select-profile-avatar-type", "select-profile-avatar-shape",
-    "select-profile-banner-type", "input-profile-banner-url"
+    "select-profile-banner-type", "input-profile-banner-url",
+    "input-web-title", "select-favicon-type", "input-favicon-val-icon", 
+    "input-favicon-val-custom", "input-pwa-enable", "input-pwa-name", 
+    "input-pwa-short-name"
   ];
 
   inputs.forEach(id => {
@@ -633,6 +674,25 @@ function initFormBindings() {
   if (bannerShowInput && bannerDetailsGroup) {
     bannerShowInput.addEventListener("change", () => {
       bannerDetailsGroup.style.display = bannerShowInput.checked ? "flex" : "none";
+      updateLivePreview();
+    });
+  }
+
+  // Vinculaciones específicas para Favicon y PWA
+  const faviconTypeSelect = document.getElementById("select-favicon-type");
+  if (faviconTypeSelect) {
+    faviconTypeSelect.addEventListener("change", () => {
+      const val = faviconTypeSelect.value;
+      document.getElementById("group-favicon-val-icon").style.display = val === "icon" ? "flex" : "none";
+      document.getElementById("group-favicon-val-custom").style.display = val === "custom" ? "flex" : "none";
+      updateLivePreview();
+    });
+  }
+
+  const pwaEnableInput = document.getElementById("input-pwa-enable");
+  if (pwaEnableInput) {
+    pwaEnableInput.addEventListener("change", () => {
+      document.getElementById("group-pwa-details").style.display = pwaEnableInput.checked ? "flex" : "none";
       updateLivePreview();
     });
   }
@@ -1894,6 +1954,16 @@ function exportConfigFile() {
   const verified = document.getElementById("input-verified").checked;
   const avatar = document.getElementById("input-avatar").value;
   const title = document.getElementById("input-title").value;
+  
+  const webTitle = document.getElementById("input-web-title").value;
+  const faviconType = document.getElementById("select-favicon-type").value;
+  const faviconIcon = document.getElementById("input-favicon-val-icon").value;
+  const faviconCustom = document.getElementById("input-favicon-val-custom").value;
+  const pwaEnable = document.getElementById("input-pwa-enable").checked;
+  const pwaName = document.getElementById("input-pwa-name").value;
+  const pwaShortName = document.getElementById("input-pwa-short-name").value;
+
+  const faviconVal = faviconType === "icon" ? faviconIcon : (faviconType === "custom" ? faviconCustom : "");
   const theme = document.getElementById("select-theme").value;
   const btnStyle = document.getElementById("select-button-style").value;
   const btnAnim = document.getElementById("select-button-anim").value;
@@ -1988,6 +2058,7 @@ const CONFIG = {
     avatarShape: "${avatarShape}",     // Forma del avatar ("circle", "square", "rounded", etc.)
     avatarSize: ${avatarSize},         // Tamaño del avatar en px
     title: "${title.replace(/"/g, '\\"')}", // Tu cargo/título (aparecerá en negrita)
+    pageTitle: "${webTitle.replace(/"/g, '\\"')}", // Título personalizado de la pestaña (Vacío para Nombre | Cargo)
     
     // Banner/Cabecera superior personalizado (Imagen o Video)
     headerBanner: {
@@ -2099,6 +2170,12 @@ ${bioString}
     buttonAnimation: "${btnAnim}",
     accentColor: "${accentColor}",
     fontFamily: "'Outfit', sans-serif",
+ 
+    // Configuración del Favicon dinámico (Icono de la pestaña del navegador)
+    favicon: {
+      type: "${faviconType}",                      // "avatar", "icon", o "custom"
+      value: "${faviconVal.replace(/"/g, '\\"')}"  // Valor de icono FontAwesome o URL de la imagen
+    },
 
     // 3.4. Fondo personalizado (opcional):
     // Elige un fondo propio (estático o animado) en lugar de los temas de partículas:
@@ -2123,6 +2200,15 @@ ${bioString}
       boxColor: "${profileCardBoxColor}",
       boxOpacity: ${profileCardBoxOpacity}
     }
+  },
+
+  // ==========================================
+  // 3.6. CONFIGURACIÓN DE APLICACIÓN INSTALABLE (PWA)
+  // ==========================================
+  pwa: {
+    enable: ${pwaEnable},                              // ¿Habilitar la instalación como aplicación en móviles y PCs? (true/false)
+    appName: "${pwaName.replace(/"/g, '\\"')}",                      // Nombre completo de la aplicación al instalarse
+    appShortName: "${pwaShortName.replace(/"/g, '\\"')}"                     // Nombre corto de la aplicación en la pantalla de inicio
   },
 
   // ==========================================

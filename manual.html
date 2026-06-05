@@ -618,6 +618,7 @@
       
       <li class="nav-category">SEO & Soporte</li>
       <li class="nav-item"><a href="#seo-og"><i class="fas fa-search"></i>SEO y Vista Previa</a></li>
+      <li class="nav-item"><a href="#configuracion-web"><i class="fas fa-cog"></i>Configuración Web y PWA</a></li>
       <li class="nav-item"><a href="#faq"><i class="fas fa-question-circle"></i>Preguntas Frecuentes</a></li>
     </ul>
   </aside>
@@ -1683,6 +1684,53 @@ body.theme-volcano {
             <p>Abre tu archivo <code>index.html</code> en tu ordenador utilizando cualquier editor de código o de texto. Busca el bloque <code>&lt;head&gt;</code> (cerca de la línea 1-20) y pega el código copiado dentro. Guarda el archivo y súbelo a tu hosting.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CONFIGURACIÓN AVANZADA DE LA WEB -->
+    <section id="configuracion-web" class="wiki-section">
+      <h2><i class="fas fa-cog"></i> Configuración Avanzada de la Web (Título, Favicon, App)</h2>
+      <p>Esta sección detalla cómo configurar de manera avanzada los aspectos del navegador y la compatibilidad para instalar tu biolink como una aplicación móvil o de escritorio sin editar el código HTML principal, todo gestionado desde <code>config.js</code> y el Creador de Temas.</p>
+
+      <div class="dns-grid" style="grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;">
+        
+        <!-- Título -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-heading"></i> A. Título Personalizado del Navegador</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Por defecto, la pestaña de tu navegador muestra la combinación de <code>Nombre | Cargo Profesional</code>. Si deseas que aparezca un texto diferente (como <i>"Mi Portafolio Profesional ✨"</i>):</p>
+          <ol style="margin-left: 2rem; color: var(--text-muted); line-height: 1.6; font-size: 0.9rem;">
+            <li>Abre el Creador de Temas y expande la <strong>Sección 8: Configuración de la Web</strong>.</li>
+            <li>Introduce el título de tu preferencia en el campo <strong>Título Personalizado de la Web</strong>.</li>
+            <li>Exporta tu archivo <code>config.js</code> y reemplázalo en el proyecto. La lógica dinámica de <code>app.js</code> se encargará del resto de manera automática.</li>
+          </ol>
+        </div>
+
+        <!-- Favicon -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-image"></i> B. Favicon Dinámico (Icono de la Pestaña)</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Puedes regular el icono visible del navegador de tres formas distintas:</p>
+          <ul style="margin-left: 2rem; color: var(--text-muted); line-height: 1.6; font-size: 0.9rem;">
+            <li><strong>Foto de Perfil (Avatar)</strong>: Ajusta de forma automática tu icono del navegador a tu imagen de perfil.</li>
+            <li><strong>Icono de FontAwesome</strong>: Permite escribir cualquier clase libre (ej: <code>fa-solid fa-code</code> o <code>fa-brands fa-whatsapp</code>). La web pintará dinámicamente un círculo con el color de acento del tema y el icono blanco centrado de forma ultra-nítida.</li>
+            <li><strong>Imagen Personalizada</strong>: Te permite ingresar una ruta a un archivo propio (ej: <code>assets/favicon-propio.png</code>) o un enlace URL de internet.</li>
+          </ul>
+        </div>
+
+        <!-- PWA / App -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-mobile-alt"></i> C. Progressive Web App (PWA) e Instalación como App</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Una PWA permite que tu sitio sea instalado como una aplicación nativa, añadiendo un icono a la pantalla de inicio sin depender de tiendas de aplicaciones.</p>
+          <h5 style="margin-bottom: 0.5rem; color: var(--text-color);">Ventajas principales:</h5>
+          <ul style="margin-left: 2rem; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; margin-bottom: 1rem;">
+            <li><strong>Acceso Sin Conexión</strong>: Gracias al Service Worker (<code>sw.js</code>), los archivos de la web se almacenan localmente. Si tu visitante pierde la red, la web cargará y funcionará igualmente.</li>
+            <li><strong>Icono de Inicio Personalizado</strong>: Se usará tu foto de perfil como icono nativo con los nombres que introduzcas en el configurador.</li>
+            <li><strong>Modo Standalone (Sin marcos)</strong>: Se abrirá como una aplicación nativa eliminando las barras de dirección e interfaces del navegador móvil.</li>
+          </ul>
+          <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; padding: 1rem; border-radius: 4px; font-size: 0.85rem; color: #f87171; line-height: 1.5;">
+            <strong>⚠️ Requisito de Seguridad Obligatorio (HTTPS):</strong> Las especificaciones de PWA exigen el uso estricto del protocolo seguro <strong>HTTPS</strong>. Al probar localmente en tu ordenador usando la dirección IP local de red (ej: <code>http://192.168.1.x:8080</code>), el móvil no te dejará instalar la aplicación nativa y fallbackeará a un simple "acceso directo". La instalación nativa PWA completa se habilitará inmediatamente cuando publiques el sitio en <strong>Cloudflare Pages</strong> u otros hostings de producción ya provistos con HTTPS.
+          </div>
+        </div>
+
       </div>
     </section>
 

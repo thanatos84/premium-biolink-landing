@@ -11,6 +11,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Inicialización general
   applyDynamicStyles();
+  setupFavicon();
+  setupPWA();
   renderProfile();
   renderSocialIcons();
   renderContent();
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyLayoutOrder();
   initBackgroundAnimation();
   initActionHandlers();
+
 });
 
 /**
@@ -131,7 +134,11 @@ function applyDynamicStyles() {
   if (typeof CONFIG === "undefined") return;
 
   const root = document.documentElement;
-  document.title = `${CONFIG.profile.name} | ${CONFIG.profile.title}`;
+  if (CONFIG.profile.pageTitle && CONFIG.profile.pageTitle.trim() !== "") {
+    document.title = CONFIG.profile.pageTitle;
+  } else {
+    document.title = `${CONFIG.profile.name} | ${CONFIG.profile.title}`;
+  }
 
   // Obtener y aplicar el tema seleccionado a body
   const theme = CONFIG.theme.selectedTheme || "space";
@@ -152,6 +159,229 @@ function applyDynamicStyles() {
     document.body.style.setProperty('--font-family', CONFIG.theme.fontFamily);
   }
 }
+
+/**
+ * Configura dinámicamente el favicon de la página basado en CONFIG.theme.favicon
+ */
+function setupFavicon() {
+  if (typeof CONFIG === "undefined" || !CONFIG.theme || !CONFIG.theme.favicon) return;
+
+  const faviconConf = CONFIG.theme.favicon;
+  const type = faviconConf.type || "avatar";
+  const value = faviconConf.value;
+
+  const setFaviconUrl = (url) => {
+    let link = document.querySelector('link[rel="icon"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = url;
+  };
+
+  if (type === "avatar") {
+    // Usar la foto del perfil
+    let avatarUrl = CONFIG.profile.avatar || "profile.jpg";
+    // Si es la ruta por defecto del avatar de ejemplo que no existe físicamente, usar el fallback de Unsplash
+    if (avatarUrl === "assets/avatar.jpg") {
+      avatarUrl = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=250&q=80";
+    }
+    setFaviconUrl(avatarUrl);
+  } else if (type === "custom" && value) {
+    // Usar imagen personalizada
+    setFaviconUrl(value);
+  } else if (type === "icon" && value) {
+    // Renderizar icono de FontAwesome en canvas
+    renderFontAwesomeFavicon(value);
+  }
+}
+
+/**
+ * Helper para resolver rutas relativas a URLs absolutas (necesario para el manifiesto de PWA)
+ */
+function getAbsoluteUrl(relativeUrl) {
+  const a = document.createElement('a');
+  a.href = relativeUrl;
+  return a.href;
+}
+
+/**
+ * Renderiza un glifo de FontAwesome sobre un fondo circular de color de acento y lo aplica como favicon
+ */
+function renderFontAwesomeFavicon(iconClass, retryCount = 0) {
+  // Crear un elemento i invisible temporal para obtener el unicode del icono
+  const i = document.createElement('i');
+  i.className = iconClass;
+  i.style.position = 'absolute';
+  i.style.left = '-9999px';
+  i.style.visibility = 'hidden';
+  document.body.appendChild(i);
+
+  // Determinar familia de fuentes de FontAwesome 6
+  let fontFamily = 'Font Awesome 6 Free';
+  let fontWeight = '900'; // Default Solid
+
+  if (iconClass.includes('fa-brands') || iconClass.includes('fab ')) {
+    fontFamily = 'Font Awesome 6 Brands';
+    fontWeight = '400';
+  } else if (iconClass.includes('fa-regular') || iconClass.includes('far ')) {
+    fontFamily = 'Font Awesome 6 Free';
+    fontWeight = '400';
+  } else if (iconClass.includes('fa-solid') || iconClass.includes('fas ')) {
+    fontFamily = 'Font Awesome 6 Free';
+    fontWeight = '900';
+  }
+
+  const checkAndDraw = () => {
+    const style = window.getComputedStyle(i, '::before');
+    const content = style.getPropertyValue('content');
+
+    let char = '';
+    if (content && content !== 'none' && content !== 'normal') {
+      char = content.replace(/['"]/g, ''); // Eliminar comillas
+    }
+
+    // Si la fuente no se ha cargado todavía, document.fonts.check puede fallar.
+    // Comprobamos si el glifo está disponible y si la fuente está lista.
+    const fontSpec = `${fontWeight} 12px "${fontFamily}"`;
+    const isFontLoaded = document.fonts.check(fontSpec);
+
+    if ((!char || !isFontLoaded) && retryCount < 20) {
+      document.body.removeChild(i);
+      setTimeout(() => {
+        renderFontAwesomeFavicon(iconClass, retryCount + 1);
+      }, 100);
+      return;
+    }
+
+    if (!char) {
+      document.body.removeChild(i);
+      console.warn("No se pudo obtener el glifo de FontAwesome para el favicon:", iconClass);
+      return;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+
+    // Dibujar fondo circular con el color de acento
+    ctx.beginPath();
+    ctx.arc(32, 32, 30, 0, Math.PI * 2);
+    ctx.fillStyle = CONFIG.theme.accentColor || '#38bdf8';
+    ctx.fill();
+
+    // Dibujar el icono en blanco en el centro
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `${fontWeight} 32px "${fontFamily}"`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(char, 32, 32);
+
+    // Aplicar como favicon
+    let link = document.querySelector('link[rel="icon"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = canvas.toDataURL('image/png');
+    
+    document.body.removeChild(i);
+  };
+
+  if (document.fonts.status === 'loaded') {
+    checkAndDraw();
+  } else {
+    document.fonts.ready.then(checkAndDraw);
+  }
+}
+
+/**
+ * Genera el manifest de PWA de forma dinámica y registra/desregistra el Service Worker
+ */
+function setupPWA() {
+  if (typeof CONFIG === "undefined" || !CONFIG.pwa || !CONFIG.pwa.enable) {
+    // Si PWA está deshabilitado, intentar desregistrar el Service Worker activo
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+    return;
+  }
+
+  // Obtener URL absoluta para avatar y start_url
+  const rawAvatar = CONFIG.profile.avatar || "assets/avatar.jpg";
+  const absoluteAvatarUrl = getAbsoluteUrl(rawAvatar);
+  const absoluteStartUrl = getAbsoluteUrl(".");
+
+  // Generar objeto manifest con URLs absolutas para evitar fallos de resolución en Data URLs
+  const manifest = {
+    "name": CONFIG.pwa.appName || CONFIG.profile.name || "Mi Biolink",
+    "short_name": CONFIG.pwa.appShortName || CONFIG.profile.name || "Biolink",
+    "start_url": absoluteStartUrl,
+    "display": "standalone",
+    "background_color": (CONFIG.theme.profileCard && CONFIG.theme.profileCard.boxColor) ? CONFIG.theme.profileCard.boxColor : "#111928",
+    "theme_color": CONFIG.theme.accentColor || "#38bdf8",
+    "description": CONFIG.profile.title || "Mi Landing Page de Enlaces",
+    "icons": [
+      {
+        "src": absoluteAvatarUrl,
+        "sizes": "192x192",
+        "type": "image/jpeg"
+      },
+      {
+        "src": absoluteAvatarUrl,
+        "sizes": "512x512",
+        "type": "image/jpeg"
+      }
+    ]
+  };
+
+  // Ajustar el tipo de imagen del avatar en el manifest basándose en la extensión
+  let imgType = "image/jpeg";
+  if (rawAvatar.toLowerCase().endsWith(".png")) imgType = "image/png";
+  else if (rawAvatar.toLowerCase().endsWith(".webp")) imgType = "image/webp";
+  else if (rawAvatar.toLowerCase().endsWith(".svg")) imgType = "image/svg+xml";
+
+  manifest.icons[0].type = imgType;
+  manifest.icons[1].type = imgType;
+
+  // Convertir a JSON y luego a base64 para el Data URL de manifest
+  try {
+    const manifestString = JSON.stringify(manifest);
+    const base64Manifest = btoa(unescape(encodeURIComponent(manifestString)));
+    const manifestURL = `data:application/json;base64,${base64Manifest}`;
+
+    let link = document.querySelector('link[rel="manifest"]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'manifest';
+      document.head.appendChild(link);
+    }
+    link.href = manifestURL;
+  } catch (e) {
+    console.error("Error al generar el manifest dinámico:", e);
+  }
+
+  // Registrar Service Worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((registration) => {
+          console.log('PWA Service Worker registrado con éxito:', registration.scope);
+        })
+        .catch((error) => {
+          console.error('Error al registrar el PWA Service Worker:', error);
+        });
+    });
+  }
+}
+
 
 /**
  * Helper para convertir HEX a RGBA

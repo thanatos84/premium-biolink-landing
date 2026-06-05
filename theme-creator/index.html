@@ -482,6 +482,64 @@
 
           </div>
         </details>
+
+        <!-- SECCIÓN 8: Configuración de la Web (Título, Favicon, App) -->
+        <details class="editor-section">
+          <summary><i class="fas fa-globe"></i> Configuración de la Web (Título, Favicon, App)</summary>
+          <div class="section-content">
+            <p class="section-desc">Personaliza las opciones del navegador y la instalación de tu web en dispositivos móviles y ordenadores.</p>
+            
+            <!-- Título de la Web -->
+            <div class="form-group">
+              <label for="input-web-title">Título Personalizado de la Web</label>
+              <input type="text" id="input-web-title" placeholder="Ej: Mi Portafolio Profesional (Vacío para Nombre | Cargo)">
+              <span class="help-text">Si se deja vacío, se mostrará "Nombre | Cargo" por defecto en la pestaña.</span>
+            </div>
+
+            <!-- Favicon de la Web -->
+            <div class="form-group">
+              <label for="select-favicon-type">Origen del Favicon</label>
+              <select id="select-favicon-type">
+                <option value="avatar">Foto de Perfil (Avatar)</option>
+                <option value="icon">Icono de FontAwesome</option>
+                <option value="custom">Imagen Personalizada (Ruta o URL)</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="group-favicon-val-icon" style="display: none;">
+              <label for="input-favicon-val-icon">Clase del Icono FontAwesome</label>
+              <input type="text" id="input-favicon-val-icon" value="fa-solid fa-code" placeholder="Ej: fa-solid fa-code">
+              <span class="help-text">Puedes usar cualquier icono de <a href="https://fontawesome.com/search?o=r&m=free" target="_blank" style="color: var(--accent-color);">FontAwesome 6 Free</a> (ej: <code>fa-solid fa-code</code>, <code>fa-brands fa-whatsapp</code>).</span>
+            </div>
+
+            <div class="form-group" id="group-favicon-val-custom" style="display: none;">
+              <label for="input-favicon-val-custom">URL o Ruta de la Imagen</label>
+              <input type="text" id="input-favicon-val-custom" placeholder="Ej: assets/favicon-custom.png">
+            </div>
+
+            <!-- PWA (Instalación como App) -->
+            <p class="section-desc" style="margin-top: 15px; margin-bottom: 8px; font-weight: 600; font-size: 0.85rem; border-top: 1px solid var(--panel-border); padding-top: 12px;">Instalación como Aplicación (PWA)</p>
+            <div class="form-group checkbox-group" style="margin-bottom: 8px;">
+              <label for="input-pwa-enable">
+                <input type="checkbox" id="input-pwa-enable">
+                Habilitar Instalación como App Móvil/PC
+              </label>
+            </div>
+            
+            <div id="group-pwa-details" style="display: none; flex-direction: column; gap: 12px;">
+              <div class="form-group">
+                <label for="input-pwa-name">Nombre Completo de la App</label>
+                <input type="text" id="input-pwa-name" value="Mi Biolink" placeholder="Ej: Jonatan Pons Biolink">
+              </div>
+              <div class="form-group">
+                <label for="input-pwa-short-name">Nombre Corto de la App</label>
+                <input type="text" id="input-pwa-short-name" value="Biolink" placeholder="Ej: JonaBiolink">
+                <span class="help-text">Se muestra en la pantalla de inicio del móvil debajo del icono.</span>
+              </div>
+            </div>
+
+          </div>
+        </details>
       </div>
     </aside>
 

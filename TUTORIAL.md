@@ -18,7 +18,8 @@ Bienvenido a la guía oficial de referencia. Este documento contiene todas las i
 11. [Proveedores de Subdominios Gratuitos](#11-proveedores-de-subdominios-gratuitos)
 12. [Cómo Conectar tu Subdominio a tu Hosting (DNS)](#12-cómo-conectar-tu-subdominio-a-tu-hosting-dns)
 13. [SEO, Meta Tags y Vista Previa al Compartir (Open Graph)](#13-seo-meta-tags-y-vista-previa-al-compartir-open-graph)
-14. [Preguntas Frecuentes y Solución de Problemas (FAQ)](#14-preguntas-frecuentes-y-solución-de-problemas-faq)
+14. [Configuración Avanzada de la Web (Favicon, Título y App Instalable)](#14-configuración-avanzada-de-la-web-favicon-título-y-app-instalable)
+15. [Preguntas Frecuentes y Solución de Problemas (FAQ)](#15-preguntas-frecuentes-y-solución-de-problemas-faq)
 
 ---
 
@@ -398,7 +399,39 @@ El Creador de Temas cuenta con un módulo de simulación y generación automáti
 
 ---
 
-## 14. Preguntas Frecuentes y Solución de Problemas (FAQ)
+## 14. Configuración Avanzada de la Web (Favicon, Título y App Instalable)
+Esta sección detalla cómo configurar de manera avanzada los aspectos del navegador y la compatibilidad para instalar tu biolink como una aplicación móvil o de escritorio sin editar el código HTML principal, todo gestionado desde `config.js` y el Creador de Temas.
+
+### A. Título Personalizado del Navegador
+Por defecto, la landing page lee tu Nombre y tu Cargo Profesional de la configuración y compone el título de la pestaña como: `Nombre | Cargo Profesional`. 
+Si prefieres un título diferente (ejemplo: `Mi Portafolio Profesional ✨` o `Escríbeme - Tu Nombre`):
+1. Abre el Creador de Temas y dirígete a la **Sección 8: Configuración de la Web (Título, Favicon, App)**.
+2. Escribe el título que desees en el campo **Título Personalizado de la Web**.
+3. Exporta y reemplaza tu `config.js`. JavaScript lo aplicará dinámicamente en el navegador.
+
+### B. Favicon Dinámico (Icono de la Pestaña)
+El favicon es el pequeño icono que aparece en la pestaña del navegador. Puedes elegir entre tres opciones de forma dinámica:
+*   **Foto de Perfil (Avatar)**: Utiliza automáticamente la misma imagen que tu foto de perfil.
+*   **Icono de FontAwesome**: Permite utilizar cualquier icono vectorial gratuito del catálogo de FontAwesome 6 (ej: `fa-brands fa-whatsapp`, `fa-solid fa-cloud`, `fa-solid fa-code`). La web creará un canvas invisible, dibujará un fondo circular con tu color de acento y pintará el icono blanco en el centro para generar el favicon sobre la marcha de forma ultra-nítida.
+*   **Imagen Personalizada**: Te permite enlazar un archivo local en tu servidor (ej: `assets/favicon-custom.png`) o una URL directa.
+
+### C. Habilitar Progressive Web App (PWA) e Instalación
+Una Progressive Web App (PWA) permite que tu Landing Page sea instalada en el dispositivo del visitante (móvil, tablet o PC) como si fuese una aplicación nativa.
+*   **Características de la PWA**:
+    *   **Acceso offline**: La página almacena los recursos clave y la configuración en la memoria caché del móvil gracias al Service Worker `sw.js` integrado. Si el visitante pierde la conexión, la web seguirá abriéndose.
+    *   **Acceso Directo con Icono**: La app se añade al cajón de aplicaciones o a la pantalla de inicio con tu foto de perfil como icono y el nombre que tú elijas.
+    *   **Sin Barra de Navegación**: Se abre en una ventana independiente "standalone" sin marcos de navegador, luciendo 100% como app nativa.
+*   **Cómo activarlo**:
+    1. En la Sección 8 del Creador, marca la casilla **Habilitar Instalación como App Móvil/PC**.
+    2. Define el **Nombre Completo** (ej: `Jonatan Pons Biolink`) y el **Nombre Corto** (ej: `JonaBiolink` - se muestra debajo del icono).
+    3. Exporta y actualiza tu `config.js`.
+
+> [!WARNING]
+> **Requisito de Conexión Segura (HTTPS)**: Para que los navegadores móviles (como Safari en iOS y Chrome en Android) activen el botón de instalación de aplicación, la web debe estar servida de forma obligatoria bajo el protocolo seguro **HTTPS**. Si accedes localmente a través de la dirección IP de tu PC (ej: `http://192.168.1.222:8080`), tu teléfono no detectará HTTPS y sólo te permitirá crear un "Acceso directo". Una vez la despliegues a Cloudflare Pages o GitHub Pages (que tienen SSL/HTTPS activados por defecto), la instalación PWA como App nativa funcionará a la perfección.
+
+---
+
+## 15. Preguntas Frecuentes y Solución de Problemas (FAQ)
 
 ### ❓ 1. He cambiado mi información o foto de compartido, pero en WhatsApp/Telegram se sigue viendo la versión antigua. ¿Qué ocurre?
 Las redes sociales utilizan un sistema de caché de servidor muy agresivo para no saturar su ancho de banda cada vez que alguien comparte un enlace. Esto hace que "recuerden" la primera vista previa de tu web durante días o semanas.

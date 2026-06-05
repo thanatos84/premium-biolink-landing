@@ -15,7 +15,9 @@ Una landing page premium, ultra-rápida y altamente interactiva para tus enlaces
 ## ✨ Características Principales
 
 *   🎨 **20 Temas Visuales Interactivos**: Efectos de fondo en vivo usando Canvas de HTML5 (campos de estrellas, auroras polares, lluvia digital tipo Matrix, cuadrícula Synthwave, luciérnagas, pétalos de cerezo y más).
-*   🛠️ **Creador de Temas Integrado**: Panel visual interactivo en el subdirectorio `/theme-creator` para personalizar colores de acento, estilos de botones, animaciones, y ordenar secciones mediante arrastrar y soltar (Drag & Drop). Exporta tu configuración al instante.
+*   🛠️ **Creador de Temas Integrado**: Panel visual interactivo en el subdirectorio `/theme-creator` para personalizar colores de acento, estilos de botones, animaciones, ordenar secciones mediante arrastrar y soltar (Drag & Drop), y ajustar opciones de navegador. Exporta tu configuración al instante.
+*   🌐 **Personalización del Navegador (Favicon y Título)**: Elige el favicon de tu pestaña desde el creador (usando tu foto de perfil, cualquier icono de FontAwesome 6 o una ruta de imagen personalizada) y configura un título personalizado para el navegador sin editar `index.html`.
+*   📱 **Instalación como Aplicación Nativa (PWA)**: Opción para habilitar Progressive Web App desde la configuración. Tu web podrá ser instalada con un solo clic como aplicación móvil (iOS/Android) u ordenador (Windows/macOS/Linux), con soporte offline gracias a su Service Worker integrado.
 *   🔍 **Simulador SEO y Open Graph (Redes Sociales)**: Previsualiza en tiempo real cómo se verá la burbuja de compartido de tu web en WhatsApp, Telegram o Discord. Elige entre mostrar tu avatar, banner, un código QR autogenerado o ninguno, y copia el código meta estático listo para usar.
 *   📇 **Descarga de Tarjeta de Contacto (VCard)**: Botón interactivo para añadir tu información de contacto directamente a la agenda del móvil del visitante.
 *   ⚡ **Rendimiento Máximo**: Construida únicamente con HTML, CSS vainilla y JavaScript estático. Sin bases de datos, sin dependencias pesadas y con carga instantánea.
