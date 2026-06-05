@@ -9,25 +9,25 @@
 
 // Estado global
 let socialIcons = [
-  { name: "linkedin", url: "https://www.linkedin.com/in/jonatanpons/", icon: "linkedin" },
-  { name: "github", url: "https://github.com/thanatos84", icon: "github" },
-  { name: "whatsapp", url: "https://wa.me/+34667461868", icon: "whatsapp" },
-  { name: "telegram", url: "https://t.me/thanatos", icon: "telegram" },
-  { name: "instagram", url: "https://www.instagram.com/jonatanpons/", icon: "instagram" },
-  { name: "youtube", url: "https://www.youtube.com/@jonatanpons5512", icon: "youtube" },
-  { name: "facebook", url: "https://www.facebook.com/jona.pons", icon: "facebook" }
+  { name: "linkedin", url: "https://www.linkedin.com/in/tu-usuario/", icon: "linkedin" },
+  { name: "github", url: "https://github.com/tu-usuario", icon: "github" },
+  { name: "whatsapp", url: "https://wa.me/34600000000", icon: "whatsapp" },
+  { name: "telegram", url: "https://t.me/tu-usuario", icon: "telegram" },
+  { name: "instagram", url: "https://www.instagram.com/tu-usuario/", icon: "instagram" },
+  { name: "youtube", url: "https://www.youtube.com/@tu-usuario", icon: "youtube" },
+  { name: "facebook", url: "https://www.facebook.com/tu-usuario", icon: "facebook" }
 ];
 
 let contentList = [
-  { type: "section", title: "Capturando momentos y buenas charlas", icon: "📸" },
-  { type: "link", title: "Escríbeme un WhatsApp directo", url: "https://wa.me/+34667461868", icon: "whatsapp", highlight: true },
-  { type: "link", title: "Instagram", url: "https://www.instagram.com/jonatanpons/", icon: "instagram", highlight: false },
-  { type: "link", title: "Charlemos por Telegram", url: "https://t.me/thanatos", icon: "telegram", highlight: false },
-  { type: "link", title: "Facebook", url: "https://www.facebook.com/jona.pons", icon: "facebook", highlight: false },
-  { type: "section", title: "Ingeniería, Seguridad, Cloud y Sistemas", icon: "💻" },
-  { type: "link", title: "LinkedIn", url: "https://www.linkedin.com/in/jonatanpons/", icon: "linkedin", highlight: false },
-  { type: "link", title: "GitHub", url: "https://github.com/thanatos84", icon: "github", highlight: false },
-  { type: "link", title: "YouTube", url: "https://www.youtube.com/@jonatanpons5512", icon: "youtube", highlight: false }
+  { type: "section", title: "Sección de ejemplo", icon: "📸" },
+  { type: "link", title: "Escríbeme por WhatsApp", url: "https://wa.me/34600000000", icon: "whatsapp", highlight: true },
+  { type: "link", title: "Instagram", url: "https://www.instagram.com/tu-usuario/", icon: "instagram", highlight: false },
+  { type: "link", title: "Charlemos por Telegram", url: "https://t.me/tu-usuario", icon: "telegram", highlight: false },
+  { type: "link", title: "Facebook", url: "https://www.facebook.com/tu-usuario", icon: "facebook", highlight: false },
+  { type: "section", title: "Enlaces de interés", icon: "💻" },
+  { type: "link", title: "LinkedIn", url: "https://www.linkedin.com/in/tu-usuario/", icon: "linkedin", highlight: false },
+  { type: "link", title: "GitHub", url: "https://github.com/tu-usuario", icon: "github", highlight: false },
+  { type: "link", title: "YouTube", url: "https://www.youtube.com/@tu-usuario", icon: "youtube", highlight: false }
 ];
 
 // Estado del diseño y estructura
@@ -2039,7 +2039,7 @@ function exportConfigFile() {
 
   // Documentar cada listado detalladamente en español
   const output = `/**
- * CONFIGURACIÓN DE LA LANDING PAGE - JONATAN PONS
+ * CONFIGURACIÓN DE LA LANDING PAGE
  * 
  * Este archivo contiene toda la información de tu página. Puedes editarlo fácilmente
  * para añadir enlaces, cambiar iconos, modificar el fondo, cambiar tu foto, etc.

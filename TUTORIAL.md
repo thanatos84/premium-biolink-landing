@@ -137,7 +137,7 @@ Entra al sitio oficial de [FontAwesome Icons](https://fontawesome.com/icons) y b
 ## 8. Uso de Etiquetas HTML Libres
 Los campos del proyecto son compatibles con código HTML nativo para dar la máxima flexibilidad de diseño a tus textos. Puedes utilizar estas etiquetas en la **Biografía**, el **Título Profesional**, los **Títulos de Secciones** y de **Enlaces**:
 
-- **Negritas**: `<b>Texto</b>` o `<strong>Texto</strong>` (Ej: `<b>Jonatan</b>`)
+- **Negritas**: `<b>Texto</b>` o `<strong>Texto</strong>` (Ej: `<b>Juan</b>`)
 - **Cursiva**: `<i>Texto</i>` o `<em>Texto</em>` (Ej: `<i>Diseñador</i>`)
 - **Subrayado**: `<u>Texto</u>`
 - **Tachado**: `<s>Tachado</s>` o `<del>Tachado</del>`
@@ -426,7 +426,7 @@ Una Progressive Web App (PWA) permite que tu Landing Page sea instalada en el di
     *   **Sin Barra de Navegación**: Se abre en una ventana independiente "standalone" sin marcos de navegador, luciendo 100% como app nativa.
 *   **Cómo activarlo**:
     1. En la Sección 8 del Creador, marca la casilla **Habilitar Instalación como App Móvil/PC**.
-    2. Define el **Nombre Completo** (ej: `Jonatan Pons Biolink`) y el **Nombre Corto** (ej: `JonaBiolink` - se muestra debajo del icono).
+    2. Define el **Nombre Completo** (ej: `Mi Biolink`) y el **Nombre Corto** (ej: `Biolink` - se muestra debajo del icono).
     3. Exporta y actualiza tu `config.js`.
 
 > [!WARNING]
