@@ -72,7 +72,8 @@ Si prefieres no usar el botón automático, puedes subir la carpeta del proyecto
 ## 📖 Guía Completa de Usuario
 ¿Quieres saber cómo registrar un subdominio gratuito (`.pp.ua`, `is-a.dev`, `js.org`, etc.), cómo conectar tus DNS con o sin Cloudflare, o cómo estructurar iconos avanzados y etiquetas HTML libres?
 
-👉 **[Leer el Manual Completo y Wiki del Proyecto](TUTORIAL.md)**
+*   📖 **[Manual de Usuario en Formato Markdown (GitHub)](TUTORIAL.md)**
+*   🌐 **[Manual Interactivo y Wiki en Formato Web](https://premium-biolink-landing.pages.dev/manual.html)**
 
 ---
 
