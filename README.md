@@ -1,5 +1,7 @@
 # 🌟 Premium Biolink & Interactive Landing Page
 
+![Portada Principal](assets/screenshots/portada.png)
+
 Una landing page premium, ultra-rápida y altamente interactiva para tus enlaces personales o profesionales. Diseñada como una alternativa moderna y autohospedada a Linktree o LinkStack, pensada para lucir espectacular y funcionar en cualquier servidor estático gratuito.
 
 🚀 **Demostración en Vivo**: [premium-biolink-landing.pages.dev](https://premium-biolink-landing.pages.dev)  

@@ -1,5 +1,7 @@
 # Wiki & Manual de Usuario Completo - Landing Page Premium
 
+![Portada Principal](assets/screenshots/portada.png)
+
 Bienvenido a la guía oficial de referencia. Este documento contiene todas las instrucciones paso a paso para utilizar, personalizar, hospedar y configurar un subdominio gratuito en tu Landing Page, diseñado de forma comprensible para cualquier persona sin conocimientos técnicos previos.
 
 🚀 **Demostración en Vivo**: [premium-biolink-landing.pages.dev](https://premium-biolink-landing.pages.dev)  
@@ -60,6 +62,9 @@ Para entender cómo funciona la Landing Page, aquí tienes la explicación senci
 ---
 
 ## 4. Guía del Creador de Temas
+
+![Creador Visual](assets/screenshots/2_creador_visual.png)
+
 El creador es una aplicación web interactiva (ubicada en `/theme-creator/index.html`) que te permite diseñar la web de forma visual y sin escribir código.
 
 1.  **Edición en Vivo**: El panel izquierdo te permite modificar nombres, temas, colores, formas y enlaces, y ver el resultado de inmediato en la simulación del teléfono del panel derecho.
@@ -70,6 +75,9 @@ El creador es una aplicación web interactiva (ubicada en `/theme-creator/index.
 ---
 
 ## 5. Opciones de Configuración del Creador
+
+![Opciones y Tarjeta de Contacto VCard](assets/screenshots/6_tarjeta_vcard.png)
+
 El editor visual cuenta con una amplia variedad de controles interactivos para regular la distribución visual (layout) de tu Landing Page:
 
 ### A. Datos Generales y Avatar (Foto/Video)
@@ -152,6 +160,9 @@ Los campos del proyecto son compatibles con código HTML nativo para dar la máx
 Si deseas expandir la programación de la landing, puedes crear nuevos diseños modificando el código fuente del proyecto:
 
 ### A. Crear un nuevo Tema Visual
+
+![Temas Interactivos](assets/screenshots/1_temas_interactivos.png)
+
 1.  **CSS**: Abre `index.css` y define las variables de color en `body.theme-mituema`:
     ```css
     body.theme-volcano {
@@ -228,6 +239,9 @@ Si deseas expandir la programación de la landing, puedes crear nuevos diseños 
 ---
 
 ## 10. Hosting Gratuito (Alojamiento de tu Web)
+
+![Rendimiento y Hosting](assets/screenshots/7_rendimiento_maximo.png)
+
 Cuando tengas lista la web y tu archivo `config.js` actualizado, puedes hospedarla gratuitamente usando cualquiera de estos proveedores de hosting estático:
 
 ### A. GitHub Pages ([pages.github.com](https://pages.github.com/))
@@ -378,6 +392,9 @@ Cloudflare es una pasarela DNS profesional totalmente gratuita. Ofrece ancho de 
 ---
 
 ## 13. SEO, Meta Tags y Vista Previa al Compartir (Open Graph)
+
+![Simulador SEO](assets/screenshots/5_simulador_seo.png)
+
 Cuando compartes el enlace de tu sitio web en aplicaciones como WhatsApp, Telegram, Facebook o Discord, la plataforma genera automáticamente una **tarjeta visual** (burbuja de compartido) con una imagen, un título y una descripción. Esto se conoce como protocolo **Open Graph (OG)**.
 
 > [!IMPORTANT]
@@ -403,6 +420,9 @@ El Creador de Temas cuenta con un módulo de simulación y generación automáti
 ---
 
 ## 14. Configuración Avanzada de la Web (Favicon, Título y App Instalable)
+
+![Personalización de Navegador](assets/screenshots/3_personalizacion_navegador.png)
+
 Esta sección detalla cómo configurar de manera avanzada los aspectos del navegador y la compatibilidad para instalar tu biolink como una aplicación móvil o de escritorio sin editar el código HTML principal, todo gestionado desde `config.js` y el Creador de Temas.
 
 ### A. Título Personalizado del Navegador
@@ -419,6 +439,9 @@ El favicon es el pequeño icono que aparece en la pestaña del navegador. Puedes
 *   **Imagen Personalizada**: Te permite enlazar un archivo local en tu servidor (ej: `assets/favicon-custom.png`) o una URL directa.
 
 ### C. Habilitar Progressive Web App (PWA) e Instalación
+
+![Instalación PWA](assets/screenshots/4_pwa_instalacion.png)
+
 Una Progressive Web App (PWA) permite que tu Landing Page sea instalada en el dispositivo del visitante (móvil, tablet o PC) como si fuese una aplicación nativa.
 *   **Características de la PWA**:
     *   **Acceso offline**: La página almacena los recursos clave y la configuración en la memoria caché del móvil gracias al Service Worker `sw.js` integrado. Si el visitante pierde la conexión, la web seguirá abriéndose.
