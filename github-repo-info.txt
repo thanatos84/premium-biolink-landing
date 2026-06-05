@@ -1,0 +1,21 @@
+============================================================
+DATOS SUGERIDOS PARA LA CREACIÓN DEL REPOSITORIO EN GITHUB
+============================================================
+
+1. Nombre del repositorio (Repository name):
+   premium-biolink-landing
+
+2. Descripción (Description):
+   Una landing page interactiva y premium para tus enlaces personales y profesionales (alternativa autohospedada a Linktree o LinkStack). Cuenta con 20 temas animados con efectos en Canvas, tarjeta digital VCard de contacto y un Creador de Temas con simulador SEO y Open Graph integrado.
+
+3. Visibilidad (Public/Private):
+   Public (Público)
+
+4. Add a README file:
+   Desmarcar (ya tenemos un archivo README.md local creado en el proyecto)
+
+5. Add .gitignore:
+   None (ya tenemos un archivo .gitignore local creado en el proyecto)
+
+6. Licencia (License):
+   MIT License (puedes seleccionarla en el desplegable de GitHub al crear el repo, o usar la mención del README.md)
