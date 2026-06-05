@@ -73,7 +73,7 @@
 
     .search-box {
       position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .search-box i {
@@ -121,7 +121,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--text-muted);
-      margin: 1.5rem 0 0.5rem 0;
+      margin: 1.25rem 0 0.4rem 0;
       font-weight: 700;
     }
 
@@ -131,11 +131,11 @@
       gap: 0.75rem;
       color: var(--text-muted);
       text-decoration: none;
-      padding: 0.65rem 0.85rem;
+      padding: 0.6rem 0.75rem;
       border-radius: 8px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .nav-item a:hover {
@@ -147,7 +147,7 @@
       color: #fff;
       background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
       border-left: 3px solid var(--accent-color);
-      padding-left: calc(0.85rem - 3px);
+      padding-left: calc(0.75rem - 3px);
     }
 
     /* CONTENEDOR PRINCIPAL FLUIDO (EVITA DESBORDAMIENTOS) */
@@ -224,7 +224,7 @@
       color: #fff;
     }
 
-    /* CÓDIGO Y PRE (CORREGIDO DESBORDAMIENTO CON PRE-WRAP) */
+    /* CÓDIGO Y PRE */
     pre {
       background: rgba(3, 7, 18, 0.6);
       border: 1px solid var(--card-border);
@@ -601,12 +601,15 @@
     <ul class="nav-menu">
       <li class="nav-category">Uso General</li>
       <li class="nav-item active"><a href="#uso-web"><i class="fas fa-desktop"></i>Uso de la Web</a></li>
+      <li class="nav-item"><a href="#estructura-archivos"><i class="fas fa-folder-open"></i>Estructura de Archivos</a></li>
       <li class="nav-item"><a href="#creador-temas"><i class="fas fa-sliders-h"></i>Creador de Temas</a></li>
+      <li class="nav-item"><a href="#detalles-creador"><i class="fas fa-cogs"></i>Opciones del Creador</a></li>
       
       <li class="nav-category">Personalización</li>
       <li class="nav-item"><a href="#multimedia"><i class="fas fa-image"></i>Imágenes y Videos</a></li>
       <li class="nav-item"><a href="#iconos"><i class="fas fa-icons"></i>Sistema de Iconos</a></li>
       <li class="nav-item"><a href="#html-libre"><i class="fas fa-code"></i>Etiquetas HTML Libres</a></li>
+      <li class="nav-item"><a href="#desarrollo"><i class="fas fa-code-branch"></i>Desarrollo Avanzado</a></li>
       
       <li class="nav-category">Alojamiento</li>
       <li class="nav-item"><a href="#hosting"><i class="fas fa-server"></i>Hostings Gratuitos</a></li>
@@ -668,6 +671,50 @@
       </div>
     </section>
 
+    <!-- SECCIÓN: ESTRUCTURA DE ARCHIVOS -->
+    <section id="estructura-archivos" class="wiki-section">
+      <h2><i class="fas fa-folder-open"></i> Estructura de Archivos del Proyecto</h2>
+      <p>Para entender cómo se compone el proyecto, aquí tienes un desglose de los archivos principales de la carpeta raíz y cuál es su función específica:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%;">Archivo</th>
+              <th style="width: 20%;">Tecnología</th>
+              <th>Propósito / Explicación sencilla</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">index.html</td>
+              <td>HTML5</td>
+              <td>La maqueta o esqueleto de tu Landing Page. Contiene la estructura básica de la cabecera, del banner, la sección del avatar, el cuerpo para los enlaces y el footer. No necesitas editarlo a mano.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">index.css</td>
+              <td>CSS3</td>
+              <td>El diseño y la ropa de la web. En él se definen las 20 variables de color para los temas visuales, el efecto esmerilado translúcido de las cajas (glassmorphism), el comportamiento de los botones y los recortes geométricos del avatar.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">app.js</td>
+              <td>JavaScript (JS)</td>
+              <td>El cerebro de la página. Lee la configuración del archivo <code>config.js</code> y se encarga de dibujar el perfil, inyectar los enlaces, controlar el banner de imagen/video y renderizar los espectaculares fondos animados interactivos en Canvas.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">config.js</td>
+              <td>JavaScript (Data)</td>
+              <td>El archivo de datos que guarda toda tu configuración (nombre, biografía, enlaces, redes, tema y estilos de caja). Este es el archivo que se genera automáticamente al pulsar "Exportar" en el creador.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">theme-creator/</td>
+              <td>Carpeta</td>
+              <td>Contiene la herramienta visual editora de temas. Dentro de ella están <code>index.html</code> (interfaz del editor) y <code>creator.js</code> (el código que simula el teléfono móvil en tiempo real y escribe tus datos para descargarlos).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- SECCIÓN: CREADOR DE TEMAS -->
     <section id="creador-temas" class="wiki-section">
       <h2><i class="fas fa-sliders-h"></i> Guía del Creador de Temas</h2>
@@ -721,10 +768,66 @@
       </div>
     </section>
 
+    <!-- SECCIÓN: DETALLES DE LAS OPCIONES DEL CREADOR -->
+    <section id="detalles-creador" class="wiki-section">
+      <h2><i class="fas fa-cogs"></i> Opciones de Configuración del Creador</h2>
+      <p>Aquí tienes una guía exhaustiva de cada una de las opciones del editor visual y cómo afectan al layout (distribución visual) de tu web:</p>
+
+      <h3>1. Datos de Cabecera y Perfil</h3>
+      <ul>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Nombre Completo</strong>: Tu nombre de marca o personal. Soporta código HTML.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Insignia Verificado</strong>: Muestra un pequeño check azul al lado de tu nombre de marca.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Título Profesional</strong>: Tu cargo actual (ej: <code>&lt;b&gt;UI Designer&lt;/b&gt;</code>).</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Foto de Perfil / Avatar (Imagen o Video)</strong>: Puedes elegir un archivo local escribiendo su nombre (ej: <code>profile.jpg</code> o <code>avatar-animado.mp4</code>) o pegar un enlace web. Al seleccionar <strong>Vídeo (MP4)</strong>, se reproducirá un clip corto en bucle silenciado con auto-reproducción.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Forma del Avatar</strong>: 9 formas de recorte integradas (Círculo, Cuadrado, Cuadrado Redondeado, Triángulo, Hexágono, Octágono, Rombo, Corazón y Estrella).</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Tamaño de la Foto</strong>: Controla con un slider de píxeles el diámetro de tu foto/video de perfil (desde 60px hasta 160px).</li>
+      </ul>
+
+      <h3>2. Banner Superior</h3>
+      <ul>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Mostrar Banner</strong>: Activa/desactiva la cabecera a pantalla completa.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Tipo de Banner</strong>: Selecciona si el fondo superior será una imagen estática o un video (MP4/WebM) dinámico en bucle y silenciado.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>URL o Nombre del Archivo</strong>: Ruta del recurso. Si escribes <code>mi-banner.mp4</code> y guardas ese video en tu carpeta, funcionará de inmediato. Si no se activa la casilla del banner, el contenido del perfil subirá automáticamente sin desajustes.</li>
+      </ul>
+
+      <h3>3. Diseños y Layouts de la "Caja de Lectura"</h3>
+      <p>El creador ofrece varias modalidades estéticas para colocar fondos translúcidos esmerilados (efecto glassmorphism) sobre tu web:</p>
+      <div class="grid-cards">
+        <div class="wiki-card">
+          <h4>Caja en toda la Cabecera</h4>
+          <p>Envuelve la foto de perfil, tu nombre, título profesional y biografía completa bajo una única tarjeta translúcida unificada.</p>
+        </div>
+        <div class="wiki-card">
+          <h4>Caja en toda la Biografía</h4>
+          <p>Excluye tu nombre y tu avatar, y envuelve únicamente tus párrafos de biografía en una elegante tarjeta de lectura.</p>
+        </div>
+        <div class="wiki-card">
+          <h4>Cajas por Párrafo Individual</h4>
+          <p>Te permite añadir una tarjeta de fondo de lectura separada para cada párrafo de tu biografía de forma independiente. Útil para separar ideas.</p>
+        </div>
+        <div class="wiki-card">
+          <h4>Caja de Secciones Unificada</h4>
+          <p>Al activarlo, todo tu contenido de secciones y enlaces de abajo se agrupará en una única caja de lectura gigante.</p>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem;"><strong>Ajuste de Color y Opacidad de las Cajas</strong>: Tienes deslizadores en el panel para regular tanto el color hexadecimal de las cajas como el nivel de transparencia (opacidad, de 0 a 1) para adaptarlos exactamente al fondo animado de tu tema.</p>
+
+      <h3>4. Menú de Redes Sociales</h3>
+      <p>Introduce las URLs de tus plataformas. El sistema añadirá un icono circular en la parte superior. Si dejas el input vacío, el botón correspondiente desaparecerá en vivo.</p>
+
+      <h3>5. Listado de Contenido Dinámico</h3>
+      <p>Permite administrar los tres tipos de elementos del cuerpo:</p>
+      <ul>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Enlaces (Links)</strong>: Introduce el título del botón, su URL, icono (ej: <code>whatsapp</code> o <code>fa-brands fa-tiktok</code>) y una casilla para "Destacar Enlace" (aplica una animación continua como destellos o vibración).</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Títulos de Sección</strong>: Títulos organizadores para agrupar enlaces. Tienen un interruptor para decidir si tienen caja translúcida o si van integrados directamente sobre el fondo animado.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Separadores</strong>: Bloques invisibles que añaden espacio en blanco para separar el contenido. Mediante un slider, puedes decidir su altura exacta de 5px a 100px.</li>
+      </ul>
+    </section>
+
     <!-- SECCIÓN: MULTIMEDIA -->
     <section id="multimedia" class="wiki-section">
       <h2><i class="fas fa-image"></i> Carga de Imágenes y Videos</h2>
-      <p>Puedes configurar imágenes o videos locales de dos formas dentro de los campos del creador de temas:</p>
+      <p>Puedes configurar imágenes o videos de fondo locales de dos formas dentro de los campos del creador de temas:</p>
       
       <h3>1. Uso de Archivos Locales (Recomendado)</h3>
       <p>Guarda tus fotos, imágenes o videos en la misma carpeta del proyecto (donde está <code>index.html</code>). En el creador de temas, en el input correspondiente, simplemente escribe el <strong>nombre exacto del archivo con su extensión</strong>.</p>
@@ -878,6 +981,156 @@ banner.mp4 (o banner.jpg)</code></pre>
           <p>Prueba a copiar y pegar este bloque directamente en tu biografía dentro del creador de temas:</p>
           <pre style="margin: 0.5rem 0 0 0; background: rgba(0,0,0,0.4);"><code>Hola, soy &lt;b&gt;Jonatan&lt;/b&gt; &lt;i class="fa-solid fa-code"&gt;&lt;/i&gt;.&lt;br&gt;
 Creador de &lt;span style="color: var(--accent-color); font-weight: bold;"&gt;experiencias web interactivas&lt;/span&gt;. &lt;i class="fa-regular fa-lightbulb"&gt;&lt;/i&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DESARROLLO AVANZADO -->
+    <section id="desarrollo" class="wiki-section">
+      <h2><i class="fas fa-code-branch"></i> Cómo Añadir Temas, Botones y Efectos de Animación (Desarrolladores)</h2>
+      <p>Si tienes conocimientos de HTML/CSS/JS y deseas expandir el código fuente para crear nuevos temas de fondo con el canvas, nuevos estilos de botón o efectos de animación interactiva:</p>
+
+      <h3>A. Añadir un Nuevo Tema Visual con Efectos de Fondo</h3>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Declarar las Variables CSS del Tema</h4>
+            <p>Abre <code>index.css</code> y añade las variables de colores y fondos para tu nuevo tema utilizando el selector de clase <code>body.theme-nombre</code>:
+            <pre><code>/* TEMA VOLCANO */
+body.theme-volcano {
+  --bg-color: #0b0200;                  /* Color de fondo base */
+  --text-muted: #f87171;                /* Color del texto secundario/biografía */
+  --accent-color: #f97316;              /* Color de acento principal (Naranja fuego) */
+  --accent-glow: rgba(249, 115, 22, 0.4); /* Resplandor/Sombra del color de acento */
+  --glass-bg: rgba(30, 8, 4, 0.8);      /* Fondo de los botones (translúcido) */
+  --glass-border: rgba(249, 115, 22, 0.15); /* Borde fino de los botones */
+  background: radial-gradient(circle at center, #2e0802 0%, #0b0200 100%) !important;
+}</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Programar la Animación en Canvas (app.js y creator.js)</h4>
+            <p>Para que tu tema tenga un fondo animado en el lienzo (Canvas), abre <code>app.js</code> y localiza la función <code>initBackgroundAnimation()</code>.
+              <br><br>
+              <strong>1. Inicializar Partículas:</strong>
+              <br>
+              Busca el bloque <code>// --- CONFIGURACIÓN E INICIALIZACIÓN DE PARTÍCULAS POR TEMA ---</code> y añade la inicialización de tus partículas:
+              <pre><code>else if (theme === "volcano") {
+  numParticles = 50; // Cantidad de partículas
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 4 + 1,
+      speedY: -(Math.random() * 0.4 + 0.1), // Flotan hacia arriba
+      alpha: Math.random() * 0.7 + 0.2
+    });
+  }
+}</code></pre>
+              <br>
+              <strong>2. Dibujar las Partículas en el bucle:</strong>
+              <br>
+              Busca la función <code>draw()</code> dentro de <code>initBackgroundAnimation()</code> y añade el dibujado:
+              <pre><code>else if (theme === "volcano") {
+  // Limpiar con color de fondo del tema
+  ctx.fillStyle = "rgba(11, 2, 0, 0.25)";
+  ctx.fillRect(0, 0, width, height);
+
+  particles.forEach((p) => {
+    p.y += p.speedY; // Mover
+    if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; } // Reiniciar al salir
+
+    ctx.beginPath();
+    ctx.arc(p.x + mouseX * p.size * 0.3, p.y + mouseY * p.size * 0.3, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(249, 115, 22, ${p.alpha})`; // Naranja
+    ctx.fill();
+  });
+}</code></pre>
+              <em>Nota: Para sincronizar el previsualizador del Creador de Temas visual, repite estos dos bloques exactamente en el archivo <code>theme-creator/creator.js</code> dentro de la función <code>initPreviewAnimation()</code>.</em>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Añadir la Opción en el Selector del Creador de Temas</h4>
+            <p>Abre <code>theme-creator/index.html</code> y busca el selector <code>&lt;select id="select-theme"&gt;</code>. Añade tu nueva opción:
+            <pre><code>&lt;option value="volcano"&gt;21. Volcano (Fumarola de magma y lava)&lt;/option&gt;</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3>B. Cómo Añadir un Nuevo Estilo de Botón en CSS</h3>
+      <p>Los estilos de botones se definen 100% mediante CSS y se asignan mediante la clase <code>.btn-style-nombre</code>.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Declarar los estilos en index.css</h4>
+            <p>Abre <code>index.css</code> y añade las clases para el estado normal y el estado hover (<code>:hover</code>). Utiliza las variables CSS de acento y resplandor para que tu estilo se adapte automáticamente al tema de fondo seleccionado:
+            <pre><code>/* ESTILO BORDE NEÓN TRIPLE */
+.btn-style-triple-neon {
+  background: transparent;
+  border: 1.5px solid var(--accent-color);
+  box-shadow: 0 0 4px var(--accent-color), 0 0 10px var(--accent-glow);
+  color: var(--text-color);
+}
+
+.btn-style-triple-neon:hover {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 8px var(--accent-color), 0 0 20px var(--accent-glow);
+  transform: translateY(-2px); /* Elevar sutilmente */
+}</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Registrar la opción en el HTML del Creador</h4>
+            <p>Abre <code>theme-creator/index.html</code>, busca el desplegable <code>&lt;select id="select-button-style"&gt;</code> y añade:
+            <pre><code>&lt;option value="triple-neon"&gt;21. Triple Neon (Líneas finas de neón)&lt;/option&gt;</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3>C. Cómo Añadir un Nuevo Efecto / Animación de Botón</h3>
+      <p>Las animaciones de botones utilizan animaciones keyframes estándar de CSS y se definen bajo la clase <code>.btn-anim-nombre</code>.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear la animación en index.css</h4>
+            <p>Abre <code>index.css</code> y define la animación <code>@keyframes</code> junto con la clase del botón:
+            <pre><code>/* ANIMACIÓN SPIN-SHAKE (Vibrar rotando) */
+.btn-anim-spin-shake {
+  animation: spinShakeButton 4s infinite ease-in-out;
+}
+
+@keyframes spinShakeButton {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  92% { transform: rotate(-2deg); }
+  94% { transform: rotate(2deg); }
+  96% { transform: rotate(-1deg); }
+  98% { transform: rotate(1deg); }
+}</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Registrar la opción en el HTML del Creador</h4>
+            <p>Abre <code>theme-creator/index.html</code>, busca el desplegable <code>&lt;select id="select-button-anim"&gt;</code> y añade:
+            <pre><code>&lt;option value="spin-shake"&gt;22. Spin Shake (Vibración y rotación en bucle)&lt;/option&gt;</code></pre>
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -1129,7 +1382,7 @@ Creador de &lt;span style="color: var(--accent-color); font-weight: bold;"&gt;ex
       </div>
 
       <h3>4. js.org (<a href="https://js.org/" target="_blank" style="color: var(--accent-color);">js.org</a>)</h3>
-      <p>Un subdominio con terminación <code>tunombre.js.org</code> exclusivo para programadores de Javascript alojados en GitHub Pages.</p>
+      <p>Un subdominio con terminación <code>tunombre.js.org</code> exclusivo para programadores de JavaScript alojados en GitHub Pages.</p>
       <div class="step-list">
         <div class="step-item">
           <div class="step-number">1</div>

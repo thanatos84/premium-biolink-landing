@@ -16,20 +16,19 @@ const CONFIG = {
     avatar: "profile.jpg",       // Archivo de tu foto o vídeo de perfil.
     avatarType: "image",       // Tipo de avatar ("image" o "video")
     avatarShape: "rounded",     // Forma del avatar ("circle", "square", "rounded", etc.)
-    avatarSize: 160,         // Tamaño del avatar en px
+    avatarSize: 130,         // Tamaño del avatar en px
     title: "Senior Systems & Infrastructure Engineer ☁️", // Tu cargo/título (aparecerá en negrita)
     
     // Banner/Cabecera superior personalizado (Imagen o Video)
     headerBanner: {
-      show: true,
+      show: false,
       type: "video",
       url: "https://www.pexels.com/download/video/33987219/"
     },
     
     // Tu biografía. Cada elemento en la lista es un párrafo nuevo.
     bio: [
-      { text: "Apasionado de la fotografía, la montaña y el buen café 🏔️📸☕\nConectando infraestructura compleja de día y disfrutando de buenas conversaciones con una cerveza fría de noche. ✨🍻\nEmpático, curioso y siempre listo para una gran charla en excelente compañía. 👥", showBox: true },
-      { text: "", showBox: false }
+      { text: "Apasionado de la fotografía, la montaña y el buen café 🏔️📸☕\n\nConectando infraestructura compleja de día y disfrutando de buenas conversaciones con una cerveza fría de noche. ✨🍻\n\nEmpático, curioso y siempre listo para una gran charla en excelente compañía. 👥", showBox: true }
     ],
     
     // Datos de contacto para la tarjeta digital (.vcf / VCard)
@@ -80,7 +79,7 @@ const CONFIG = {
     // - "sakura"         -> Pétalos de flor de cerezo rosa cayendo con ráfagas de viento.
     // - "quantum"        -> Partículas caóticas de alta velocidad en órbitas atómicas.
     // - "minimal-static" -> Fondo gris pizarra estático (cero consumo de batería y CPU).
-    selectedTheme: "space", 
+    selectedTheme: "clouds", 
 
     // 3.2. Estilo de los botones principales de la lista:
     // - "glass"           -> Vidrio translúcido con desenfoque de fondo.
@@ -103,7 +102,7 @@ const CONFIG = {
     // - "split-gradient"  -> Mitad vidrio, mitad color degradado de acento.
     // - "metallic"        -> Acero cepillado metálico reflectante tipo chapa.
     // - "ghost"           -> Botón ultra-discreto semi-invisible que se ilumina en hover.
-    buttonStyle: "glass",
+    buttonStyle: "outline",
 
     // 3.3. Animación / Efecto constante de los botones en la lista:
     // - "none"           -> Sin animación constante (solo reacciona al pasar el ratón).
@@ -127,8 +126,8 @@ const CONFIG = {
     // - "jello"          -> Efecto gelatina elástica al pasar el ratón.
     // - "radar"          -> Ondas de sombra concéntricas emitidas hacia afuera en bucle.
     // - "swing"          -> Balanceo pendular colgado de la parte superior.
-    buttonAnimation: "pulse",
-    accentColor: "#38bdf8",
+    buttonAnimation: "skew",
+    accentColor: "#93c5fd",
     fontFamily: "'Outfit', sans-serif",
 
     // 3.4. Fondo personalizado (opcional):
@@ -146,13 +145,13 @@ const CONFIG = {
     // Permite añadir un fondo de tarjeta (glassmorphism/sólido) al perfil, secciones y/o pie de página
     // para asegurar la legibilidad del texto sobre fondos brillantes o vídeos.
     profileCard: {
-      showBox: false,
+      showBox: true,
       showNameTitleBox: true,
       showBioBox: true,
       showSectionBox: true,
       showFooterBox: true,
-      boxColor: "#111928",
-      boxOpacity: 0.65
+      boxColor: "#1f2937",
+      boxOpacity: 0.45
     }
   },
 
@@ -160,11 +159,11 @@ const CONFIG = {
   // 4. ICONOS RÁPIDOS DE CABECERA (Redes Sociales)
   // ==========================================
   socialIcons: [
-    { name: "linkedin", url: "https://www.linkedin.com/in/jonatanpons/", icon: "linkedin" },
-    { name: "github", url: "https://github.com/thanatos84", icon: "github" },
     { name: "whatsapp", url: "https://wa.me/+34667461868", icon: "whatsapp" },
     { name: "telegram", url: "https://t.me/thanatos", icon: "telegram" },
     { name: "instagram", url: "https://www.instagram.com/jonatanpons/", icon: "instagram" },
+    { name: "linkedin", url: "https://www.linkedin.com/in/jonatanpons/", icon: "linkedin" },
+    { name: "github", url: "https://github.com/thanatos84", icon: "github" },
     { name: "youtube", url: "https://www.youtube.com/@jonatanpons5512", icon: "youtube" },
     { name: "facebook", url: "https://www.facebook.com/jona.pons", icon: "facebook" }
   ],
@@ -209,7 +208,7 @@ const CONFIG = {
     },
     {
       type: "separator",
-      height: 26
+      height: 10
     },
     {
       type: "section",
@@ -240,7 +239,7 @@ const CONFIG = {
     },
     {
       type: "separator",
-      height: 60
+      height: 0
     }
   ],
 
@@ -275,6 +274,6 @@ const CONFIG = {
     text: "© 2026",                             // Texto de copyright o secundario
     linkText: "jonatanpons.pp.ua",               // Texto del enlace
     linkUrl: "https://jonatanpons.pp.ua",       // URL a la que dirigirá el enlace
-    extraText: "Hecho con ✨"                    // Texto final o créditos del pie de página
+    extraText: ""                    // Texto final o créditos del pie de página
   }
 };
