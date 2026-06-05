@@ -2289,10 +2289,22 @@ function updateSeoPreview() {
   const previewImg = document.getElementById("preview-seo-img");
 
   if (imgType === "none" || !imageUrl) {
-    if (previewImgContainer) previewImgContainer.style.display = "none";
+    if (previewImgContainer) {
+      previewImgContainer.style.display = "none";
+      previewImgContainer.className = "seo-preview-img-container";
+    }
     if (previewImg) previewImg.src = "";
   } else {
-    if (previewImgContainer) previewImgContainer.style.display = "block";
+    if (previewImgContainer) {
+      previewImgContainer.style.display = "block";
+      // Restablecer y asignar clases específicas de ajuste
+      previewImgContainer.className = "seo-preview-img-container";
+      if (imgType === "qr") {
+        previewImgContainer.classList.add("fit-qr");
+      } else if (imgType === "avatar") {
+        previewImgContainer.classList.add("fit-avatar");
+      }
+    }
     if (previewImg) {
       previewImg.src = imageUrl;
       previewImg.onerror = () => {

@@ -28,7 +28,7 @@ const CONFIG = {
     
     // Tu biografía. Cada elemento en la lista es un párrafo nuevo.
     bio: [
-      { text: "Apasionado de la fotografía, la montaña y el buen café 🏔️📸☕\n\nConectando infraestructura compleja de día y disfrutando de buenas conversaciones con una cerveza fría de noche. ✨🍻\n\nEmpático, curioso y siempre listo para una gran charla en excelente compañía. 👥", showBox: true }
+      { text: "Apasionado de la fotografía, la montaña y el buen café 🏔️📸☕\nConectando infraestructura compleja de día y disfrutando de buenas conversaciones con una cerveza fría de noche. ✨🍻\nEmpático, curioso y siempre listo para una gran charla en excelente compañía. 👥", showBox: true }
     ],
     
     // Datos de contacto para la tarjeta digital (.vcf / VCard)
@@ -40,7 +40,7 @@ const CONFIG = {
       title: "Senior Systems & Infrastructure Engineer ☁️",
       phone: "+34667461868",
       email: "jonatanpons@gmail.com",
-      url: "https://jonatanpons.pp.ua"
+      url: "https://jonatanpons.pages.dev"
     }
   },
 
@@ -48,10 +48,10 @@ const CONFIG = {
   // 2. CONFIGURACIÓN DEL CÓDIGO QR Y COMPARTIR
   // ==========================================
   sharing: {
-    qrUrl: "https://jonatanpons.pp.ua", // URL a la que dirigirá el código QR
+    qrUrl: "https://jonatanpons.pages.dev", // URL a la que dirigirá el código QR
     shareTitle: "Contacto de Jona",
     shareText: "Echa un vistazo a la landing page de Jona",
-    shareUrl: "https://jonatanpons.pp.ua"
+    shareUrl: "https://jonatanpons.pages.dev"
   },
 
   // ==========================================
@@ -272,8 +272,8 @@ const CONFIG = {
   footer: {
     show: true,                                 // ¿Mostrar el pie de página? (true/false)
     text: "© 2026",                             // Texto de copyright o secundario
-    linkText: "jonatanpons.pp.ua",               // Texto del enlace
-    linkUrl: "https://jonatanpons.pp.ua",       // URL a la que dirigirá el enlace
+    linkText: "jonatanpons.pages.dev",               // Texto del enlace
+    linkUrl: "https://jonatanpons.pages.dev",       // URL a la que dirigirá el enlace
     extraText: ""                    // Texto final o créditos del pie de página
   }
 };

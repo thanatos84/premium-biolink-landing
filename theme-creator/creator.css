@@ -758,6 +758,25 @@ body.creator-body {
   height: 100%;
   object-fit: cover;
 }
+.seo-preview-img-container.fit-qr {
+  background-color: #ffffff;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.seo-preview-img-container.fit-qr img {
+  object-fit: contain;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  padding: 6px;
+}
+.seo-preview-img-container.fit-avatar {
+  background-color: #0a111c;
+}
+.seo-preview-img-container.fit-avatar img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
 .seo-preview-img-container.no-image {
   display: none;
 }
