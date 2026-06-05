@@ -32,11 +32,14 @@ Una landing page premium, ultra-rápida y altamente interactiva para tus enlaces
 
 ## 🚀 Despliegue en 1 Clic (1-Click Deploy)
 
-Puedes desplegar este proyecto gratis en cuestión de segundos en **Cloudflare Pages** haciendo clic en el siguiente botón:
+Puedes desplegar este proyecto gratis en cuestión de segundos utilizando cualquiera de estas dos plataformas autohospedadas:
 
-[![Desplegar en Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/thanatos84/premium-biolink-landing)
+| ☁️ Cloudflare Pages (Automático) | 🐙 GitHub Pages (2 Clics) |
+| :---: | :---: |
+| [![Desplegar en Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/thanatos84/premium-biolink-landing) | [![Desplegar en GitHub Pages](https://img.shields.io/badge/Desplegar%20en-GitHub%20Pages-black?style=for-the-badge&logo=github)](https://github.com/thanatos84/premium-biolink-landing/settings/pages) |
 
-*(Al hacer clic, Cloudflare creará una copia del repositorio en tu cuenta de GitHub y publicará la web automáticamente).*
+*   **Cloudflare Pages**: Hace una copia (fork) del proyecto en tu cuenta de GitHub y lo compila/publica automáticamente.
+*   **GitHub Pages**: Haz clic en el botón de arriba para ir directo a la sección de configuración de tu repositorio, selecciona la rama `main` en el apartado **Branch**, pulsa **Save** y tu web estará lista en segundos.
 
 ---
 
