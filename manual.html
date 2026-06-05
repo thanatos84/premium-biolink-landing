@@ -36,14 +36,15 @@
       color: var(--text-color);
       min-height: 100vh;
       display: flex;
+      width: 100%;
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
-    /* BARRA LATERAL (SIDEBAR) */
+    /* BARRA LATERAL (SIDEBAR) RESPONSIVA */
     aside {
       width: var(--sidebar-width);
-      background: rgba(3, 7, 18, 0.85);
+      background: rgba(3, 7, 18, 0.95);
       backdrop-filter: blur(16px);
       border-right: 1px solid var(--card-border);
       position: fixed;
@@ -54,6 +55,7 @@
       display: flex;
       flex-direction: column;
       padding: 2rem 1.5rem;
+      box-sizing: border-box;
     }
 
     .brand {
@@ -148,12 +150,14 @@
       padding-left: calc(0.85rem - 3px);
     }
 
-    /* CONTENEDOR PRINCIPAL */
+    /* CONTENEDOR PRINCIPAL FLUIDO (EVITA DESBORDAMIENTOS) */
     main {
       margin-left: var(--sidebar-width);
-      flex-grow: 1;
+      width: calc(100% - var(--sidebar-width));
       padding: 3rem 4rem;
+      box-sizing: border-box;
       max-width: 1200px;
+      overflow-y: auto;
     }
 
     .header-wiki {
@@ -201,8 +205,8 @@
     }
 
     section h3 {
-      font-size: 1.3rem;
-      margin: 2rem 0 1rem 0;
+      font-size: 1.35rem;
+      margin: 2.5rem 0 1rem 0;
       color: #fff;
       display: flex;
       align-items: center;
@@ -220,7 +224,7 @@
       color: #fff;
     }
 
-    /* CÓDIGO Y PRE */
+    /* CÓDIGO Y PRE (CORREGIDO DESBORDAMIENTO CON PRE-WRAP) */
     pre {
       background: rgba(3, 7, 18, 0.6);
       border: 1px solid var(--card-border);
@@ -228,7 +232,9 @@
       padding: 1.25rem;
       overflow-x: auto;
       margin: 1.5rem 0;
-      position: relative;
+      max-width: 100%;
+      white-space: pre-wrap; /* Fuerza el ajuste de línea */
+      word-break: break-all; /* Rompe palabras ultra largas */
     }
 
     code {
@@ -256,27 +262,172 @@
       border-radius: 0 0 12px 12px;
     }
 
-    .btn-copy {
-      background: rgba(255, 255, 255, 0.05);
+    /* TABLAS RESPONSIVAS */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.5rem 0;
       border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 0.25rem 0.75rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.75rem;
-      transition: all 0.2s ease;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    .btn-copy:hover {
-      background: var(--accent-color);
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 600px;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
       color: #fff;
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* INFOGRAFÍAS PREMIUM CSS */
+    .infographic-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+    }
+
+    .infographic-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Infografía Flujo Icono */
+    .flow-horizontal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      background: rgba(31, 41, 55, 0.6);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem;
+      flex: 1;
+      min-width: 130px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .flow-node.highlight {
       border-color: var(--accent-color);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .flow-node .node-step {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-node .node-text {
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .flow-arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Infografía DNS vs Cloudflare */
+    .dns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .dns-column {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .dns-column-title {
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dns-flow-vertical {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.50rem;
+    }
+
+    .dns-bubble {
+      background: rgba(31, 41, 55, 0.8);
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      width: 80%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .dns-bubble.success {
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+
+    .dns-bubble.accent {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .dns-arrow-v {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin: 0.15rem 0;
     }
 
     /* TARJETAS E INFO */
     .grid-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin: 2rem 0;
     }
@@ -417,7 +568,18 @@
       }
       main {
         margin-left: 0;
-        padding: 2rem;
+        width: 100%;
+        padding: 2rem 1.5rem;
+      }
+      .dns-grid {
+        grid-template-columns: 1fr;
+      }
+      .flow-horizontal {
+        flex-direction: column;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
       }
     }
   </style>
@@ -459,6 +621,30 @@
       <h1>Documentación y Guía del Proyecto</h1>
       <p>Bienvenido al manual interactivo oficial para tu Landing Page Premium. Aquí aprenderás a sacarle el máximo partido al creador de temas, a entender el sistema de iconos flexibles, el soporte de HTML libre y cómo publicar tu web de forma profesional y 100% gratuita utilizando subdominios e integración con Cloudflare.</p>
     </div>
+
+    <!-- GLOSARIO DE TÉRMINOS -->
+    <section id="glosario" class="wiki-section">
+      <h2><i class="fas fa-info-circle"></i> Glosario de Términos (Conceptos Básicos)</h2>
+      <p>Si eres nuevo en el desarrollo web, estos son los conceptos clave que debes conocer. No te preocupes, se explican de forma sencilla:</p>
+      <div class="grid-cards">
+        <div class="wiki-card">
+          <h4><i class="fas fa-server"></i> Hosting (Alojamiento)</h4>
+          <p>Es un ordenador conectado a internet las 24 horas del día donde guardas los archivos de tu web (como tu <code>index.html</code>) para que todo el mundo pueda verlos introduciendo tu dirección web.</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-globe"></i> Dominio y Subdominio</h4>
+          <p>Un dominio es tu nombre web exclusivo (ej: <code>miweb.com</code>). Un subdominio es una palabra añadida delante del dominio original (ej: <code>jonatan.is-a.dev</code> o <code>jonatandev.pp.ua</code>).</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-address-book"></i> DNS (Dirección DNS)</h4>
+          <p>Es la "agenda de contactos" de internet. Traduce el nombre de tu web (legible para humanos) en la dirección IP del ordenador donde está alojada tu web.</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-directions"></i> Registro CNAME</h4>
+          <p>Es una instrucción DNS específica que le dice a internet: <em>"Cuando alguien visite mi subdominio A, mándalo a la dirección del hosting B"</em> (ej: de <code>jonatan.is-a.dev</code> a <code>jonatan.github.io</code>).</p>
+        </div>
+      </div>
+    </section>
 
     <!-- SECCIÓN: USO DE LA WEB -->
     <section id="uso-web" class="wiki-section">
@@ -568,64 +754,84 @@ banner.mp4 (o banner.jpg)</code></pre>
       <h2><i class="fas fa-icons"></i> Sistema Flexible de Iconos</h2>
       <p>El proyecto utiliza la librería <strong>FontAwesome v6</strong>. El sistema lee el campo de icono y decide de forma inteligente qué renderizar.</p>
 
-      <h3>¿Cómo busca y resuelve el icono el código interno?</h3>
-      <p>Cuando ingresas un valor en el campo de iconos de los enlaces o redes sociales, el código ejecuta una función que filtra el texto de la siguiente forma:</p>
-      <div class="step-list">
-        <div class="step-item">
-          <div class="step-number">A</div>
-          <div class="step-content">
-            <h4>Detección de URL / Ruta de Imagen</h4>
-            <p>Si el texto comienza con <code>http://</code>, <code>https://</code> o <code>./</code>, el código asume que quieres poner una imagen personalizada como icono y renderiza una etiqueta <code>&lt;img src="..."&gt;</code>.</p>
+      <!-- INFOGRAFÍA: FLUJO DE ICONOS -->
+      <div class="infographic-container">
+        <div class="infographic-title">
+          <i class="fas fa-project-diagram"></i> Infografía: Flujo de Detección de Iconos
+        </div>
+        <div class="flow-horizontal">
+          <div class="flow-node highlight">
+            <div class="node-step">Paso 1</div>
+            <div class="node-text">¿Empieza por <code>http</code> o <code>./</code>?</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="flow-node">
+            <div class="node-step">SÍ</div>
+            <div class="node-text">Renderiza <code>&lt;img&gt;</code> (Imagen local o URL)</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="flow-node">
+            <div class="node-step">NO</div>
+            <div class="node-text">¿Contiene <code>fa-</code> o prefijos?</div>
           </div>
         </div>
-        <div class="step-item">
-          <div class="step-number">B</div>
-          <div class="step-content">
-            <h4>Detección de Nombre Completo de Clase FontAwesome</h4>
-            <p>Si el texto contiene <code>fa-</code> o inicia con prefijos como <code>fab </code>, <code>fas </code>, o <code>far </code>, el sistema asume que es una clase específica de FontAwesome y la inyecta directamente. Ej: <code>fa-brands fa-whatsapp</code>.</p>
-          </div>
+        <div class="flow-horizontal">
+          <div class="flow-arrow" style="visibility:hidden; flex:1;"><i class="fas fa-arrow-down"></i></div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+          <div class="flow-arrow" style="visibility:hidden; flex:1;"><i class="fas fa-arrow-down"></i></div>
         </div>
-        <div class="step-item">
-          <div class="step-number">C</div>
-          <div class="step-content">
-            <h4>Búsqueda en el Mapa Interno (ICON_MAP)</h4>
-            <p>Si escribes una palabra simple (como "whatsapp"), el sistema busca en un diccionario interno preconfigurado (<code>ICON_MAP</code>) para traducirlo automáticamente a la clase correspondiente.</p>
+        <div class="flow-horizontal">
+          <div class="flow-node">
+            <div class="node-step">SÍ</div>
+            <div class="node-text">Usa clases FontAwesome puras</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-left"></i></div>
+          <div class="flow-node highlight">
+            <div class="node-step">Paso 2</div>
+            <div class="node-text">¿Existe en <code>ICON_MAP</code>?</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="flow-node">
+            <div class="node-step">NO</div>
+            <div class="node-text">Fallback: <code>fas fa-{texto}</code></div>
           </div>
         </div>
       </div>
 
       <h3>Diferencia entre formatos de escritura</h3>
-      <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden;">
-        <thead>
-          <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--card-border);">
-            <th style="padding: 12px; color: #fff;">Formato de entrada</th>
-            <th style="padding: 12px; color: #fff;">Cómo lo interpreta el sistema</th>
-            <th style="padding: 12px; color: #fff;">Resultado / Caso de Uso</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom: 1px solid var(--card-border);">
-            <td style="padding: 12px; font-family: monospace; color: #38bdf8;">whatsapp</td>
-            <td style="padding: 12px;">Busca en el mapa interno <code>ICON_MAP</code></td>
-            <td style="padding: 12px;">Carga <code>fab fa-whatsapp</code> automáticamente. Ideal para principiantes.</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--card-border);">
-            <td style="padding: 12px; font-family: monospace; color: #38bdf8;">fa-brands fa-whatsapp</td>
-            <td style="padding: 12px;">Detecta el prefijo y aplica clases directas</td>
-            <td style="padding: 12px;">Renderiza la etiqueta correcta. Es el método más preciso de FontAwesome.</td>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--card-border);">
-            <td style="padding: 12px; font-family: monospace; color: #38bdf8;">fab fa-whatsapp</td>
-            <td style="padding: 12px;">Detecta prefijo alternativo de FontAwesome v5/v6</td>
-            <td style="padding: 12px;">Igual al anterior, funciona perfectamente por compatibilidad.</td>
-          </tr>
-          <tr>
-            <td style="padding: 12px; font-family: monospace; color: #38bdf8;">&lt;i class="fa-brands fa-whatsapp"&gt;&lt;/i&gt;</td>
-            <td style="padding: 12px;">HTML crudo</td>
-            <td style="padding: 12px;"><strong>No poner esto en los campos de "Icono"</strong>. Esto se usa únicamente dentro de textos libres como la biografía o descripciones.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Formato de entrada</th>
+              <th>Cómo lo interpreta el sistema</th>
+              <th>Resultado / Caso de Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">whatsapp</td>
+              <td>Busca en el mapa interno <code>ICON_MAP</code></td>
+              <td>Carga <code>fab fa-whatsapp</code> automáticamente. Ideal para principiantes.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">fa-brands fa-whatsapp</td>
+              <td>Detecta el prefijo y aplica clases directas</td>
+              <td>Renderiza la etiqueta correcta. Es el método más preciso de FontAwesome.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">fab fa-whatsapp</td>
+              <td>Detecta prefijo alternativo de FontAwesome v5/v6</td>
+              <td>Igual al anterior, funciona perfectamente por compatibilidad.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">&lt;i class="fa-brands fa-whatsapp"&gt;&lt;/i&gt;</td>
+              <td>HTML crudo</td>
+              <td><strong>No poner esto en los campos de "Icono"</strong>. Esto se usa únicamente dentro de textos libres como la biografía o descripciones.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>Cómo buscar nuevos iconos</h3>
       <p>Para buscar e incorporar nuevos iconos en tus enlaces o títulos:</p>
@@ -678,85 +884,230 @@ Creador de &lt;span style="color: var(--accent-color); font-weight: bold;"&gt;ex
 
     <!-- SECCIÓN: HOSTING -->
     <section id="hosting" class="wiki-section">
-      <h2><i class="fas fa-server"></i> Hosting Gratuito (Alojamiento)</h2>
-      <p>Una vez que tengas tu Landing Page configurada, es momento de publicarla en internet. Aquí tienes una guía paso a paso para los 5 mejores servicios de hosting estático gratuitos:</p>
+      <h2><i class="fas fa-server"></i> Hosting Gratuito (Alojamiento de tu Web)</h2>
+      <p>Cuando finalices de editar la configuración en el creador, tendrás tus archivos de web listos. Aquí tienes los tutoriales detallados para subirlos a Internet de manera totalmente gratuita.</p>
 
-      <h3>1. GitHub Pages</h3>
-      <p>El servicio oficial de GitHub para alojar proyectos web de forma gratuita directamente desde un repositorio de código.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Crea una cuenta en <a href="https://github.com" target="_blank" style="color: var(--accent-color);">GitHub</a> si no la tienes.</li>
-        <li>Crea un nuevo repositorio público con el nombre: <code>tuusuario.github.io</code> (reemplaza "tuusuario" por tu nombre real de usuario).</li>
-        <li>Sube todos los archivos del proyecto a la rama principal (<code>main</code> o <code>master</code>).</li>
-        <li>¡Listo! Tu web estará online en pocos minutos en la dirección <code>https://tuusuario.github.io</code>.</li>
-      </ol>
+      <h3>1. GitHub Pages (<a href="https://pages.github.com/" target="_blank" style="color: var(--accent-color);">pages.github.com</a>)</h3>
+      <p>GitHub es una plataforma profesional para guardar código, y te regala hosting ilimitado para webs estáticas como la tuya.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear Cuenta en GitHub</h4>
+            <p>Regístrate de forma gratuita en <a href="https://github.com" target="_blank" style="color: var(--accent-color);">github.com</a> con tu correo electrónico y elige tu nombre de usuario.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear el Repositorio de tu Web</h4>
+            <p>Haz clic en el botón "+" (arriba a la derecha) -> "New repository". Asigna exactamente este nombre a tu repositorio: <code>tuusuario.github.io</code> (reemplaza "tuusuario" por tu nombre real de usuario de GitHub). Asegúrate de que esté configurado como <strong>Public</strong>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Subir los Archivos de tu Proyecto</h4>
+            <p>Dentro del repositorio que has creado, haz clic en "uploading an existing file". Arrastra y suelta todos los archivos de tu proyecto (incluyendo <code>index.html</code>, <code>app.js</code>, <code>index.css</code>, <code>config.js</code> y tus fotos/videos locales). Haz clic en "Commit changes" abajo del todo para guardar.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Listo</h4>
+            <p>Tu web estará visible automáticamente en pocos minutos en la dirección: <code>https://tuusuario.github.io</code>.</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>2. Cloudflare Pages</h3>
-      <p>Una de las plataformas más rápidas y seguras del mundo. Integra CDN de forma nativa.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Crea una cuenta en <a href="https://pages.cloudflare.com" target="_blank" style="color: var(--accent-color);">Cloudflare</a>.</li>
-        <li>Ve a la pestaña <strong>Pages</strong> y haz clic en <strong>"Create an Application"</strong> -> <strong>"Deploy Pages"</strong>.</li>
-        <li>Puedes conectar tu repositorio de GitHub, o simplemente arrastrar y soltar la carpeta de tu proyecto.</li>
-        <li>Cloudflare procesará el despliegue y te dará una URL única del tipo <code>https://tu-proyecto.pages.dev</code>.</li>
-      </ol>
+      <h3>2. Cloudflare Pages (<a href="https://pages.cloudflare.com/" target="_blank" style="color: var(--accent-color);">pages.cloudflare.com</a>)</h3>
+      <p>Una plataforma hiperveloz que ofrece ancho de banda ilimitado, protección gratuita contra hackers y una de las redes más rápidas de Internet.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear Cuenta</h4>
+            <p>Regístrate en <a href="https://dash.cloudflare.com/sign-up" target="_blank" style="color: var(--accent-color);">dash.cloudflare.com</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Proyecto Pages</h4>
+            <p>En tu panel de Cloudflare, ve a la barra lateral izquierda, pulsa en <strong>Workers & Pages</strong> -> pestaña <strong>Pages</strong> -> haz clic en <strong>"Create an Application"</strong> -> <strong>"Upload assets"</strong>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Subir Carpeta de la Web</h4>
+            <p>Asígnale un nombre a tu proyecto y arrastra la carpeta completa de tu Landing Page al recuadro de subida. Cloudflare procesará la carga en segundos.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Desplegar</h4>
+            <p>Haz clic en "Deploy Site". Cloudflare te proporcionará una dirección única gratuita terminada en <code>.pages.dev</code> (ej: <code>mi-landing.pages.dev</code>).</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>3. Surge.sh</h3>
-      <p>Ideal si te gusta la terminal de comandos. Permite publicar en segundos.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Asegúrate de tener <a href="https://nodejs.org" target="_blank" style="color: var(--accent-color);">Node.js</a> instalado.</li>
-        <li>Abre la terminal en la carpeta de tu proyecto y ejecuta: <code>npm install -g surge</code> para instalarlo globalmente.</li>
-        <li>Escribe el comando: <code>surge</code></li>
-        <li>Introduce tu correo y una contraseña si es la primera vez, confirma la carpeta del proyecto y elige el dominio personalizado terminado en <code>.surge.sh</code> que te sugiera la terminal.</li>
-      </ol>
+      <h3>3. Surge.sh (<a href="https://surge.sh/" target="_blank" style="color: var(--accent-color);">surge.sh</a>)</h3>
+      <p>Excelente herramienta para publicar tu web en cuestión de segundos utilizando la consola de comandos de tu ordenador.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Instalar Node.js</h4>
+            <p>Descarga e instala la versión recomendada de Node.js desde su web oficial: <a href="https://nodejs.org/" target="_blank" style="color: var(--accent-color);">nodejs.org</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Instalar Surge en tu Ordenador</h4>
+            <p>Abre la Consola de comandos (en Windows busca "cmd" o "PowerShell"). Escribe el siguiente comando y pulsa Intro:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>npm install -g surge</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Publicar la Web</h4>
+            <p>Navega con la consola hasta la carpeta donde tienes tu proyecto o haz clic derecho en la carpeta de tu proyecto y selecciona "Abrir en terminal". Luego escribe simplemente:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>surge</code></pre>
+            Te pedirá que escribas tu correo y una contraseña para crear tu cuenta gratuita. Luego confirma la ruta de la carpeta del proyecto y escribe el nombre de dominio gratuito terminado en <code>.surge.sh</code> que desees para tu web.</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>4. Codeberg Pages</h3>
-      <p>Una alternativa europea a GitHub, de código abierto e independiente, enfocada en la privacidad.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Regístrate en <a href="https://codeberg.org" target="_blank" style="color: var(--accent-color);">Codeberg.org</a>.</li>
-        <li>Crea un repositorio llamado obligatoriamente <code>pages</code> en tu cuenta.</li>
-        <li>Sube los archivos del proyecto a la rama <code>main</code>.</li>
-        <li>Tu sitio se publicará automáticamente en <code>https://tuusuario.codeberg.page</code>.</li>
-      </ol>
+      <h3>4. Codeberg Pages (<a href="https://pages.codeberg.org/" target="_blank" style="color: var(--accent-color);">pages.codeberg.org</a>)</h3>
+      <p>Una alternativa de código abierto a GitHub con servidores en Europa, 100% gratuita y sin publicidad.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear Cuenta</h4>
+            <p>Regístrate en <a href="https://codeberg.org" target="_blank" style="color: var(--accent-color);">codeberg.org</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Repositorio</h4>
+            <p>Crea un repositorio haciendo clic en el botón "+" -> "New Repository". El repositorio debe tener exactamente el nombre: <code>pages</code>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-content">
+            <h4>Subir Archivos</h4>
+            <p>Sube los archivos de tu Landing Page a la rama principal (<code>main</code>). Una vez subidos, tu web estará online de forma inmediata en la dirección: <code>https://tuusuario.codeberg.page</code>.</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>5. Sourcehut Pages (srht.site)</h3>
-      <p>Una plataforma minimalista extremadamente rápida para desarrolladores.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Crea una cuenta en <a href="https://sourcehut.org" target="_blank" style="color: var(--accent-color);">Sourcehut</a>.</li>
-        <li>Comprime los archivos del proyecto en un archivo <code>.tar.gz</code>.</li>
-        <li>Puedes subirlos mediante su terminal git o directamente a través de su interfaz web en <code>srht.site</code> apuntando a tu usuario.</li>
-      </ol>
+      <h3>5. Sourcehut Pages (<a href="https://srht.site/" target="_blank" style="color: var(--accent-color);">srht.site</a>)</h3>
+      <p>Una plataforma ultra minimalista y rápida orientada a la privacidad.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro</h4>
+            <p>Crea tu cuenta de usuario en <a href="https://meta.sr.ht" target="_blank" style="color: var(--accent-color);">meta.sr.ht</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Subir Web</h4>
+            <p>Puedes empaquetar tu carpeta en un archivo comprimido <code>.tar.gz</code> y subirla directamente usando el formulario interactivo de su panel web en <code>srht.site</code>.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- SECCIÓN: SUBDOMINIOS GRATUITOS -->
     <section id="subdominios" class="wiki-section">
-      <h2><i class="fas fa-globe"></i> Cómo Obtener Subdominios Gratuitos</h2>
-      <p>Si quieres tu propio nombre personalizado pero no quieres pagar por un dominio <code>.com</code>, existen varios proveedores de subdominios gratuitos ideales para desarrolladores:</p>
+      <h2><i class="fas fa-globe"></i> Proveedores de Subdominios Gratuitos</h2>
+      <p>Si deseas un nombre personalizado bonito sin tener que comprar un dominio de pago, utiliza cualquiera de estos proveedores oficiales de subdominios gratuitos:</p>
 
-      <h3>1. pp.ua (a través de nic.ua)</h3>
-      <p>Es un dominio de nivel superior geográfico para Ucrania totalmente gratuito, pero requiere activación por Telegram.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Ve a <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>, busca un dominio que te guste que termine en <code>.pp.ua</code> (ej: <code>jonatandev.pp.ua</code>).</li>
-        <li>Agrégalo al carrito por $0 y finaliza el proceso de registro/compra gratuita.</li>
-        <li>El estado del dominio aparecerá como "Reclutando" o "Espera de activación".</li>
-        <li>Abre la aplicación Telegram y busca el bot oficial: <strong><code>@NicUaBot</code></strong> o ingresa a <code>t.me/NicUaBot</code>.</li>
-        <li>Escribe <code>/start</code> y autoriza compartiendo tu número de teléfono (este paso es para prevenir spam).</li>
-        <li>Envía el comando <code>/activate</code>. El bot te pedirá confirmar el dominio que acabas de registrar en nic.ua.</li>
-        <li>¡Felicidades! Tu dominio <code>.pp.ua</code> estará activo. Ahora puedes cambiar sus DNS para apuntar a Cloudflare.</li>
-      </ol>
+      <h3>1. pp.ua (vía <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>)</h3>
+      <p>Ofrece subdominios <code>.pp.ua</code> oficiales gratis. Requiere una cuenta en nic.ua y confirmación por Telegram:</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Buscar y Registrar</h4>
+            <p>Entra en <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>, introduce tu subdominio deseado terminado en <code>.pp.ua</code> (ej: <code>jonatandev.pp.ua</code>). Agrégalo al carrito a coste $0 y procesa la compra gratuita hasta el final rellenando tus datos.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Iniciar el Bot de Telegram</h4>
+            <p>Abre la aplicación Telegram en tu teléfono o PC, busca el bot oficial de nic.ua: <strong><code>@NicUaBot</code></strong> (o haz clic en <a href="https://t.me/NicUaBot" target="_blank" style="color: var(--accent-color);">t.me/NicUaBot</a>) y envíale el comando <code>/start</code>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Autorizar Número</h4>
+            <p>El bot te pedirá autorización para validar que eres humano. Haz clic en el botón de Telegram de abajo para compartir tu número telefónico con el bot.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Activar Dominio</h4>
+            <p>Envía al bot el comando <code>/activate</code>. Te mostrará un botón con tu dominio pendiente. Pulsa en él y el bot te notificará que tu subdominio ha sido activado con éxito. Ahora ya puedes configurar sus DNS en el panel web de nic.ua.</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>2. FreeDomain (digitalplat.org)</h3>
-      <p>Te permite obtener subdominios gratuitos como <code>*.dp.ua</code>, <code>*.net.ua</code>, etc.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Visita el repositorio en <a href="https://github.com/DigitalPlatDev/FreeDomain" target="_blank" style="color: var(--accent-color);">DigitalPlatDev/FreeDomain</a> o su portal <code>domain.digitalplat.org</code>.</li>
-        <li>Registra tu solicitud ingresando tu dominio y los servidores de nombres (NS) que te provea Cloudflare.</li>
-      </ol>
+      <h3>2. DigitalPlat Domain Portal (<a href="https://domain.digitalplat.org" target="_blank" style="color: var(--accent-color);">domain.digitalplat.org</a>)</h3>
+      <p>Un servicio que distribuye subdominios gratuitos en extensiones de red como <code>*.dp.ua</code> o <code>*.net.ua</code> de forma directa.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro</h4>
+            <p>Ve a <a href="https://domain.digitalplat.org" target="_blank" style="color: var(--accent-color);">domain.digitalplat.org</a> y regístrate.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Solicitar Subdominio</h4>
+            <p>Busca un nombre disponible, elige la extensión de subdominio gratuita que prefieras e introduce tus servidores DNS o registros de apuntamiento.</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>3. is-a.dev</h3>
-      <p>Muy popular en la comunidad de desarrolladores de GitHub. Te otorga un subdominio <code>tunombre.is-a.dev</code>.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Haz un Fork del repositorio de GitHub <code>register</code> de <a href="https://github.com/is-a-dev/register" target="_blank" style="color: var(--accent-color);">is-a-dev/register</a>.</li>
-        <li>En la carpeta <code>domains</code>, crea un archivo JSON con el nombre de tu subdominio (ej: <code>jonatan.json</code>).</li>
-        <li>El contenido del archivo debe definir si usarás un registro CNAME o registros A. Ejemplo:
-          <pre style="margin-top: 0.5rem; background: rgba(0,0,0,0.3); font-size: 0.85rem;"><code>{
+      <h3>3. is-a.dev (<a href="https://is-a.dev/" target="_blank" style="color: var(--accent-color);">is-a.dev</a>)</h3>
+      <p>Un servicio popular para obtener la terminación <code>tunombre.is-a.dev</code> de forma directa mediante la gestión de ficheros en GitHub.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Hacer un Fork</h4>
+            <p>Inicia sesión en tu cuenta de GitHub, entra al repositorio <a href="https://github.com/is-a-dev/register" target="_blank" style="color: var(--accent-color);">github.com/is-a-dev/register</a> y haz clic en el botón <strong>"Fork"</strong> (arriba a la derecha) para copiar el repositorio a tu perfil personal.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear el Archivo de tu Dominio</h4>
+            <p>Entra a la carpeta <code>domains</code> en tu copia. Haz clic en "Add file" -> "Create new file". Ponle por nombre a tu archivo: <code>tunombre.json</code> (ej: si deseas <code>jonatan.is-a.dev</code>, tu archivo debe llamarse <code>jonatan.json</code>).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Configurar el JSON</h4>
+            <p>Pega este código dentro del editor de tu nuevo archivo JSON:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>{
   "owner": {
     "username": "tu-usuario-github",
     "email": "tuemail@gmail.com"
@@ -765,82 +1116,256 @@ Creador de &lt;span style="color: var(--accent-color); font-weight: bold;"&gt;ex
     "CNAME": "tuusuario.github.io"
   }
 }</code></pre>
-        </li>
-        <li>Envía un Pull Request al repositorio original. Un bot validará la sintaxis y tu dominio se activará automáticamente al ser aceptado el PR.</li>
-      </ol>
-
-      <h3>4. js.org</h3>
-      <p>Exclusivo para proyectos Javascript alojados en GitHub Pages.</p>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Asegúrate de que tu landing page está publicada en GitHub Pages y que tenga contenido relacionado con JS.</li>
-        <li>Crea un Pull Request en <a href="https://github.com/js-org/js.org" target="_blank" style="color: var(--accent-color);">github.com/js-org/js.org</a>.</li>
-        <li>Añade tu subdominio en el archivo de mapeo correspondiente apuntando a tu dirección de GitHub Pages.</li>
-      </ol>
-
-      <h3>5. thedev.id (upset.dev)</h3>
-      <p>Otorga subdominios de la forma <code>usuario.thedev.id</code> usando tu perfil de GitHub para autenticarte.</p>
-
-      <h3>6. isroot.in y getfreedomain.name</h3>
-      <p>Servicios web tradicionales donde te registras, buscas la extensión gratuita deseada y configuras los campos CNAME o Nameservers directamente desde sus paneles interactivos.</p>
-    </section>
-
-    <!-- SECCIÓN: CLOUDFLARE -->
-    <section id="cloudflare" class="wiki-section">
-      <h2><i class="fas fa-cloud"></i> Configuración con Cloudflare y Hostings</h2>
-      <p>Para unir tu subdominio gratuito con tu servicio de alojamiento y disponer de HTTPS (candado de seguridad), protección ante ataques DDoS y alta velocidad, utilizaremos <strong>Cloudflare</strong> como pasarela DNS.</p>
-
-      <div class="callout callout-success">
-        <i class="fas fa-shield-alt"></i>
-        <div class="callout-content">
-          <h5>¿Por qué usar Cloudflare?</h5>
-          <p>Cloudflare permite redirigir y enmascarar cualquier dominio o subdominio de forma gratuita. Además, provee certificados SSL universales automáticos.</p>
+            *(Reemplaza "tu-usuario-github" por tu usuario y "tuusuario.github.io" por la dirección de tu hosting actual)*. Guarda el archivo con "Commit changes".</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Enviar el Pull Request</h4>
+            <p>En tu repositorio de GitHub, haz clic en la pestaña <strong>"Pull requests"</strong> -> botón verde <strong>"New pull request"</strong> -> <strong>"Create pull request"</strong>. Un sistema automatizado comprobará que la estructura sea correcta y fusionará tu archivo en pocos minutos, tras lo cual tu dominio estará activo.</p>
+          </div>
         </div>
       </div>
 
-      <h3>Paso 1: Agregar el dominio en Cloudflare</h3>
-      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
-        <li>Inicia sesión en Cloudflare y haz clic en <strong>"Add a Site"</strong>.</li>
-        <li>Escribe tu dominio completo obtenido (ej: <code>jonatandev.pp.ua</code>) y selecciona el plan gratuito ($0).</li>
-        <li>Cloudflare te dará dos Servidores de Nombres (Nameservers). Ej: <code>eva.ns.cloudflare.com</code> y <code>will.ns.cloudflare.com</code>.</li>
-        <li>Ve al panel de control de tu proveedor de dominios (ej: nic.ua, FreeDomain) y reemplaza los Nameservers originales por los de Cloudflare. <em>Nota: Este cambio puede tardar entre 2 y 24 horas en propagarse mundialmente.</em></li>
-      </ol>
+      <h3>4. js.org (<a href="https://js.org/" target="_blank" style="color: var(--accent-color);">js.org</a>)</h3>
+      <p>Un subdominio con terminación <code>tunombre.js.org</code> exclusivo para programadores de Javascript alojados en GitHub Pages.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Requisito Inicial</h4>
+            <p>Debes tener tu landing page activa y publicada en GitHub Pages (ej: en <code>tuusuario.github.io</code>).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Hacer Fork del Repositorio de js.org</h4>
+            <p>Ve a <a href="https://github.com/js-org/js.org" target="_blank" style="color: var(--accent-color);">github.com/js-org/js.org</a> y haz un Fork de su repositorio en tu cuenta.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Editar el Archivo de Mapeo</h4>
+            <p>Abre el archivo <code>cnames.active.js</code>. Añade tu subdominio respetando el orden alfabético estricto de la lista de esta forma:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>"tunombre": "tuusuario.github.io",</code></pre>
+            Guarda el archivo en tu repositorio.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Enviar Pull Request</h4>
+            <p>Crea un Pull Request desde su pestaña en GitHub. Una vez aprobado por los mantenedores de la plataforma, el dominio estará listo.</p>
+          </div>
+        </div>
+      </div>
 
-      <h3>Paso 2: Apuntar el Subdominio al Hosting (Registros DNS)</h3>
-      <p>Una vez que el dominio esté activo en Cloudflare, ve a la sección <strong>DNS -> Records</strong> y añade el apuntamiento:</p>
+      <h3>5. thedev.id / Upset.dev (<a href="https://thedev.id" target="_blank" style="color: var(--accent-color);">thedev.id</a>)</h3>
+      <p>Te provee un dominio gratuito de programador del tipo <code>usuario.thedev.id</code>.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Hacer Fork del Repositorio</h4>
+            <p>Entra en <a href="https://github.com/thedev-id/register" target="_blank" style="color: var(--accent-color);">github.com/thedev-id/register</a> y haz un fork a tu perfil.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Fichero JSON</h4>
+            <p>Crea un archivo llamado <code>domains/tuusuario.json</code>. Copia el siguiente esquema en su interior:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>{
+  "owner": {
+    "username": "tu-usuario-github",
+    "email": "tuemail@example.com"
+  },
+  "record": {
+    "CNAME": "tuusuario.github.io"
+  }
+}</code></pre>
+            Guarda los cambios.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Pull Request</h4>
+            <p>Abre el Pull Request en GitHub. El sistema automatizado validará y añadirá tu subdominio de forma gratuita en pocos minutos.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>6. isroot.in (<a href="https://isroot.in/" target="_blank" style="color: var(--accent-color);">isroot.in</a>)</h3>
+      <p>Servicio web para desarrolladores que ofrece subdominios del tipo <code>*.isroot.in</code> e <code>*.isroot.dev</code> de manera fácil.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro en la Web</h4>
+            <p>Entra en <a href="https://isroot.in/" target="_blank" style="color: var(--accent-color);">isroot.in</a> y crea tu cuenta de usuario.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Subdominio</h4>
+            <p>Ve a tu panel de control, haz clic en "Add new domain / subdomain", escribe el nombre deseado y pulsa Guardar.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Configurar DNS</h4>
+            <p>En el panel del subdominio de isroot.in, selecciona "DNS Manager" e inserta tu registro de tipo CNAME apuntando al hosting.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>7. getfreedomain.name (<a href="https://www.getfreedomain.name/" target="_blank" style="color: var(--accent-color);">getfreedomain.name</a>)</h3>
+      <p>Un buscador tradicional de dominios gratis de segundo nivel (como <code>*.free.hr</code>, <code>*.co.pl</code>, etc.).</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro y Compra Gratuita</h4>
+            <p>Entra en <a href="https://www.getfreedomain.name/" target="_blank" style="color: var(--accent-color);">getfreedomain.name</a>, busca la extensión gratuita que desees, agrégala y finaliza la facturación a coste cero.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>DNS Manager</h4>
+            <p>Accede a tus dominios en el menú superior, ve a "DNS Management" y añade tus registros de apuntamiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DNS Y CONECTIVIDAD -->
+    <section id="cloudflare" class="wiki-section">
+      <h2><i class="fas fa-cloud"></i> Cómo Conectar tu Subdominio a tu Hosting</h2>
+      <p>Una vez que tienes el hosting (donde están guardados tus archivos) y el subdominio gratuito (tu dirección de texto), debes unirlos. Te explicamos los dos métodos disponibles:</p>
+
+      <!-- INFOGRAFÍA: COMPARATIVA DNS -->
+      <div class="infographic-container">
+        <div class="infographic-title">
+          <i class="fas fa-network-wired"></i> Infografía: Comparativa de Métodos de Conexión
+        </div>
+        <div class="dns-grid">
+          <!-- Columna Método Directo -->
+          <div class="dns-column">
+            <div class="dns-column-title"><i class="fas fa-exchange-alt" style="color: #f59e0b;"></i> Método 1: Apuntamiento Directo</div>
+            <div class="dns-flow-vertical">
+              <div class="dns-bubble">Tu Subdominio (pp.ua, is-a.dev)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble success">CNAME nativo del proveedor</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble">Alojamiento (GitHub / Cloudflare Pages)</div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center;">Simple, rápido y sin cuentas intermedias.</p>
+          </div>
+          <!-- Columna Cloudflare -->
+          <div class="dns-column">
+            <div class="dns-column-title"><i class="fas fa-shield-alt" style="color: #10b981;"></i> Método 2: A través de Cloudflare</div>
+            <div class="dns-flow-vertical">
+              <div class="dns-bubble">Tu Subdominio (pp.ua, isroot.in)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble success">Servidor DNS Cloudflare (Nameservers)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble accent">Proxy de Cloudflare (Seguridad + SSL)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble">Alojamiento (GitHub / Cloudflare Pages)</div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center;">Máxima seguridad, velocidad y estadísticas de tráfico.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Método 1: Usando el Panel de DNS Nativo del Proveedor (Sin Cloudflare)</h3>
+      <p>Es la opción más sencilla si no deseas crear cuentas adicionales en otros servicios. Puedes gestionar los registros desde el panel de control del mismo proveedor del subdominio.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Entrar al panel DNS del Proveedor</h4>
+            <p>Accede a tu cuenta de dominio (nic.ua, isroot.in, getfreedomain.name, etc.) y ve a la sección de administración de dominios / DNS.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Registro CNAME</h4>
+            <p>Añade un registro nuevo con los siguientes datos exactos:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted);">
+                <li><strong>Tipo de Registro (Type)</strong>: <code>CNAME</code></li>
+                <li><strong>Nombre / Host (Name)</strong>: <code>@</code> (o déjalo en blanco si representa tu dirección principal)</li>
+                <li><strong>Valor / Destino (Value / Target)</strong>: La dirección de tu hosting de origen (ej: <code>tuusuario.github.io</code> o <code>tu-sitio.pages.dev</code>).</li>
+                <li><strong>TTL</strong>: Automático o 14400.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Guardar Cambios</h4>
+            <p>Aplica la configuración. Los cambios tardarán unos minutos (o hasta unas pocas horas) en actualizarse por internet.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Método 2: A través de Cloudflare (Gestionado, Seguro y con Proxy)</h3>
+      <p>Este método es el más potente e idóneo para proyectos profesionales, ya que Cloudflare actúa como intermediario proporcionando protección anti-hackers, estadísticas, certificado SSL (candado de seguridad seguro) y velocidad optimizada de forma ilimitada y gratuita.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Agregar tu Dominio en Cloudflare</h4>
+            <p>Inicia sesión en <a href="https://dash.cloudflare.com" target="_blank" style="color: var(--accent-color);">dash.cloudflare.com</a> y haz clic en <strong>"Add a Site"</strong>. Introduce tu subdominio registrado (ej: <code>jonatandev.pp.ua</code>) y selecciona el plan gratuito ($0).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Cambiar los Nameservers en tu Proveedor</h4>
+            <p>Cloudflare te dará dos direcciones de Servidor de Nombres (Nameservers). Por ejemplo:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); font-family: monospace;">
+                <li>eva.ns.cloudflare.com</li>
+                <li>will.ns.cloudflare.com</li>
+              </ul>
+              Ve al panel de tu proveedor de dominio (nic.ua o el que estés usando), busca la sección "Nameservers" o "Servidores de Nombres" y cambia los que tiene de fábrica por estos dos que te dio Cloudflare.
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Añadir Registro DNS en Cloudflare</h4>
+            <p>Una vez que Cloudflare detecte el cambio de Nameservers (te enviará un correo), ve a la pestaña <strong>DNS -> Records</strong> de Cloudflare y pulsa en "Add record":
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted);">
+                <li><strong>Type (Tipo)</strong>: <code>CNAME</code></li>
+                <li><strong>Name (Nombre)</strong>: <code>@</code></li>
+                <li><strong>Target (Destino)</strong>: Escribe tu hosting (ej: <code>tuusuario.github.io</code> o <code>tu-sitio.pages.dev</code>)</li>
+                <li><strong>Proxy Status (Nube)</strong>: Mantén activa la nube naranja (Proxied) para disfrutar del escudo y SSL gratuito.</li>
+              </ul>
+              Guarda el registro.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Paso Final: Configurar tu Dominio en la Web de Hosting</h3>
+      <p>Tanto si usas el Método 1 como el Método 2, debes indicarle a tu hosting que responda cuando alguien escriba tu dominio personalizado:</p>
       
-      <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden;">
-        <thead>
-          <tr style="background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--card-border);">
-            <th style="padding: 12px; color: #fff;">Tipo de Registro</th>
-            <th style="padding: 12px; color: #fff;">Name (Nombre)</th>
-            <th style="padding: 12px; color: #fff;">Target / Value (Valor)</th>
-            <th style="padding: 12px; color: #fff;">Proxy status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom: 1px solid var(--card-border);">
-            <td style="padding: 12px; font-family: monospace; color: #38bdf8;">CNAME</td>
-            <td style="padding: 12px; font-family: monospace;">@ (o www)</td>
-            <td style="padding: 12px; font-family: monospace;">tuusuario.github.io</td>
-            <td style="padding: 12px; color: #10b981;"><i class="fas fa-cloud"></i> Proxied (Naranja)</td>
-          </tr>
-          <tr>
-            <td style="padding: 12px; font-family: monospace; color: #38bdf8;">CNAME</td>
-            <td style="padding: 12px; font-family: monospace;">@ (o www)</td>
-            <td style="padding: 12px; font-family: monospace;">tu-sitio.pages.dev</td>
-            <td style="padding: 12px; color: #10b981;"><i class="fas fa-cloud"></i> Proxied (Naranja)</td>
-          </tr>
-        </tbody>
-      </table>
+      <h4>Si tu hosting es GitHub Pages:</h4>
+      <p>Entra a tu repositorio de GitHub -> ve a <strong>Settings</strong> (en el menú superior) -> sección <strong>Pages</strong> (en el menú izquierdo). En la casilla de <strong>"Custom domain"</strong> escribe tu dominio (ej: <code>jonatandev.pp.ua</code>) y pulsa en <strong>Save</strong>. Asegúrate de activar la casilla <strong>"Enforce HTTPS"</strong> para forzar la navegación segura.</p>
 
-      <h3>Paso 3: Configurar el Dominio en el Hosting</h3>
-      <p>El último paso consiste en avisarle al hosting que responderá a tu nuevo dominio:</p>
-      
-      <h4>En GitHub Pages:</h4>
-      <p>Ve a los ajustes del repositorio -> <strong>Pages</strong>. En la sección <strong>"Custom Domain"</strong>, escribe tu dominio (ej: <code>jonatandev.pp.ua</code>) y guarda. Asegúrate de activar la casilla <strong>"Enforce HTTPS"</strong>.</p>
-
-      <h4>En Cloudflare Pages:</h4>
-      <p>Ve a tu proyecto -> pestaña <strong>"Custom Domains"</strong>. Haz clic en <strong>"Set up a Custom Domain"</strong>, escribe tu dirección y Cloudflare configurará todo de forma automática en tu zona DNS.</p>
+      <h4>Si tu hosting es Cloudflare Pages:</h4>
+      <p>Entra en el panel de Cloudflare de tu proyecto Pages -> ve a la pestaña <strong>"Custom domains"</strong> -> haz clic en <strong>"Set up a custom domain"</strong>. Escribe tu subdominio (ej: <code>jonatandev.pp.ua</code>) y pulsa continuar. Cloudflare configurará y conectará todo automáticamente.</p>
     </section>
   </main>
 
