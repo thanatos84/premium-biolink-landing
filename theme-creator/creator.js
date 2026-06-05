@@ -202,11 +202,11 @@ function loadConfigValues() {
     }
     
     if (p.vCard) {
-      if (p.vCard.firstName) document.getElementById("input-vcard-name").value = p.vCard.firstName;
-      if (p.vCard.lastName) document.getElementById("input-vcard-lname").value = p.vCard.lastName;
-      if (p.vCard.phone) document.getElementById("input-vcard-phone").value = p.vCard.phone;
-      if (p.vCard.email) document.getElementById("input-vcard-email").value = p.vCard.email;
-      if (p.vCard.url) document.getElementById("input-vcard-url").value = p.vCard.url;
+      document.getElementById("input-vcard-name").value = p.vCard.firstName !== undefined ? p.vCard.firstName : "";
+      document.getElementById("input-vcard-lname").value = p.vCard.lastName !== undefined ? p.vCard.lastName : "";
+      document.getElementById("input-vcard-phone").value = p.vCard.phone !== undefined ? p.vCard.phone : "";
+      document.getElementById("input-vcard-email").value = p.vCard.email !== undefined ? p.vCard.email : "";
+      document.getElementById("input-vcard-url").value = p.vCard.url !== undefined ? p.vCard.url : "";
     }
   }
 
@@ -275,10 +275,10 @@ function loadConfigValues() {
   const f = CONFIG.footer;
   if (f) {
     document.getElementById("input-footer-show").checked = f.show !== false;
-    if (f.text) document.getElementById("input-footer-text").value = f.text;
-    if (f.linkText) document.getElementById("input-footer-link-text").value = f.linkText;
-    if (f.linkUrl) document.getElementById("input-footer-link-url").value = f.linkUrl;
-    if (f.extraText) document.getElementById("input-footer-extra").value = f.extraText;
+    document.getElementById("input-footer-text").value = f.text !== undefined ? f.text : "";
+    document.getElementById("input-footer-link-text").value = f.linkText !== undefined ? f.linkText : "";
+    document.getElementById("input-footer-link-url").value = f.linkUrl !== undefined ? f.linkUrl : "";
+    document.getElementById("input-footer-extra").value = f.extraText !== undefined ? f.extraText : "";
   }
 
   // Cargar orden estructural (layout)
