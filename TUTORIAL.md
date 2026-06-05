@@ -27,9 +27,9 @@ Si es tu primera vez creando una página web, estos conceptos te ayudarán a com
 
 *   **Hosting (Alojamiento)**: Es como un "disco duro" conectado a internet las 24 horas del día. Allí es donde guardas los archivos de tu web (como `index.html`, `app.js`, etc.) para que otros puedan acceder a ellos.
 *   **Dominio**: Tu nombre único en internet (ejemplo: `miweb.com`).
-*   **Subdominio**: Un nombre añadido antes de tu dominio principal separado por un punto (ejemplo: `jonatan.is-a.dev` o `jonatan.pp.ua`). Son ideales porque muchos proveedores los ofrecen 100% gratis.
-*   **DNS (Dirección DNS)**: Funciona como la agenda telefónica de internet. Traduce el nombre de tu web (como `jonatan.is-a.dev`) en la dirección numérica (IP) del ordenador donde está alojada tu web.
-*   **Registro CNAME**: Una instrucción DNS específica que dice: *"Cuando alguien busque mi subdominio A, llévalo a la dirección del hosting B"* (ejemplo: apunta `jonatan.is-a.dev` a `tuusuario.github.io`).
+*   **Subdominio**: Un nombre añadido antes de tu dominio principal separado por un punto (ejemplo: `tu-usuario.is-a.dev` o `tu-dominio.pp.ua`). Son ideales porque muchos proveedores los ofrecen 100% gratis.
+*   **DNS (Dirección DNS)**: Funciona como la agenda telefónica de internet. Traduce el nombre de tu web (como `tu-usuario.is-a.dev`) en la dirección numérica (IP) del ordenador donde está alojada tu web.
+*   **Registro CNAME**: Una instrucción DNS específica que dice: *"Cuando alguien busque mi subdominio A, llévalo a la dirección del hosting B"* (ejemplo: apunta `tu-usuario.is-a.dev` a `tuusuario.github.io`).
 *   **Nameservers (Servidores de nombres)**: Son las computadoras encargadas de gestionar las DNS de tu dominio. Al cambiarlos, le otorgas el control de tus DNS a otra plataforma (como Cloudflare).
 
 ---
@@ -272,7 +272,7 @@ Consigue tu propio nombre personalizado de manera 100% gratuita utilizando estos
 
 ### A. pp.ua (a través de [nic.ua](https://nic.ua/en))
 Un dominio de nivel superior oficial gratis de Ucrania con activación por Telegram:
-1.  Ve a [nic.ua/en](https://nic.ua/en), busca un dominio terminado en `.pp.ua` (ejemplo: `jonatan.pp.ua`), agrégalo al carrito por $0 y finaliza la compra gratuita.
+1.  Ve a [nic.ua/en](https://nic.ua/en), busca un dominio terminado en `.pp.ua` (ejemplo: `tu-dominio.pp.ua`), agrégalo al carrito por $0 y finaliza la compra gratuita.
 2.  Abre tu Telegram y busca el bot oficial: **`@NicUaBot`** (o entra a [t.me/NicUaBot](https://t.me/NicUaBot)).
 3.  Envíale `/start` y comparte tu número de teléfono cuando el bot te lo solicite pulsando en el botón inferior de validación de usuario.
 4.  Envía el comando `/activate` y haz clic en el botón de confirmación de tu dominio registrado. Tu dominio estará listo para configurarse en la web de nic.ua.
@@ -286,7 +286,7 @@ Otorga subdominios de red gratuitos como `*.dp.ua` o `*.net.ua`:
 Subdominios gratis para programadores del tipo `tunombre.is-a.dev` gestionados desde GitHub:
 1.  Crea una cuenta en GitHub y entra a [github.com/is-a-dev/register](https://github.com/is-a-dev/register). Haz clic en **Fork** (arriba a la derecha).
 2.  En tu fork personal, acceder a la carpeta `domains`. Haz clic en **Add file** -> **Create new file**.
-3.  Nombra el archivo exactamente: `tunombre.json` (ejemplo: `jonatan.json`).
+3.  Nombra el archivo exactamente: `tu-usuario.json` (ejemplo: `tu-usuario.json`).
 4.  Pega el siguiente texto configurado con tus datos en su interior:
     ```json
     {
@@ -360,7 +360,7 @@ Cloudflare es una pasarela DNS profesional totalmente gratuita. Ofrece ancho de 
    [Hosting de Destino] (GitHub Pages / Cloudflare Pages)
 ```
 
-1.  Regístrate en [Cloudflare.com](https://www.cloudflare.com) y pulsa en **"Add a Site"**. Escribe tu dominio (ej: `jonatan.pp.ua`) y elige el plan gratis.
+1.  Regístrate en [Cloudflare.com](https://www.cloudflare.com) y pulsa en **"Add a Site"**. Escribe tu dominio (ej: `tu-dominio.pp.ua`) y elige el plan gratis.
 2.  Cloudflare te dará dos Nameservers (ej: `eva.ns.cloudflare.com` y `will.ns.cloudflare.com`). Ve al panel de tu proveedor de dominio (ej: nic.ua) y reemplaza los Nameservers originales por los de Cloudflare.
 3.  En Cloudflare, ve a **DNS -> Records** y añade tu registro:
     *   **Type**: `CNAME`
@@ -368,7 +368,7 @@ Cloudflare es una pasarela DNS profesional totalmente gratuita. Ofrece ancho de 
     *   **Target**: La URL de tu hosting (ej: `tuusuario.github.io`).
     *   **Proxy status**: Mantén la nube en color naranja (Proxied) activa.
 4.  **Configurar en tu Hosting**:
-    *   *En GitHub Pages:* Ve a tu Repositorio -> Settings -> Pages. En "Custom Domain" escribe tu dominio (ej: `jonatan.pp.ua`) y pulsa Save. Activa la casilla "Enforce HTTPS".
+    *   *En GitHub Pages:* Ve a tu Repositorio -> Settings -> Pages. En "Custom Domain" escribe tu dominio (ej: `tu-dominio.pp.ua`) y pulsa Save. Activa la casilla "Enforce HTTPS".
     *   *En Cloudflare Pages:* Entra a tu proyecto -> pestaña Custom Domains -> Set up a Custom Domain y escribe tu dominio.
 
 ---
@@ -384,7 +384,7 @@ Cuando compartes el enlace de tu sitio web en aplicaciones como WhatsApp, Telegr
 El Creador de Temas cuenta con un módulo de simulación y generación automática de etiquetas en la **Sección 7: SEO y Vista Previa en Redes**.
 
 1. **Configurar los Campos SEO**: Rellena las opciones en el panel del creador:
-   - **Dominio de tu Web**: Escribe la URL exacta de tu sitio (ej: `https://jonatanpons.pages.dev`). Es fundamental para que los bots ubiquen las rutas de tus imágenes.
+   - **Dominio de tu Web**: Escribe la URL exacta de tu sitio (ej: `https://tu-usuario.pages.dev`). Es fundamental para que los bots ubiquen las rutas de tus imágenes.
    - **Título del Enlace**: El título principal de la tarjeta. Por defecto se autogenera uniendo tu Nombre + Cargo (si no lo has modificado manualmente).
    - **Descripción**: Un texto breve sobre tu web. Se pre-carga con el primer párrafo de tu biografía de forma inteligente.
 2. **Seleccionar el Origen de la Imagen**: Elige cuál quieres que sea la imagen de portada de tu tarjeta de compartido entre estas 5 opciones:

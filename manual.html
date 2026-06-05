@@ -640,7 +640,7 @@
         </div>
         <div class="wiki-card">
           <h4><i class="fas fa-globe"></i> Dominio y Subdominio</h4>
-          <p>Un dominio es tu nombre web exclusivo (ej: <code>miweb.com</code>). Un subdominio es una palabra añadida delante del dominio original (ej: <code>jonatan.is-a.dev</code> o <code>jonatandev.pp.ua</code>).</p>
+          <p>Un dominio es tu nombre web exclusivo (ej: <code>miweb.com</code>). Un subdominio es una palabra añadida delante del dominio original (ej: <code>tu-usuario.is-a.dev</code> o <code>tu-dominio.pp.ua</code>).</p>
         </div>
         <div class="wiki-card">
           <h4><i class="fas fa-address-book"></i> DNS (Dirección DNS)</h4>
@@ -648,7 +648,7 @@
         </div>
         <div class="wiki-card">
           <h4><i class="fas fa-directions"></i> Registro CNAME</h4>
-          <p>Es una instrucción DNS específica que le dice a internet: <em>"Cuando alguien visite mi subdominio A, mándalo a la dirección del hosting B"</em> (ej: de <code>jonatan.is-a.dev</code> a <code>jonatan.github.io</code>).</p>
+          <p>Es una instrucción DNS específica que le dice a internet: <em>"Cuando alguien visite mi subdominio A, mándalo a la dirección del hosting B"</em> (ej: de <code>tu-usuario.is-a.dev</code> a <code>tu-usuario.github.io</code>).</p>
         </div>
       </div>
     </section>
@@ -1297,7 +1297,7 @@ body.theme-volcano {
           <div class="step-number">1</div>
           <div class="step-content">
             <h4>Buscar y Registrar</h4>
-            <p>Entra en <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>, introduce tu subdominio deseado terminado en <code>.pp.ua</code> (ej: <code>jonatandev.pp.ua</code>). Agrégalo al carrito a coste $0 y procesa la compra gratuita hasta el final rellenando tus datos.</p>
+            <p>Entra en <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>, introduce tu subdominio deseado terminado en <code>.pp.ua</code> (ej: <code>tu-dominio.pp.ua</code>). Agrégalo al carrito a coste $0 y procesa la compra gratuita hasta el final rellenando tus datos.</p>
           </div>
         </div>
         <div class="step-item">
@@ -1356,7 +1356,7 @@ body.theme-volcano {
           <div class="step-number">2</div>
           <div class="step-content">
             <h4>Crear el Archivo de tu Dominio</h4>
-            <p>Entra a la carpeta <code>domains</code> en tu copia. Haz clic en "Add file" -> "Create new file". Ponle por nombre a tu archivo: <code>tunombre.json</code> (ej: si deseas <code>jonatan.is-a.dev</code>, tu archivo debe llamarse <code>jonatan.json</code>).</p>
+            <p>Entra a la carpeta <code>domains</code> en tu copia. Haz clic en "Add file" -> "Create new file". Ponle por nombre a tu archivo: <code>tu-usuario.json</code> (ej: si deseas <code>tu-usuario.is-a.dev</code>, tu archivo debe llamarse <code>tu-usuario.json</code>).</p>
           </div>
         </div>
         <div class="step-item">
@@ -1582,7 +1582,7 @@ body.theme-volcano {
           <div class="step-number">1</div>
           <div class="step-content">
             <h4>Agregar tu Dominio en Cloudflare</h4>
-            <p>Inicia sesión en <a href="https://dash.cloudflare.com" target="_blank" style="color: var(--accent-color);">dash.cloudflare.com</a> y haz clic en <strong>"Add a Site"</strong>. Introduce tu subdominio registrado (ej: <code>jonatandev.pp.ua</code>) y selecciona el plan gratuito ($0).</p>
+            <p>Inicia sesión en <a href="https://dash.cloudflare.com" target="_blank" style="color: var(--accent-color);">dash.cloudflare.com</a> y haz clic en <strong>"Add a Site"</strong>. Introduce tu subdominio registrado (ej: <code>tu-dominio.pp.ua</code>) y selecciona el plan gratuito ($0).</p>
           </div>
         </div>
         <div class="step-item">
@@ -1619,10 +1619,10 @@ body.theme-volcano {
       <p>Tanto si usas el Método 1 como el Método 2, debes indicarle a tu hosting que responda cuando alguien escriba tu dominio personalizado:</p>
       
       <h4>Si tu hosting es GitHub Pages:</h4>
-      <p>Entra a tu repositorio de GitHub -> ve a <strong>Settings</strong> (en el menú superior) -> sección <strong>Pages</strong> (en el menú izquierdo). En la casilla de <strong>"Custom domain"</strong> escribe tu dominio (ej: <code>jonatandev.pp.ua</code>) y pulsa en <strong>Save</strong>. Asegúrate de activar la casilla <strong>"Enforce HTTPS"</strong> para forzar la navegación segura.</p>
+      <p>Entra a tu repositorio de GitHub -> ve a <strong>Settings</strong> (en el menú superior) -> sección <strong>Pages</strong> (en el menú izquierdo). En la casilla de <strong>"Custom domain"</strong> escribe tu dominio (ej: <code>tu-dominio.pp.ua</code>) y pulsa en <strong>Save</strong>. Asegúrate de activar la casilla <strong>"Enforce HTTPS"</strong> para forzar la navegación segura.</p>
 
       <h4>Si tu hosting es Cloudflare Pages:</h4>
-      <p>Entra en el panel de Cloudflare de tu proyecto Pages -> ve a la pestaña <strong>"Custom domains"</strong> -> haz clic en <strong>"Set up a custom domain"</strong>. Escribe tu subdominio (ej: <code>jonatandev.pp.ua</code>) y pulsa continuar. Cloudflare configurará y conectará todo automáticamente.</p>
+      <p>Entra en el panel de Cloudflare de tu proyecto Pages -> ve a la pestaña <strong>"Custom domains"</strong> -> haz clic en <strong>"Set up a custom domain"</strong>. Escribe tu subdominio (ej: <code>tu-dominio.pp.ua</code>) y pulsa continuar. Cloudflare configurará y conectará todo automáticamente.</p>
     </section>
 
     <!-- SECCIÓN: SEO Y META TAGS -->
@@ -1647,7 +1647,7 @@ body.theme-volcano {
             <h4>Configurar los Campos SEO</h4>
             <p>Rellena las opciones en el panel del creador:
               <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); line-height: 1.5;">
-                <li><strong>Dominio de tu Web</strong>: Escribe la URL exacta de tu sitio (ej: <code>https://jonatanpons.pages.dev</code>). Es fundamental para que los bots ubiquen las rutas de tus imágenes.</li>
+                <li><strong>Dominio de tu Web</strong>: Escribe la URL exacta de tu sitio (ej: <code>https://tu-usuario.pages.dev</code>). Es fundamental para que los bots ubiquen las rutas de tus imágenes.</li>
                 <li><strong>Título del Enlace</strong>: El título principal de la tarjeta. Por defecto se autogenera uniendo tu Nombre + Cargo (si no lo has modificado manualmente).</li>
                 <li><strong>Descripción</strong>: Un texto breve sobre tu web. Se pre-carga con el primer párrafo de tu biografía de forma inteligente.</li>
               </ul>
