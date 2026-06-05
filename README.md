@@ -34,7 +34,7 @@ Una landing page premium, ultra-rápida y altamente interactiva para tus enlaces
 
 Puedes desplegar este proyecto gratis en cuestión de segundos en **Cloudflare Pages** haciendo clic en el siguiente botón:
 
-[![Desplegar en Cloudflare Pages](https://pages.cloudflare.com/deploy-button.svg)](https://pages.dev/deploy?url=https://github.com/thanatos84/premium-biolink-landing)
+[![Desplegar en Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/thanatos84/premium-biolink-landing)
 
 *(Al hacer clic, Cloudflare creará una copia del repositorio en tu cuenta de GitHub y publicará la web automáticamente).*
 
