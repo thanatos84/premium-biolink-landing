@@ -2296,7 +2296,7 @@ function updateSeoPreview() {
     if (previewImg) previewImg.src = "";
   } else {
     if (previewImgContainer) {
-      previewImgContainer.style.display = "block";
+      previewImgContainer.style.display = "";
       // Restablecer y asignar clases específicas de ajuste
       previewImgContainer.className = "seo-preview-img-container";
       if (imgType === "qr") {
