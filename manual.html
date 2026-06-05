@@ -582,6 +582,51 @@
         margin: 0.5rem 0;
       }
     }
+
+    @media print {
+      aside {
+        display: none !important;
+      }
+      main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .wiki-section {
+        background: transparent !important;
+        border: none !important;
+        color: black !important;
+        padding: 1rem 0 !important;
+        margin-bottom: 2rem !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, h4, h5, p, li, code, pre, span, div {
+        color: black !important;
+      }
+      pre {
+        background: #f3f4f6 !important;
+        border: 1px solid #ddd !important;
+        color: black !important;
+      }
+      .callout {
+        background: #f9fafb !important;
+        border-left: 4px solid #3b82f6 !important;
+        color: black !important;
+      }
+      .wiki-card, .dns-column {
+        background: #f9fafb !important;
+        border: 1px solid #ddd !important;
+        color: black !important;
+      }
+      img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+      }
+    }
   </style>
 </head>
 <body>
