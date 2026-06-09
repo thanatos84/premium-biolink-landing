@@ -1,0 +1,9 @@
+config.personal.js
+github-repo-info.txt
+profile.jpg
+profile.png
+profile.jpeg
+
+# Documentos locales y recursos de promoción
+*.pdf
+promocion/

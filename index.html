@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mi portafolio de enlaces personales y profesionales.">
+  <title>Nombre Apellido | Tu Cargo o Especialidad</title>
+  
+  <!-- Favicon con Emoji para evitar 404 y verse espectacular -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☁️</text></svg>">
+
+  <!-- Google Fonts: Outfit e Inter para tipografías premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 para todos los iconos vectoriales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Banner/Cabecera superior (Imagen o Video) -->
+  <div id="profile-banner" class="profile-banner"></div>
+
+  <!-- Contenedor para vídeo de fondo personalizado -->
+  <div id="video-bg-container" class="video-bg-container"></div>
+
+  <!-- Canvas para el fondo de estrellas animadas interactivo -->
+  <canvas id="starfield"></canvas>
+
+  <!-- Contenedor Principal de la Página -->
+  <main class="container">
+    
+    <!-- 1. Cabecera y Perfil -->
+    <header class="profile-header" id="layout-profile">
+      <div class="avatar-wrapper" id="profile-avatar-container">
+        <!-- Generado dinámicamente en app.js (imagen o video) -->
+      </div>
+      
+      <div id="profile-name-title-container" class="profile-name-title-container">
+        <div class="name-container">
+          <h1 id="profile-name" class="profile-name">Nombre Apellido</h1>
+          <span id="profile-verified" class="verified-badge" title="Cuenta verificada">
+            <i class="fas fa-check-circle"></i>
+          </span>
+        </div>
+        
+        <div id="profile-title" class="profile-title">Tu Cargo, Profesión o Especialidad 🚀</div>
+      </div>
+      
+      <div id="profile-bio" class="profile-bio">
+        <!-- Rellenado dinámicamente por app.js -->
+      </div>
+    </header>
+
+    <!-- 2. Barra de Acciones Rápidas (Añadir Contacto, Compartir, QR) -->
+    <section class="action-bar" id="layout-actions" aria-label="Acciones de contacto y compartir">
+      <button id="btn-add-contact" class="action-btn" aria-label="Descargar tarjeta de contacto">
+        <i class="fas fa-user-plus"></i> Guardar
+      </button>
+      <button id="btn-share" class="action-btn" aria-label="Compartir esta página">
+        <i class="fas fa-share-alt"></i> Compartir
+      </button>
+      <button id="btn-qr" class="action-btn" aria-label="Ver código QR de la página">
+        <i class="fas fa-qrcode"></i> Código QR
+      </button>
+    </section>
+
+    <!-- 3. Redes Sociales Rápidas (Iconos superiores) -->
+    <section id="social-icons" class="social-icons-row" aria-label="Redes sociales rápidas">
+      <!-- Rellenado dinámicamente por app.js -->
+    </section>
+
+    <!-- 4. Lista Principal de Secciones y Botones -->
+    <section id="content-list" class="content-list" aria-label="Enlaces principales">
+      <!-- Rellenado dinámicamente por app.js -->
+    </section>
+
+    <!-- 5. Pie de página elegante -->
+    <footer id="page-footer" class="footer">
+      <!-- Rellenado dinámicamente por app.js -->
+    </footer>
+  </main>
+
+  <!-- ==========================================================
+       COMPONENTES FLOTANTES Y MODALES
+       ========================================================== -->
+
+  <!-- Modal del Código QR -->
+  <div id="modal-qr" class="modal-overlay" aria-modal="true" role="dialog">
+    <div class="modal-container">
+      <button id="modal-close" class="modal-close" aria-label="Cerrar modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="modal-title">Mi Código QR</h2>
+      <p id="qr-subtitle" class="modal-subtitle">tu-dominio.com</p>
+      
+      <div class="qr-wrapper">
+        <!-- Canvas donde la librería QRious dibujará el QR -->
+        <canvas id="qr-canvas"></canvas>
+      </div>
+      
+      <div class="modal-actions">
+        <button id="btn-copy-qr-link" class="modal-btn modal-btn-primary">
+          <i class="far fa-copy"></i> Copiar enlace
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificación Toast Temporal -->
+  <div id="toast" class="toast" role="alert">
+    <i class="fas fa-check-circle" style="color: var(--accent-color);"></i>
+    <span id="toast-text">¡Enlace copiado!</span>
+  </div>
+
+  <!-- Librería ligera QRious para generar códigos QR en el cliente (CDN estable y seguro) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Scripts de Configuración y Lógica de la Página -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

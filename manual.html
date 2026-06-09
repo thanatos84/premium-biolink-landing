@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki & Manual de Usuario - Landing Page Premium</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-color: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-color: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.35);
+      --accent-secondary: #8b5cf6;
+      --sidebar-width: 320px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* BARRA LATERAL (SIDEBAR) RESPONSIVA */
+    aside {
+      width: var(--sidebar-width);
+      background: rgba(3, 7, 18, 0.95);
+      backdrop-filter: blur(16px);
+      border-right: 1px solid var(--card-border);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(to right, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-box input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: 12px;
+      color: var(--text-color);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .nav-menu {
+      list-style: none;
+      overflow-y: auto;
+      flex-grow: 1;
+      padding-right: 0.5rem;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+      width: 4px;
+    }
+    .nav-menu::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    .nav-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0.4rem 0;
+      font-weight: 700;
+    }
+
+    .nav-item a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      margin-bottom: 0.2rem;
+    }
+
+    .nav-item a:hover {
+      color: var(--text-color);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-item.active a {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+      border-left: 3px solid var(--accent-color);
+      padding-left: calc(0.75rem - 3px);
+    }
+
+    /* CONTENEDOR PRINCIPAL FLUIDO (EVITA DESBORDAMIENTOS) */
+    main {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+      padding: 3rem 4rem;
+      box-sizing: border-box;
+      max-width: 1200px;
+      overflow-y: auto;
+    }
+
+    .header-wiki {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 2rem;
+    }
+
+    .header-wiki h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #ffffff, #9ca3af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-wiki p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* SECCIONES */
+    section {
+      margin-bottom: 5rem;
+      scroll-margin-top: 2rem;
+    }
+
+    section h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px dashed var(--card-border);
+      padding-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    section h2 i {
+      color: var(--accent-color);
+    }
+
+    section h3 {
+      font-size: 1.35rem;
+      margin: 2.5rem 0 1rem 0;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    p {
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    strong {
+      color: #fff;
+    }
+
+    /* CÓDIGO Y PRE */
+    pre {
+      background: rgba(3, 7, 18, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      max-width: 100%;
+      white-space: pre-wrap; /* Fuerza el ajuste de línea */
+      word-break: break-all; /* Rompe palabras ultra largas */
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: #38bdf8;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.5rem 1.25rem;
+      border-radius: 12px 12px 0 0;
+      border: 1px solid var(--card-border);
+      border-bottom: none;
+      margin-top: 1.5rem;
+      margin-bottom: -1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .code-header + pre {
+      border-radius: 0 0 12px 12px;
+    }
+
+    /* TABLAS RESPONSIVAS */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 600px;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      color: #fff;
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* INFOGRAFÍAS PREMIUM CSS */
+    .infographic-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+    }
+
+    .infographic-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Infografía Flujo Icono */
+    .flow-horizontal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      background: rgba(31, 41, 55, 0.6);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem;
+      flex: 1;
+      min-width: 130px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .flow-node.highlight {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .flow-node .node-step {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-node .node-text {
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .flow-arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Infografía DNS vs Cloudflare */
+    .dns-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .dns-column {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .dns-column-title {
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dns-flow-vertical {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.50rem;
+    }
+
+    .dns-bubble {
+      background: rgba(31, 41, 55, 0.8);
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      width: 80%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .dns-bubble.success {
+      border-color: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+
+    .dns-bubble.accent {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .dns-arrow-v {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin: 0.15rem 0;
+    }
+
+    /* TARJETAS E INFO */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .wiki-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .wiki-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .wiki-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wiki-card h4 i {
+      color: var(--accent-secondary);
+    }
+
+    .wiki-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* ALERTAS / CALLOUTS */
+    .callout {
+      background: rgba(59, 130, 246, 0.08);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.08);
+      border-left-color: #f59e0b;
+    }
+
+    .callout-success {
+      background: rgba(16, 185, 129, 0.08);
+      border-left-color: #10b981;
+    }
+
+    .callout i {
+      font-size: 1.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .callout-info i { color: var(--accent-color); }
+    .callout-warning i { color: #f59e0b; }
+    .callout-success i { color: #10b981; }
+
+    .callout-content h5 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .callout-content p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+    }
+
+    /* PASOS COMPACTOS */
+    .step-list {
+      list-style: none;
+      position: relative;
+      padding-left: 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .step-list::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .step-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .step-number {
+      position: absolute;
+      left: -40px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      background: #1f2937;
+      border: 2px solid var(--accent-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      color: #fff;
+      z-index: 2;
+    }
+
+    .step-content h4 {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 968px) {
+      body {
+        flex-direction: column;
+      }
+      aside {
+        width: 100%;
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 1.5rem;
+      }
+      main {
+        margin-left: 0;
+        width: 100%;
+        padding: 2rem 1.5rem;
+      }
+      .dns-grid {
+        grid-template-columns: 1fr;
+      }
+      .flow-horizontal {
+        flex-direction: column;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+      }
+    }
+
+    @media print {
+      aside {
+        display: none !important;
+      }
+      main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .wiki-section {
+        background: transparent !important;
+        border: none !important;
+        color: black !important;
+        padding: 1rem 0 !important;
+        margin-bottom: 2rem !important;
+        page-break-inside: avoid;
+      }
+      h1, h2, h3, h4, h5, p, li, code, pre, span, div {
+        color: black !important;
+      }
+      pre {
+        background: #f3f4f6 !important;
+        border: 1px solid #ddd !important;
+        color: black !important;
+      }
+      .callout {
+        background: #f9fafb !important;
+        border-left: 4px solid #3b82f6 !important;
+        color: black !important;
+      }
+      .wiki-card, .dns-column {
+        background: #f9fafb !important;
+        border: 1px solid #ddd !important;
+        color: black !important;
+      }
+      img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA LATERAL -->
+  <aside>
+    <div class="brand">
+      <i class="fas fa-book-open"></i>
+      <span>Landing Wiki</span>
+    </div>
+    
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="search-input" placeholder="Buscar en la guía..." onkeyup="filterWiki()">
+    </div>
+    
+    <ul class="nav-menu">
+      <li class="nav-category">Uso General</li>
+      <li class="nav-item active"><a href="#uso-web"><i class="fas fa-desktop"></i>Uso de la Web</a></li>
+      <li class="nav-item"><a href="#estructura-archivos"><i class="fas fa-folder-open"></i>Estructura de Archivos</a></li>
+      <li class="nav-item"><a href="#creador-temas"><i class="fas fa-sliders-h"></i>Creador de Temas</a></li>
+      <li class="nav-item"><a href="#detalles-creador"><i class="fas fa-cogs"></i>Opciones del Creador</a></li>
+      
+      <li class="nav-category">Personalización</li>
+      <li class="nav-item"><a href="#multimedia"><i class="fas fa-image"></i>Imágenes y Videos</a></li>
+      <li class="nav-item"><a href="#iconos"><i class="fas fa-icons"></i>Sistema de Iconos</a></li>
+      <li class="nav-item"><a href="#html-libre"><i class="fas fa-code"></i>Etiquetas HTML Libres</a></li>
+      <li class="nav-item"><a href="#desarrollo"><i class="fas fa-code-branch"></i>Desarrollo Avanzado</a></li>
+      
+      <li class="nav-category">Alojamiento</li>
+      <li class="nav-item"><a href="#hosting"><i class="fas fa-server"></i>Hostings Gratuitos</a></li>
+      <li class="nav-item"><a href="#subdominios"><i class="fas fa-globe"></i>Subdominios Gratuitos</a></li>
+      <li class="nav-item"><a href="#cloudflare"><i class="fas fa-cloud"></i>DNS y Cloudflare</a></li>
+      
+      <li class="nav-category">SEO & Soporte</li>
+      <li class="nav-item"><a href="#seo-og"><i class="fas fa-search"></i>SEO y Vista Previa</a></li>
+      <li class="nav-item"><a href="#configuracion-web"><i class="fas fa-cog"></i>Configuración Web y PWA</a></li>
+      <li class="nav-item"><a href="#faq"><i class="fas fa-question-circle"></i>Preguntas Frecuentes</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <div class="header-wiki">
+      <h1>Documentación y Guía del Proyecto</h1>
+      <p>Bienvenido al manual interactivo oficial para tu Landing Page Premium. Aquí aprenderás a sacarle el máximo partido al creador de temas, a entender el sistema de iconos flexibles, el soporte de HTML libre y cómo publicar tu web de forma profesional y 100% gratuita utilizando subdominios e integración con Cloudflare.</p>
+      <div style="margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="https://premium-biolink-landing.pages.dev" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: 500; font-size: 0.9rem; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); transition: background 0.2s ease;"><i class="fas fa-external-link-alt" style="margin-right: 6px;"></i> Demo en Vivo</a>
+        <a href="https://premium-biolink-landing.pages.dev/theme-creator/" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: 500; font-size: 0.9rem; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); transition: background 0.2s ease;"><i class="fas fa-magic" style="margin-right: 6px;"></i> Creador Online</a>
+      </div>
+      <div style="text-align: center; margin: 2rem 0 0 0;"><img src="assets/screenshots/portada.png" alt="Portada Principal" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+    </div>
+
+    <!-- GLOSARIO DE TÉRMINOS -->
+    <section id="glosario" class="wiki-section">
+      <h2><i class="fas fa-info-circle"></i> Glosario de Términos (Conceptos Básicos)</h2>
+      <p>Si eres nuevo en el desarrollo web, estos son los conceptos clave que debes conocer. No te preocupes, se explican de forma sencilla:</p>
+      <div class="grid-cards">
+        <div class="wiki-card">
+          <h4><i class="fas fa-server"></i> Hosting (Alojamiento)</h4>
+          <p>Es un ordenador conectado a internet las 24 horas del día donde guardas los archivos de tu web (como tu <code>index.html</code>) para que todo el mundo pueda verlos introduciendo tu dirección web.</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-globe"></i> Dominio y Subdominio</h4>
+          <p>Un dominio es tu nombre web exclusivo (ej: <code>miweb.com</code>). Un subdominio es una palabra añadida delante del dominio original (ej: <code>tu-usuario.is-a.dev</code> o <code>tu-dominio.pp.ua</code>).</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-address-book"></i> DNS (Dirección DNS)</h4>
+          <p>Es la "agenda de contactos" de internet. Traduce el nombre de tu web (legible para humanos) en la dirección IP del ordenador donde está alojada tu web.</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-directions"></i> Registro CNAME</h4>
+          <p>Es una instrucción DNS específica que le dice a internet: <em>"Cuando alguien visite mi subdominio A, mándalo a la dirección del hosting B"</em> (ej: de <code>tu-usuario.is-a.dev</code> a <code>tu-usuario.github.io</code>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: USO DE LA WEB -->
+    <section id="uso-web" class="wiki-section">
+      <h2><i class="fas fa-desktop"></i> Uso de la Web Principal</h2>
+      <p>La Landing Page está diseñada bajo un enfoque minimalista y móvil (Mobile-First) con un alto nivel estético de neón y glassmorphism. Su función es servir como centro de enlaces y tarjeta de presentación digital.</p>
+      
+      <h3>Estructura Visual de la Página</h3>
+      <div class="grid-cards">
+        <div class="wiki-card">
+          <h4><i class="fas fa-heading"></i> Banner y Avatar</h4>
+          <p>Un banner superior dinámico (100% de la pantalla horizontalmente) seguido de tu fotografía de perfil circular, cuadrada, poligonal o con formas orgánicas.</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-id-card"></i> Cabecera Profesional</h4>
+          <p>Muestra tu nombre, insignia de verificado (opcional), título profesional y una biografía detallada en múltiples párrafos que soporta textos interactivos e iconos.</p>
+        </div>
+        <div class="wiki-card">
+          <h4><i class="fas fa-link"></i> Contenedores de Enlaces</h4>
+          <p>Enlaces interactivos organizados por secciones. Cuentan con animaciones hover fluidas, micro-animaciones continuas si están destacados y soporte para iconos a la izquierda.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: ESTRUCTURA DE ARCHIVOS -->
+    <section id="estructura-archivos" class="wiki-section">
+      <h2><i class="fas fa-folder-open"></i> Estructura de Archivos del Proyecto</h2>
+      <p>Para entender cómo se compone el proyecto, aquí tienes un desglose de los archivos principales de la carpeta raíz y cuál es su función específica:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%;">Archivo</th>
+              <th style="width: 20%;">Tecnología</th>
+              <th>Propósito / Explicación sencilla</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">index.html</td>
+              <td>HTML5</td>
+              <td>La maqueta o esqueleto de tu Landing Page. Contiene la estructura básica de la cabecera, del banner, la sección del avatar, el cuerpo para los enlaces y el footer. No necesitas editarlo a mano.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">index.css</td>
+              <td>CSS3</td>
+              <td>El diseño y la ropa de la web. En él se definen las 20 variables de color para los temas visuales, el efecto esmerilado translúcido de las cajas (glassmorphism), el comportamiento de los botones y los recortes geométricos del avatar.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">app.js</td>
+              <td>JavaScript (JS)</td>
+              <td>El cerebro de la página. Lee la configuración del archivo <code>config.js</code> y se encarga de dibujar el perfil, inyectar los enlaces, controlar el banner de imagen/video y renderizar los espectaculares fondos animados interactivos en Canvas.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">config.js</td>
+              <td>JavaScript (Data)</td>
+              <td>El archivo de datos que guarda toda tu configuración (nombre, biografía, enlaces, redes, tema y estilos de caja). Este es el archivo que se genera automáticamente al pulsar "Exportar" en el creador.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">theme-creator/</td>
+              <td>Carpeta</td>
+              <td>Contiene la herramienta visual editora de temas. Dentro de ella están <code>index.html</code> (interfaz del editor) y <code>creator.js</code> (el código que simula el teléfono móvil en tiempo real y escribe tus datos para descargarlos).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CREADOR DE TEMAS -->
+    <section id="creador-temas" class="wiki-section">
+      <h2><i class="fas fa-sliders-h"></i> Guía del Creador de Temas</h2>
+      <div style="text-align: center; margin: 1.5rem 0;"><img src="assets/screenshots/2_creador_visual.png" alt="Creador Visual" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+      <p>El Creador de Temas (ubicado en la carpeta <code>/theme-creator</code>) es una interfaz visual interactiva que te permite editar toda la configuración de la Landing Page sin necesidad de escribir código directamente.</p>
+      
+      <div class="callout callout-info">
+        <i class="fas fa-info-circle"></i>
+        <div class="callout-content">
+          <h5>Live Preview en Tiempo Real</h5>
+          <p>Cualquier cambio que realices en el panel izquierdo (colores, temas, perfil, enlaces) se reflejará instantáneamente en el simulador móvil del panel derecho.</p>
+        </div>
+      </div>
+
+      <h3>Explicación de Funcionalidades</h3>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Ajustes de Perfil y Apariencia</h4>
+            <p>Introduce tu nombre, título profesional, y activa/desactiva la insignia de verificado. Elige la foto de perfil (o video) y selecciona la forma geométrica (circular, cuadrada, redondeada, hexagonal, octogonal, corazón, etc.) junto con un deslizador de tamaño para regular su dimensión sin romper la estructura de la página.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Banner Superior (Imagen o Video)</h4>
+            <p>Define si deseas un banner de fondo superior en tu cabecera. Puedes cargar una imagen o un archivo de video local, o pegar una URL remota. Si decides no incluir banner, la página se reajusta automáticamente sin dejar espacios vacíos.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Biografía por Párrafos</h4>
+            <p>Añade tantos párrafos como quieras. Puedes elegir si cada párrafo tiene una caja de lectura translúcida individual, o si prefieres aplicar la caja de lectura a toda la biografía junta. ¡Soporta código HTML completo!</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Gestión de Enlaces y Separadores Transparentes</h4>
+            <p>Puedes arrastrar y soltar (Drag and Drop) los enlaces para reordenar la página. Añade <strong>Separadores</strong> transparentes entre bloques y regula su altura mediante un deslizador digital para controlar el espaciado exacto.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h4>Exportación Automática</h4>
+            <p>Al finalizar la edición, haz clic en <strong>"Exportar config.js"</strong> para descargar el archivo. Solo debes reemplazar el archivo <code>config.js</code> en el directorio raíz de tu proyecto para aplicar los cambios a la web oficial.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DETALLES DE LAS OPCIONES DEL CREADOR -->
+    <section id="detalles-creador" class="wiki-section">
+      <h2><i class="fas fa-cogs"></i> Opciones de Configuración del Creador</h2>
+      <div style="text-align: center; margin: 1.5rem 0;"><img src="assets/screenshots/6_tarjeta_vcard.png" alt="Opciones y Tarjeta de Contacto VCard" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+      <p>Aquí tienes una guía exhaustiva de cada una de las opciones del editor visual y cómo afectan al layout (distribución visual) de tu web:</p>
+
+      <h3>1. Datos de Cabecera y Perfil</h3>
+      <ul>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Nombre Completo</strong>: Tu nombre de marca o personal. Soporta código HTML.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Insignia Verificado</strong>: Muestra un pequeño check azul al lado de tu nombre de marca.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Título Profesional</strong>: Tu cargo actual (ej: <code>&lt;b&gt;UI Designer&lt;/b&gt;</code>).</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Foto de Perfil / Avatar (Imagen o Video)</strong>: Puedes elegir un archivo local escribiendo su nombre (ej: <code>profile.jpg</code> o <code>avatar-animado.mp4</code>) o pegar un enlace web. Al seleccionar <strong>Vídeo (MP4)</strong>, se reproducirá un clip corto en bucle silenciado con auto-reproducción.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Forma del Avatar</strong>: 9 formas de recorte integradas (Círculo, Cuadrado, Cuadrado Redondeado, Triángulo, Hexágono, Octágono, Rombo, Corazón y Estrella).</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Tamaño de la Foto</strong>: Controla con un slider de píxeles el diámetro de tu foto/video de perfil (desde 60px hasta 160px).</li>
+      </ul>
+
+      <h3>2. Banner Superior</h3>
+      <ul>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Mostrar Banner</strong>: Activa/desactiva la cabecera a pantalla completa.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Tipo de Banner</strong>: Selecciona si el fondo superior será una imagen estática o un video (MP4/WebM) dinámico en bucle y silenciado.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>URL o Nombre del Archivo</strong>: Ruta del recurso. Si escribes <code>mi-banner.mp4</code> y guardas ese video en tu carpeta, funcionará de inmediato. Si no se activa la casilla del banner, el contenido del perfil subirá automáticamente sin desajustes.</li>
+      </ul>
+
+      <h3>3. Diseños y Layouts de la "Caja de Lectura"</h3>
+      <p>El creador ofrece varias modalidades estéticas para colocar fondos translúcidos esmerilados (efecto glassmorphism) sobre tu web:</p>
+      <div class="grid-cards">
+        <div class="wiki-card">
+          <h4>Caja en toda la Cabecera</h4>
+          <p>Envuelve la foto de perfil, tu nombre, título profesional y biografía completa bajo una única tarjeta translúcida unificada.</p>
+        </div>
+        <div class="wiki-card">
+          <h4>Caja en toda la Biografía</h4>
+          <p>Excluye tu nombre y tu avatar, y envuelve únicamente tus párrafos de biografía en una elegante tarjeta de lectura.</p>
+        </div>
+        <div class="wiki-card">
+          <h4>Cajas por Párrafo Individual</h4>
+          <p>Te permite añadir una tarjeta de fondo de lectura separada para cada párrafo de tu biografía de forma independiente. Útil para separar ideas.</p>
+        </div>
+        <div class="wiki-card">
+          <h4>Caja de Secciones Unificada</h4>
+          <p>Al activarlo, todo tu contenido de secciones y enlaces de abajo se agrupará en una única caja de lectura gigante.</p>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem;"><strong>Ajuste de Color y Opacidad de las Cajas</strong>: Tienes deslizadores en el panel para regular tanto el color hexadecimal de las cajas como el nivel de transparencia (opacidad, de 0 a 1) para adaptarlos exactamente al fondo animado de tu tema.</p>
+
+      <h3>4. Menú de Redes Sociales</h3>
+      <p>Introduce las URLs de tus plataformas. El sistema añadirá un icono circular en la parte superior. Si dejas el input vacío, el botón correspondiente desaparecerá en vivo.</p>
+
+      <h3>5. Listado de Contenido Dinámico</h3>
+      <p>Permite administrar los tres tipos de elementos del cuerpo:</p>
+      <ul>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Enlaces (Links)</strong>: Introduce el título del botón, su URL, icono (ej: <code>whatsapp</code> o <code>fa-brands fa-tiktok</code>) y una casilla para "Destacar Enlace" (aplica una animación continua como destellos o vibración).</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Títulos de Sección</strong>: Títulos organizadores para agrupar enlaces. Tienen un interruptor para decidir si tienen caja translúcida o si van integrados directamente sobre el fondo animado.</li>
+        <li style="margin-left: 2rem; margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Separadores</strong>: Bloques invisibles que añaden espacio en blanco para separar el contenido. Mediante un slider, puedes decidir su altura exacta de 5px a 100px.</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN: MULTIMEDIA -->
+    <section id="multimedia" class="wiki-section">
+      <h2><i class="fas fa-image"></i> Carga de Imágenes y Videos</h2>
+      <p>Puedes configurar imágenes o videos de fondo locales de dos formas dentro de los campos del creador de temas:</p>
+      
+      <h3>1. Uso de Archivos Locales (Recomendado)</h3>
+      <p>Guarda tus fotos, imágenes o videos en la misma carpeta del proyecto (donde está <code>index.html</code>). En el creador de temas, en el input correspondiente, simplemente escribe el <strong>nombre exacto del archivo con su extensión</strong>.</p>
+      <div class="code-header">Ejemplo de configuración local</div>
+      <pre><code>// Para el Avatar
+profile.jpg
+
+// Para el Banner
+banner.mp4 (o banner.jpg)</code></pre>
+      
+      <h3>2. Uso de URLs Remotas</h3>
+      <p>Si prefieres alojar tus imágenes en servicios externos (Imgur, Discord, etc.), pega la URL directa completa del archivo multimedia.</p>
+      <div class="code-header">Ejemplo de URL externa</div>
+      <pre><code>https://i.imgur.com/TuImagenDirecta.jpg</code></pre>
+      
+      <div class="callout callout-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div class="callout-content">
+          <h5>Rutas Relativas en Subcarpetas</h5>
+          <p>Si prefieres ordenar tus recursos en una carpeta interna (ej: una carpeta llamada <code>images</code>), en los inputs debes escribir la ruta relativa: <code>images/mifoto.jpg</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: SISTEMA DE ICONOS -->
+    <section id="iconos" class="wiki-section">
+      <h2><i class="fas fa-icons"></i> Sistema Flexible de Iconos</h2>
+      <p>El proyecto utiliza la librería <strong>FontAwesome v6</strong>. El sistema lee el campo de icono y decide de forma inteligente qué renderizar.</p>
+
+      <!-- INFOGRAFÍA: FLUJO DE ICONOS -->
+      <div class="infographic-container">
+        <div class="infographic-title">
+          <i class="fas fa-project-diagram"></i> Infografía: Flujo de Detección de Iconos
+        </div>
+        <div class="flow-horizontal">
+          <div class="flow-node highlight">
+            <div class="node-step">Paso 1</div>
+            <div class="node-text">¿Empieza por <code>http</code> o <code>./</code>?</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="flow-node">
+            <div class="node-step">SÍ</div>
+            <div class="node-text">Renderiza <code>&lt;img&gt;</code> (Imagen local o URL)</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="flow-node">
+            <div class="node-step">NO</div>
+            <div class="node-text">¿Contiene <code>fa-</code> o prefijos?</div>
+          </div>
+        </div>
+        <div class="flow-horizontal">
+          <div class="flow-arrow" style="visibility:hidden; flex:1;"><i class="fas fa-arrow-down"></i></div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+          <div class="flow-arrow" style="visibility:hidden; flex:1;"><i class="fas fa-arrow-down"></i></div>
+        </div>
+        <div class="flow-horizontal">
+          <div class="flow-node">
+            <div class="node-step">SÍ</div>
+            <div class="node-text">Usa clases FontAwesome puras</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-left"></i></div>
+          <div class="flow-node highlight">
+            <div class="node-step">Paso 2</div>
+            <div class="node-text">¿Existe en <code>ICON_MAP</code>?</div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+          <div class="flow-node">
+            <div class="node-step">NO</div>
+            <div class="node-text">Fallback: <code>fas fa-{texto}</code></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Diferencia entre formatos de escritura</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Formato de entrada</th>
+              <th>Cómo lo interpreta el sistema</th>
+              <th>Resultado / Caso de Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">whatsapp</td>
+              <td>Busca en el mapa interno <code>ICON_MAP</code></td>
+              <td>Carga <code>fab fa-whatsapp</code> automáticamente. Ideal para principiantes.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">fa-brands fa-whatsapp</td>
+              <td>Detecta el prefijo y aplica clases directas</td>
+              <td>Renderiza la etiqueta correcta. Es el método más preciso de FontAwesome.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">fab fa-whatsapp</td>
+              <td>Detecta prefijo alternativo de FontAwesome v5/v6</td>
+              <td>Igual al anterior, funciona perfectamente por compatibilidad.</td>
+            </tr>
+            <tr>
+              <td style="font-family: monospace; color: #38bdf8;">&lt;i class="fa-brands fa-whatsapp"&gt;&lt;/i&gt;</td>
+              <td>HTML crudo</td>
+              <td><strong>No poner esto en los campos de "Icono"</strong>. Esto se usa únicamente dentro de textos libres como la biografía o descripciones.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cómo buscar nuevos iconos</h3>
+      <p>Para buscar e incorporar nuevos iconos en tus enlaces o títulos:</p>
+      <ol style="margin-left: 2rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-muted);">
+        <li>Ingresa al buscador oficial de <strong><a href="https://fontawesome.com/icons" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">FontAwesome Icons</a></strong>.</li>
+        <li>Busca el servicio que necesitas (ej: "tiktok", "instagram", "envelope").</li>
+        <li>Copia la clase CSS del icono gratuito que encuentres (ej: <code>fa-brands fa-tiktok</code> o <code>fa-regular fa-envelope</code>).</li>
+        <li>Pégala directamente en el campo <strong>Icono</strong> del creador de temas.</li>
+      </ol>
+    </section>
+
+    <!-- SECCIÓN: ETIQUETAS HTML -->
+    <section id="html-libre" class="wiki-section">
+      <h2><i class="fas fa-code"></i> Soporte de HTML Libre</h2>
+      <p>Para dar la máxima libertad de personalización visual, los campos de <strong>Biografía</strong>, <strong>Título Profesional</strong>, <strong>Secciones</strong> y <strong>Enlaces</strong> permiten código HTML puro.</p>
+
+      <h3>Guía rápida de etiquetas soportadas y ejemplos</h3>
+      
+      <div class="code-header">1. Negritas (b o strong)</div>
+      <pre><code>&lt;b&gt;Desarrollador Full Stack&lt;/b&gt; o &lt;strong&gt;Importante&lt;/strong&gt;</code></pre>
+
+      <div class="code-header">2. Cursiva (i o em)</div>
+      <pre><code>&lt;i&gt;Especializado en interfaces premium&lt;/i&gt;</code></pre>
+
+      <div class="code-header">3. Subrayado (u)</div>
+      <pre><code>&lt;u&gt;Disponible para proyectos freelance&lt;/u&gt;</code></pre>
+
+      <div class="code-header">4. Tachado (s o del)</div>
+      <pre><code>Precio anterior: &lt;s&gt;$99 USD&lt;/s&gt; ¡Ahora gratis!</code></pre>
+
+      <div class="code-header">5. Salto de Línea (br)</div>
+      <pre><code>Primer párrafo de mi biografía.&lt;br&gt;Segundo párrafo en el mismo bloque.</code></pre>
+
+      <div class="code-header">6. Color Personalizado o Estilos Inline (span con style)</div>
+      <pre><code>&lt;span style="color: #f43f5e;"&gt;Me apasiona&lt;/span&gt; el diseño interactivo.</code></pre>
+
+      <div class="code-header">7. Iconos FontAwesome incrustados en el texto</div>
+      <pre><code>Contáctame a mi WhatsApp &lt;i class="fa-brands fa-whatsapp"&gt;&lt;/i&gt; para conversar.</code></pre>
+
+      <div class="callout callout-success">
+        <i class="fas fa-check-circle"></i>
+        <div class="callout-content">
+          <h5>Ejemplo Combinado para tu Biografía</h5>
+          <p>Prueba a copiar y pegar este bloque directamente en tu biografía dentro del creador de temas:</p>
+          <pre style="margin: 0.5rem 0 0 0; background: rgba(0,0,0,0.4);"><code>Hola, soy &lt;b&gt;Nombre&lt;/b&gt; &lt;i class="fa-solid fa-code"&gt;&lt;/i&gt;.&lt;br&gt;
+Creador de &lt;span style="color: var(--accent-color); font-weight: bold;"&gt;experiencias web interactivas&lt;/span&gt;. &lt;i class="fa-regular fa-lightbulb"&gt;&lt;/i&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DESARROLLO AVANZADO -->
+    <section id="desarrollo" class="wiki-section">
+      <h2><i class="fas fa-code-branch"></i> Cómo Añadir Temas, Botones y Efectos de Animación (Desarrolladores)</h2>
+      <div style="text-align: center; margin: 1.5rem 0;"><img src="assets/screenshots/1_temas_interactivos.png" alt="Temas Interactivos" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+      <p>Si tienes conocimientos de HTML/CSS/JS y deseas expandir el código fuente para crear nuevos temas de fondo con el canvas, nuevos estilos de botón o efectos de animación interactiva:</p>
+
+      <h3>A. Añadir un Nuevo Tema Visual con Efectos de Fondo</h3>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Declarar las Variables CSS del Tema</h4>
+            <p>Abre <code>index.css</code> y añade las variables de colores y fondos para tu nuevo tema utilizando el selector de clase <code>body.theme-nombre</code>:
+            <pre><code>/* TEMA VOLCANO */
+body.theme-volcano {
+  --bg-color: #0b0200;                  /* Color de fondo base */
+  --text-muted: #f87171;                /* Color del texto secundario/biografía */
+  --accent-color: #f97316;              /* Color de acento principal (Naranja fuego) */
+  --accent-glow: rgba(249, 115, 22, 0.4); /* Resplandor/Sombra del color de acento */
+  --glass-bg: rgba(30, 8, 4, 0.8);      /* Fondo de los botones (translúcido) */
+  --glass-border: rgba(249, 115, 22, 0.15); /* Borde fino de los botones */
+  background: radial-gradient(circle at center, #2e0802 0%, #0b0200 100%) !important;
+}</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Programar la Animación en Canvas (app.js y creator.js)</h4>
+            <p>Para que tu tema tenga un fondo animado en el lienzo (Canvas), abre <code>app.js</code> y localiza la función <code>initBackgroundAnimation()</code>.
+              <br><br>
+              <strong>1. Inicializar Partículas:</strong>
+              <br>
+              Busca el bloque <code>// --- CONFIGURACIÓN E INICIALIZACIÓN DE PARTÍCULAS POR TEMA ---</code> y añade la inicialización de tus partículas:
+              <pre><code>else if (theme === "volcano") {
+  numParticles = 50; // Cantidad de partículas
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 4 + 1,
+      speedY: -(Math.random() * 0.4 + 0.1), // Flotan hacia arriba
+      alpha: Math.random() * 0.7 + 0.2
+    });
+  }
+}</code></pre>
+              <br>
+              <strong>2. Dibujar las Partículas en el bucle:</strong>
+              <br>
+              Busca la función <code>draw()</code> dentro de <code>initBackgroundAnimation()</code> y añade el dibujado:
+              <pre><code>else if (theme === "volcano") {
+  // Limpiar con color de fondo del tema
+  ctx.fillStyle = "rgba(11, 2, 0, 0.25)";
+  ctx.fillRect(0, 0, width, height);
+
+  particles.forEach((p) => {
+    p.y += p.speedY; // Mover
+    if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; } // Reiniciar al salir
+
+    ctx.beginPath();
+    ctx.arc(p.x + mouseX * p.size * 0.3, p.y + mouseY * p.size * 0.3, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(249, 115, 22, ${p.alpha})`; // Naranja
+    ctx.fill();
+  });
+}</code></pre>
+              <em>Nota: Para sincronizar el previsualizador del Creador de Temas visual, repite estos dos bloques exactamente en el archivo <code>theme-creator/creator.js</code> dentro de la función <code>initPreviewAnimation()</code>.</em>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Añadir la Opción en el Selector del Creador de Temas</h4>
+            <p>Abre <code>theme-creator/index.html</code> y busca el selector <code>&lt;select id="select-theme"&gt;</code>. Añade tu nueva opción:
+            <pre><code>&lt;option value="volcano"&gt;21. Volcano (Fumarola de magma y lava)&lt;/option&gt;</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3>B. Cómo Añadir un Nuevo Estilo de Botón en CSS</h3>
+      <p>Los estilos de botones se definen 100% mediante CSS y se asignan mediante la clase <code>.btn-style-nombre</code>.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Declarar los estilos en index.css</h4>
+            <p>Abre <code>index.css</code> y añade las clases para el estado normal y el estado hover (<code>:hover</code>). Utiliza las variables CSS de acento y resplandor para que tu estilo se adapte automáticamente al tema de fondo seleccionado:
+            <pre><code>/* ESTILO BORDE NEÓN TRIPLE */
+.btn-style-triple-neon {
+  background: transparent;
+  border: 1.5px solid var(--accent-color);
+  box-shadow: 0 0 4px var(--accent-color), 0 0 10px var(--accent-glow);
+  color: var(--text-color);
+}
+
+.btn-style-triple-neon:hover {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 8px var(--accent-color), 0 0 20px var(--accent-glow);
+  transform: translateY(-2px); /* Elevar sutilmente */
+}</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Registrar la opción en el HTML del Creador</h4>
+            <p>Abre <code>theme-creator/index.html</code>, busca el desplegable <code>&lt;select id="select-button-style"&gt;</code> y añade:
+            <pre><code>&lt;option value="triple-neon"&gt;21. Triple Neon (Líneas finas de neón)&lt;/option&gt;</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3>C. Cómo Añadir un Nuevo Efecto / Animación de Botón</h3>
+      <p>Las animaciones de botones utilizan animaciones keyframes estándar de CSS y se definen bajo la clase <code>.btn-anim-nombre</code>.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear la animación en index.css</h4>
+            <p>Abre <code>index.css</code> y define la animación <code>@keyframes</code> junto con la clase del botón:
+            <pre><code>/* ANIMACIÓN SPIN-SHAKE (Vibrar rotando) */
+.btn-anim-spin-shake {
+  animation: spinShakeButton 4s infinite ease-in-out;
+}
+
+@keyframes spinShakeButton {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  92% { transform: rotate(-2deg); }
+  94% { transform: rotate(2deg); }
+  96% { transform: rotate(-1deg); }
+  98% { transform: rotate(1deg); }
+}</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Registrar la opción en el HTML del Creador</h4>
+            <p>Abre <code>theme-creator/index.html</code>, busca el desplegable <code>&lt;select id="select-button-anim"&gt;</code> y añade:
+            <pre><code>&lt;option value="spin-shake"&gt;22. Spin Shake (Vibración y rotación en bucle)&lt;/option&gt;</code></pre>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: HOSTING -->
+    <section id="hosting" class="wiki-section">
+      <h2><i class="fas fa-server"></i> Hosting Gratuito (Alojamiento de tu Web)</h2>
+      <div style="text-align: center; margin: 1.5rem 0;"><img src="assets/screenshots/7_rendimiento_maximo.png" alt="Rendimiento y Hosting" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+      <p>Cuando finalices de editar la configuración en el creador, tendrás tus archivos de web listos. Aquí tienes los tutoriales detallados para subirlos a Internet de manera totalmente gratuita.</p>
+
+      <h3>1. GitHub Pages (<a href="https://pages.github.com/" target="_blank" style="color: var(--accent-color);">pages.github.com</a>)</h3>
+      <p>GitHub es una plataforma profesional para guardar código, y te regala hosting ilimitado para webs estáticas como la tuya.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear Cuenta en GitHub</h4>
+            <p>Regístrate de forma gratuita en <a href="https://github.com" target="_blank" style="color: var(--accent-color);">github.com</a> con tu correo electrónico y elige tu nombre de usuario.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear el Repositorio de tu Web</h4>
+            <p>Haz clic en el botón "+" (arriba a la derecha) -> "New repository". Asigna exactamente este nombre a tu repositorio: <code>tuusuario.github.io</code> (reemplaza "tuusuario" por tu nombre real de usuario de GitHub). Asegúrate de que esté configurado como <strong>Public</strong>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Subir los Archivos de tu Proyecto</h4>
+            <p>Dentro del repositorio que has creado, haz clic en "uploading an existing file". Arrastra y suelta todos los archivos de tu proyecto (incluyendo <code>index.html</code>, <code>app.js</code>, <code>index.css</code>, <code>config.js</code> y tus fotos/videos locales). Haz clic en "Commit changes" abajo del todo para guardar.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Listo</h4>
+            <p>Tu web estará visible automáticamente en pocos minutos en la dirección: <code>https://tuusuario.github.io</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>2. Cloudflare Pages (<a href="https://pages.cloudflare.com/" target="_blank" style="color: var(--accent-color);">pages.cloudflare.com</a>)</h3>
+      <p>Una plataforma hiperveloz que ofrece ancho de banda ilimitado, protección gratuita contra hackers y una de las redes más rápidas de Internet.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear Cuenta</h4>
+            <p>Regístrate en <a href="https://dash.cloudflare.com/sign-up" target="_blank" style="color: var(--accent-color);">dash.cloudflare.com</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Proyecto Pages</h4>
+            <p>En tu panel de Cloudflare, ve a la barra lateral izquierda, pulsa en <strong>Workers & Pages</strong> -> pestaña <strong>Pages</strong> -> haz clic en <strong>"Create an Application"</strong> -> <strong>"Upload assets"</strong>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Subir Carpeta de la Web</h4>
+            <p>Asígnale un nombre a tu proyecto y arrastra la carpeta completa de tu Landing Page al recuadro de subida. Cloudflare procesará la carga en segundos.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Desplegar</h4>
+            <p>Haz clic en "Deploy Site". Cloudflare te proporcionará una dirección única gratuita terminada en <code>.pages.dev</code> (ej: <code>mi-landing.pages.dev</code>).</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>3. Surge.sh (<a href="https://surge.sh/" target="_blank" style="color: var(--accent-color);">surge.sh</a>)</h3>
+      <p>Excelente herramienta para publicar tu web en cuestión de segundos utilizando la consola de comandos de tu ordenador.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Instalar Node.js</h4>
+            <p>Descarga e instala la versión recomendada de Node.js desde su web oficial: <a href="https://nodejs.org/" target="_blank" style="color: var(--accent-color);">nodejs.org</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Instalar Surge en tu Ordenador</h4>
+            <p>Abre la Consola de comandos (en Windows busca "cmd" o "PowerShell"). Escribe el siguiente comando y pulsa Intro:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>npm install -g surge</code></pre>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Publicar la Web</h4>
+            <p>Navega con la consola hasta la carpeta donde tienes tu proyecto o haz clic derecho en la carpeta de tu proyecto y selecciona "Abrir en terminal". Luego escribe simplemente:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>surge</code></pre>
+            Te pedirá que escribas tu correo y una contraseña para crear tu cuenta gratuita. Luego confirma la ruta de la carpeta del proyecto y escribe el nombre de dominio gratuito terminado en <code>.surge.sh</code> que desees para tu web.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>4. Codeberg Pages (<a href="https://pages.codeberg.org/" target="_blank" style="color: var(--accent-color);">pages.codeberg.org</a>)</h3>
+      <p>Una alternativa de código abierto a GitHub con servidores en Europa, 100% gratuita y sin publicidad.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Crear Cuenta</h4>
+            <p>Regístrate en <a href="https://codeberg.org" target="_blank" style="color: var(--accent-color);">codeberg.org</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Repositorio</h4>
+            <p>Crea un repositorio haciendo clic en el botón "+" -> "New Repository". El repositorio debe tener exactamente el nombre: <code>pages</code>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-content">
+            <h4>Subir Archivos</h4>
+            <p>Sube los archivos de tu Landing Page a la rama principal (<code>main</code>). Una vez subidos, tu web estará online de forma inmediata en la dirección: <code>https://tuusuario.codeberg.page</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>5. Sourcehut Pages (<a href="https://srht.site/" target="_blank" style="color: var(--accent-color);">srht.site</a>)</h3>
+      <p>Una plataforma ultra minimalista y rápida orientada a la privacidad.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro</h4>
+            <p>Crea tu cuenta de usuario en <a href="https://meta.sr.ht" target="_blank" style="color: var(--accent-color);">meta.sr.ht</a>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Subir Web</h4>
+            <p>Puedes empaquetar tu carpeta en un archivo comprimido <code>.tar.gz</code> y subirla directamente usando el formulario interactivo de su panel web en <code>srht.site</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: SUBDOMINIOS GRATUITOS -->
+    <section id="subdominios" class="wiki-section">
+      <h2><i class="fas fa-globe"></i> Proveedores de Subdominios Gratuitos</h2>
+      <p>Si deseas un nombre personalizado bonito sin tener que comprar un dominio de pago, utiliza cualquiera de estos proveedores oficiales de subdominios gratuitos:</p>
+
+      <h3>1. pp.ua (vía <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>)</h3>
+      <p>Ofrece subdominios <code>.pp.ua</code> oficiales gratis. Requiere una cuenta en nic.ua y confirmación por Telegram:</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Buscar y Registrar</h4>
+            <p>Entra en <a href="https://nic.ua/en" target="_blank" style="color: var(--accent-color);">nic.ua</a>, introduce tu subdominio deseado terminado en <code>.pp.ua</code> (ej: <code>tu-dominio.pp.ua</code>). Agrégalo al carrito a coste $0 y procesa la compra gratuita hasta el final rellenando tus datos.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Iniciar el Bot de Telegram</h4>
+            <p>Abre la aplicación Telegram en tu teléfono o PC, busca el bot oficial de nic.ua: <strong><code>@NicUaBot</code></strong> (o haz clic en <a href="https://t.me/NicUaBot" target="_blank" style="color: var(--accent-color);">t.me/NicUaBot</a>) y envíale el comando <code>/start</code>.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Autorizar Número</h4>
+            <p>El bot te pedirá autorización para validar que eres humano. Haz clic en el botón de Telegram de abajo para compartir tu número telefónico con el bot.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Activar Dominio</h4>
+            <p>Envía al bot el comando <code>/activate</code>. Te mostrará un botón con tu dominio pendiente. Pulsa en él y el bot te notificará que tu subdominio ha sido activado con éxito. Ahora ya puedes configurar sus DNS en el panel web de nic.ua.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>2. DigitalPlat Domain Portal (<a href="https://domain.digitalplat.org" target="_blank" style="color: var(--accent-color);">domain.digitalplat.org</a>)</h3>
+      <p>Un servicio que distribuye subdominios gratuitos en extensiones de red como <code>*.dp.ua</code> o <code>*.net.ua</code> de forma directa.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro</h4>
+            <p>Ve a <a href="https://domain.digitalplat.org" target="_blank" style="color: var(--accent-color);">domain.digitalplat.org</a> y regístrate.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Solicitar Subdominio</h4>
+            <p>Busca un nombre disponible, elige la extensión de subdominio gratuita que prefieras e introduce tus servidores DNS o registros de apuntamiento.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>3. is-a.dev (<a href="https://is-a.dev/" target="_blank" style="color: var(--accent-color);">is-a.dev</a>)</h3>
+      <p>Un servicio popular para obtener la terminación <code>tunombre.is-a.dev</code> de forma directa mediante la gestión de ficheros en GitHub.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Hacer un Fork</h4>
+            <p>Inicia sesión en tu cuenta de GitHub, entra al repositorio <a href="https://github.com/is-a-dev/register" target="_blank" style="color: var(--accent-color);">github.com/is-a-dev/register</a> y haz clic en el botón <strong>"Fork"</strong> (arriba a la derecha) para copiar el repositorio a tu perfil personal.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear el Archivo de tu Dominio</h4>
+            <p>Entra a la carpeta <code>domains</code> en tu copia. Haz clic en "Add file" -> "Create new file". Ponle por nombre a tu archivo: <code>tu-usuario.json</code> (ej: si deseas <code>tu-usuario.is-a.dev</code>, tu archivo debe llamarse <code>tu-usuario.json</code>).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Configurar el JSON</h4>
+            <p>Pega este código dentro del editor de tu nuevo archivo JSON:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>{
+  "owner": {
+    "username": "tu-usuario-github",
+    "email": "tuemail@gmail.com"
+  },
+  "record": {
+    "CNAME": "tuusuario.github.io"
+  }
+}</code></pre>
+            *(Reemplaza "tu-usuario-github" por tu usuario y "tuusuario.github.io" por la dirección de tu hosting actual)*. Guarda el archivo con "Commit changes".</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Enviar el Pull Request</h4>
+            <p>En tu repositorio de GitHub, haz clic en la pestaña <strong>"Pull requests"</strong> -> botón verde <strong>"New pull request"</strong> -> <strong>"Create pull request"</strong>. Un sistema automatizado comprobará que la estructura sea correcta y fusionará tu archivo en pocos minutos, tras lo cual tu dominio estará activo.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>4. js.org (<a href="https://js.org/" target="_blank" style="color: var(--accent-color);">js.org</a>)</h3>
+      <p>Un subdominio con terminación <code>tunombre.js.org</code> exclusivo para programadores de JavaScript alojados en GitHub Pages.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Requisito Inicial</h4>
+            <p>Debes tener tu landing page activa y publicada en GitHub Pages (ej: en <code>tuusuario.github.io</code>).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Hacer Fork del Repositorio de js.org</h4>
+            <p>Ve a <a href="https://github.com/js-org/js.org" target="_blank" style="color: var(--accent-color);">github.com/js-org/js.org</a> y haz un Fork de su repositorio en tu cuenta.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Editar el Archivo de Mapeo</h4>
+            <p>Abre el archivo <code>cnames.active.js</code>. Añade tu subdominio respetando el orden alfabético estricto de la lista de esta forma:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>"tunombre": "tuusuario.github.io",</code></pre>
+            Guarda el archivo en tu repositorio.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Enviar Pull Request</h4>
+            <p>Crea un Pull Request desde su pestaña en GitHub. Una vez aprobado por los mantenedores de la plataforma, el dominio estará listo.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>5. thedev.id / Upset.dev (<a href="https://thedev.id" target="_blank" style="color: var(--accent-color);">thedev.id</a>)</h3>
+      <p>Te provee un dominio gratuito de programador del tipo <code>usuario.thedev.id</code>.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Hacer Fork del Repositorio</h4>
+            <p>Entra en <a href="https://github.com/thedev-id/register" target="_blank" style="color: var(--accent-color);">github.com/thedev-id/register</a> y haz un fork a tu perfil.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Fichero JSON</h4>
+            <p>Crea un archivo llamado <code>domains/tuusuario.json</code>. Copia el siguiente esquema en su interior:
+            <pre style="margin-top: 0.5rem; background: #000;"><code>{
+  "owner": {
+    "username": "tu-usuario-github",
+    "email": "tuemail@example.com"
+  },
+  "record": {
+    "CNAME": "tuusuario.github.io"
+  }
+}</code></pre>
+            Guarda los cambios.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Pull Request</h4>
+            <p>Abre el Pull Request en GitHub. El sistema automatizado validará y añadirá tu subdominio de forma gratuita en pocos minutos.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>6. isroot.in (<a href="https://isroot.in/" target="_blank" style="color: var(--accent-color);">isroot.in</a>)</h3>
+      <p>Servicio web para desarrolladores que ofrece subdominios del tipo <code>*.isroot.in</code> e <code>*.isroot.dev</code> de manera fácil.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro en la Web</h4>
+            <p>Entra en <a href="https://isroot.in/" target="_blank" style="color: var(--accent-color);">isroot.in</a> y crea tu cuenta de usuario.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Subdominio</h4>
+            <p>Ve a tu panel de control, haz clic en "Add new domain / subdomain", escribe el nombre deseado y pulsa Guardar.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Configurar DNS</h4>
+            <p>En el panel del subdominio de isroot.in, selecciona "DNS Manager" e inserta tu registro de tipo CNAME apuntando al hosting.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>7. getfreedomain.name (<a href="https://www.getfreedomain.name/" target="_blank" style="color: var(--accent-color);">getfreedomain.name</a>)</h3>
+      <p>Un buscador tradicional de dominios gratis de segundo nivel (como <code>*.free.hr</code>, <code>*.co.pl</code>, etc.).</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Registro y Compra Gratuita</h4>
+            <p>Entra en <a href="https://www.getfreedomain.name/" target="_blank" style="color: var(--accent-color);">getfreedomain.name</a>, busca la extensión gratuita que desees, agrégala y finaliza la facturación a coste cero.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>DNS Manager</h4>
+            <p>Accede a tus dominios en el menú superior, ve a "DNS Management" y añade tus registros de apuntamiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DNS Y CONECTIVIDAD -->
+    <section id="cloudflare" class="wiki-section">
+      <h2><i class="fas fa-cloud"></i> Cómo Conectar tu Subdominio a tu Hosting</h2>
+      <p>Una vez que tienes el hosting (donde están guardados tus archivos) y el subdominio gratuito (tu dirección de texto), debes unirlos. Te explicamos los dos métodos disponibles:</p>
+
+      <!-- INFOGRAFÍA: COMPARATIVA DNS -->
+      <div class="infographic-container">
+        <div class="infographic-title">
+          <i class="fas fa-network-wired"></i> Infografía: Comparativa de Métodos de Conexión
+        </div>
+        <div class="dns-grid">
+          <!-- Columna Método Directo -->
+          <div class="dns-column">
+            <div class="dns-column-title"><i class="fas fa-exchange-alt" style="color: #f59e0b;"></i> Método 1: Apuntamiento Directo</div>
+            <div class="dns-flow-vertical">
+              <div class="dns-bubble">Tu Subdominio (pp.ua, is-a.dev)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble success">CNAME nativo del proveedor</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble">Alojamiento (GitHub / Cloudflare Pages)</div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center;">Simple, rápido y sin cuentas intermedias.</p>
+          </div>
+          <!-- Columna Cloudflare -->
+          <div class="dns-column">
+            <div class="dns-column-title"><i class="fas fa-shield-alt" style="color: #10b981;"></i> Método 2: A través de Cloudflare</div>
+            <div class="dns-flow-vertical">
+              <div class="dns-bubble">Tu Subdominio (pp.ua, isroot.in)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble success">Servidor DNS Cloudflare (Nameservers)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble accent">Proxy de Cloudflare (Seguridad + SSL)</div>
+              <div class="dns-arrow-v"><i class="fas fa-arrow-down"></i></div>
+              <div class="dns-bubble">Alojamiento (GitHub / Cloudflare Pages)</div>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center;">Máxima seguridad, velocidad y estadísticas de tráfico.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Método 1: Usando el Panel de DNS Nativo del Proveedor (Sin Cloudflare)</h3>
+      <p>Es la opción más sencilla si no deseas crear cuentas adicionales en otros servicios. Puedes gestionar los registros desde el panel de control del mismo proveedor del subdominio.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Entrar al panel DNS del Proveedor</h4>
+            <p>Accede a tu cuenta de dominio (nic.ua, isroot.in, getfreedomain.name, etc.) y ve a la sección de administración de dominios / DNS.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Crear Registro CNAME</h4>
+            <p>Añade un registro nuevo con los siguientes datos exactos:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted);">
+                <li><strong>Tipo de Registro (Type)</strong>: <code>CNAME</code></li>
+                <li><strong>Nombre / Host (Name)</strong>: <code>@</code> (o déjalo en blanco si representa tu dirección principal)</li>
+                <li><strong>Valor / Destino (Value / Target)</strong>: La dirección de tu hosting de origen (ej: <code>tuusuario.github.io</code> o <code>tu-sitio.pages.dev</code>).</li>
+                <li><strong>TTL</strong>: Automático o 14400.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Guardar Cambios</h4>
+            <p>Aplica la configuración. Los cambios tardarán unos minutos (o hasta unas pocas horas) en actualizarse por internet.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Método 2: A través de Cloudflare (Gestionado, Seguro y con Proxy)</h3>
+      <p>Este método es el más potente e idóneo para proyectos profesionales, ya que Cloudflare actúa como intermediario proporcionando protección anti-hackers, estadísticas, certificado SSL (candado de seguridad seguro) y velocidad optimizada de forma ilimitada y gratuita.</p>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Agregar tu Dominio en Cloudflare</h4>
+            <p>Inicia sesión en <a href="https://dash.cloudflare.com" target="_blank" style="color: var(--accent-color);">dash.cloudflare.com</a> y haz clic en <strong>"Add a Site"</strong>. Introduce tu subdominio registrado (ej: <code>tu-dominio.pp.ua</code>) y selecciona el plan gratuito ($0).</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Cambiar los Nameservers en tu Proveedor</h4>
+            <p>Cloudflare te dará dos direcciones de Servidor de Nombres (Nameservers). Por ejemplo:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); font-family: monospace;">
+                <li>eva.ns.cloudflare.com</li>
+                <li>will.ns.cloudflare.com</li>
+              </ul>
+              Ve al panel de tu proveedor de dominio (nic.ua o el que estés usando), busca la sección "Nameservers" o "Servidores de Nombres" y cambia los que tiene de fábrica por estos dos que te dio Cloudflare.
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Añadir Registro DNS en Cloudflare</h4>
+            <p>Una vez que Cloudflare detecte el cambio de Nameservers (te enviará un correo), ve a la pestaña <strong>DNS -> Records</strong> de Cloudflare y pulsa en "Add record":
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted);">
+                <li><strong>Type (Tipo)</strong>: <code>CNAME</code></li>
+                <li><strong>Name (Nombre)</strong>: <code>@</code></li>
+                <li><strong>Target (Destino)</strong>: Escribe tu hosting (ej: <code>tuusuario.github.io</code> o <code>tu-sitio.pages.dev</code>)</li>
+                <li><strong>Proxy Status (Nube)</strong>: Mantén activa la nube naranja (Proxied) para disfrutar del escudo y SSL gratuito.</li>
+              </ul>
+              Guarda el registro.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Paso Final: Configurar tu Dominio en la Web de Hosting</h3>
+      <p>Tanto si usas el Método 1 como el Método 2, debes indicarle a tu hosting que responda cuando alguien escriba tu dominio personalizado:</p>
+      
+      <h4>Si tu hosting es GitHub Pages:</h4>
+      <p>Entra a tu repositorio de GitHub -> ve a <strong>Settings</strong> (en el menú superior) -> sección <strong>Pages</strong> (en el menú izquierdo). En la casilla de <strong>"Custom domain"</strong> escribe tu dominio (ej: <code>tu-dominio.pp.ua</code>) y pulsa en <strong>Save</strong>. Asegúrate de activar la casilla <strong>"Enforce HTTPS"</strong> para forzar la navegación segura.</p>
+
+      <h4>Si tu hosting es Cloudflare Pages:</h4>
+      <p>Entra en el panel de Cloudflare de tu proyecto Pages -> ve a la pestaña <strong>"Custom domains"</strong> -> haz clic en <strong>"Set up a custom domain"</strong>. Escribe tu subdominio (ej: <code>tu-dominio.pp.ua</code>) y pulsa continuar. Cloudflare configurará y conectará todo automáticamente.</p>
+    </section>
+
+    <!-- SECCIÓN: SEO Y META TAGS -->
+    <section id="seo-og" class="wiki-section">
+      <h2><i class="fas fa-search"></i> SEO y Vista Previa al Compartir (Open Graph)</h2>
+      <div style="text-align: center; margin: 1.5rem 0;"><img src="assets/screenshots/5_simulador_seo.png" alt="Simulador SEO" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+      <p>Cuando compartes el enlace de tu sitio web en aplicaciones como WhatsApp, Telegram, Facebook o Discord, la plataforma genera automáticamente una <strong>tarjeta visual</strong> (burbuja de compartido) con una imagen, un título y una descripción. Esto se conoce como protocolo <strong>Open Graph (OG)</strong>.</p>
+      
+      <div class="dns-grid" style="margin-bottom: 2rem; grid-template-columns: 1fr;">
+        <div class="dns-column" style="border-left: 4px solid var(--accent-color); background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 0 8px 8px 0;">
+          <h4 style="margin-top:0; color: var(--accent-color);"><i class="fas fa-info-circle"></i> ¿Por qué no funciona dinámicamente con JavaScript?</h4>
+          <p style="font-size: 0.9rem; line-height: 1.5;">Los robots de redes sociales (crawlers o scrapers) son rastreadores muy simples. Cuando envías un enlace, el bot descarga únicamente el archivo <code>index.html</code> de tu servidor y extrae las etiquetas <code>&lt;meta&gt;</code> de su encabezado (<code>&lt;head&gt;</code>). <strong>Los bots no ejecutan código JavaScript</strong>. Por lo tanto, no pueden leer tu archivo <code>config.js</code> de manera dinámica. La única forma de que se muestren las imágenes e información correctas al compartir es teniendo las etiquetas HTML escritas de forma estática en el <code>index.html</code>.</p>
+        </div>
+      </div>
+
+      <h3>Cómo Utilizar el Simulador SEO en el Creador de Temas</h3>
+      <p>El Creador de Temas cuenta con un módulo de simulación y generación automática de etiquetas en la <strong>Sección 7: SEO y Vista Previa en Redes</strong>.</p>
+      
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Configurar los Campos SEO</h4>
+            <p>Rellena las opciones en el panel del creador:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); line-height: 1.5;">
+                <li><strong>Dominio de tu Web</strong>: Escribe la URL exacta de tu sitio (ej: <code>https://tu-usuario.pages.dev</code>). Es fundamental para que los bots ubiquen las rutas de tus imágenes.</li>
+                <li><strong>Título del Enlace</strong>: El título principal de la tarjeta. Por defecto se autogenera uniendo tu Nombre + Cargo (si no lo has modificado manualmente).</li>
+                <li><strong>Descripción</strong>: Un texto breve sobre tu web. Se pre-carga con el primer párrafo de tu biografía de forma inteligente.</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Seleccionar el Origen de la Imagen</h4>
+            <p>Elige cuál quieres que sea la imagen de portada de tu tarjeta de compartido entre estas 5 opciones:
+              <ul style="margin-left: 2rem; margin-top: 0.5rem; color: var(--text-muted); line-height: 1.5;">
+                <li><strong>Foto de Perfil (Avatar)</strong>: Muestra tu foto o avatar principal en la tarjeta.</li>
+                <li><strong>Banner de Cabecera</strong>: Muestra el banner superior configurado.</li>
+                <li><strong>Código QR de tu Web</strong>: Genera dinámicamente un código QR escaneable directo a tu landing usando la API de QRServer. Ideal para que cualquiera pueda escanear tu tarjeta visual de compartido y acceder directamente a tu web.</li>
+                <li><strong>URL Personalizada</strong>: Introduce una ruta de archivo local (ej: <code>assets/og-image.jpg</code>) o una URL de internet.</li>
+                <li><strong>Sin Imagen</strong>: Excluye la imagen para mostrar únicamente el bloque de texto (título y descripción).</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Simular y Copiar el Código</h4>
+            <p>Observa la previsualización interactiva estilo Telegram/WhatsApp. Si estás satisfecho, haz clic en el botón <strong>"Copiar Código"</strong>. Esto copiará las etiquetas <code>&lt;meta&gt;</code> correspondientes al portapapeles.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Pegar en el archivo index.html</h4>
+            <p>Abre tu archivo <code>index.html</code> en tu ordenador utilizando cualquier editor de código o de texto. Busca el bloque <code>&lt;head&gt;</code> (cerca de la línea 1-20) y pega el código copiado dentro. Guarda el archivo y súbelo a tu hosting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CONFIGURACIÓN AVANZADA DE LA WEB -->
+    <section id="configuracion-web" class="wiki-section">
+      <h2><i class="fas fa-cog"></i> Configuración Avanzada de la Web (Título, Favicon, App)</h2>
+      <div style="text-align: center; margin: 1.5rem 0;"><img src="assets/screenshots/3_personalizacion_navegador.png" alt="Personalización de Navegador" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+      <p>Esta sección detalla cómo configurar de manera avanzada los aspectos del navegador y la compatibilidad para instalar tu biolink como una aplicación móvil o de escritorio sin editar el código HTML principal, todo gestionado desde <code>config.js</code> y el Creador de Temas.</p>
+
+      <div class="dns-grid" style="grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;">
+        
+        <!-- Título -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-heading"></i> A. Título Personalizado del Navegador</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Por defecto, la pestaña de tu navegador muestra la combinación de <code>Nombre | Cargo Profesional</code>. Si deseas que aparezca un texto diferente (como <i>"Mi Portafolio Profesional ✨"</i>):</p>
+          <ol style="margin-left: 2rem; color: var(--text-muted); line-height: 1.6; font-size: 0.9rem;">
+            <li>Abre el Creador de Temas y expande la <strong>Sección 8: Configuración de la Web</strong>.</li>
+            <li>Introduce el título de tu preferencia en el campo <strong>Título Personalizado de la Web</strong>.</li>
+            <li>Exporta tu archivo <code>config.js</code> y reemplázalo en el proyecto. La lógica dinámica de <code>app.js</code> se encargará del resto de manera automática.</li>
+          </ol>
+        </div>
+
+        <!-- Favicon -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-image"></i> B. Favicon Dinámico (Icono de la Pestaña)</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Puedes regular el icono visible del navegador de tres formas distintas:</p>
+          <ul style="margin-left: 2rem; color: var(--text-muted); line-height: 1.6; font-size: 0.9rem;">
+            <li><strong>Foto de Perfil (Avatar)</strong>: Ajusta de forma automática tu icono del navegador a tu imagen de perfil.</li>
+            <li><strong>Icono de FontAwesome</strong>: Permite escribir cualquier clase libre (ej: <code>fa-solid fa-code</code> o <code>fa-brands fa-whatsapp</code>). La web pintará dinámicamente un círculo con el color de acento del tema y el icono blanco centrado de forma ultra-nítida.</li>
+            <li><strong>Imagen Personalizada</strong>: Te permite ingresar una ruta a un archivo propio (ej: <code>assets/favicon-propio.png</code>) o un enlace URL de internet.</li>
+          </ul>
+        </div>
+
+        <!-- PWA / App -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-mobile-alt"></i> C. Progressive Web App (PWA) e Instalación como App</h4>
+          <div style="text-align: center; margin: 1rem 0;"><img src="assets/screenshots/4_pwa_instalacion.png" alt="Instalación PWA" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1);"></div>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Una PWA permite que tu sitio sea instalado como una aplicación nativa, añadiendo un icono a la pantalla de inicio sin depender de tiendas de aplicaciones.</p>
+          <h5 style="margin-bottom: 0.5rem; color: var(--text-color);">Ventajas principales:</h5>
+          <ul style="margin-left: 2rem; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem; margin-bottom: 1rem;">
+            <li><strong>Acceso Sin Conexión</strong>: Gracias al Service Worker (<code>sw.js</code>), los archivos de la web se almacenan localmente. Si tu visitante pierde la red, la web cargará y funcionará igualmente.</li>
+            <li><strong>Icono de Inicio Personalizado</strong>: Se usará tu foto de perfil como icono nativo con los nombres que introduzcas en el configurador.</li>
+            <li><strong>Modo Standalone (Sin marcos)</strong>: Se abrirá como una aplicación nativa eliminando las barras de dirección e interfaces del navegador móvil.</li>
+          </ul>
+          <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; padding: 1rem; border-radius: 4px; font-size: 0.85rem; color: #f87171; line-height: 1.5;">
+            <strong>⚠️ Requisito de Seguridad Obligatorio (HTTPS):</strong> Las especificaciones de PWA exigen el uso estricto del protocolo seguro <strong>HTTPS</strong>. Al probar localmente en tu ordenador usando la dirección IP local de red (ej: <code>http://192.168.1.x:8080</code>), el móvil no te dejará instalar la aplicación nativa y fallbackeará a un simple "acceso directo". La instalación nativa PWA completa se habilitará inmediatamente cuando publiques el sitio en <strong>Cloudflare Pages</strong> u otros hostings de producción ya provistos con HTTPS.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: PREGUNTAS FRECUENTES (FAQ) -->
+    <section id="faq" class="wiki-section">
+      <h2><i class="fas fa-question-circle"></i> Preguntas Frecuentes y Solución de Problemas (FAQ)</h2>
+      
+      <div class="dns-grid" style="grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;">
+        
+        <!-- FAQ 1 -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-sync-alt"></i> 1. He cambiado mi información o foto de compartido, pero en WhatsApp/Telegram se sigue viendo la versión antigua. ¿Qué ocurre?</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Las redes sociales utilizan un sistema de caché de servidor muy agresivo para no saturar su ancho de banda cada vez que alguien comparte un enlace. Esto hace que "recuerden" la primera vista previa de tu web durante días o semanas.</p>
+          <h5 style="margin-bottom: 0.5rem; color: var(--text-color);">Cómo solucionarlo al instante:</h5>
+          <ul style="margin-left: 2rem; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem;">
+            <li><strong>Telegram</strong>: Habla con el bot oficial de Telegram llamado <a href="https://t.me/WebpageBot" target="_blank" style="color: var(--accent-color); text-decoration: underline;">@WebpageBot</a>. Envíale el comando <code>/updatepreview</code> y a continuación pon la dirección completa de tu sitio. El bot limpiará la caché de los servidores de Telegram de inmediato.</li>
+            <li><strong>Facebook / Messenger</strong>: Usa la herramienta oficial <a href="https://developers.facebook.com/tools/debug/" target="_blank" style="color: var(--accent-color); text-decoration: underline;">Facebook Sharing Debugger</a>. Escribe tu URL y haz clic en "Depurar" (Debug) y luego en "Volver a extraer" (Scrape Again) para refrescar la base de datos de Meta de inmediato.</li>
+            <li><strong>WhatsApp</strong>: WhatsApp utiliza la base de datos y la caché de Facebook. Al depurar tu sitio en la herramienta de Facebook (arriba mencionada), la vista previa de WhatsApp se actualizará automáticamente en pocos minutos.</li>
+          </ul>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-clock"></i> 2. Acabo de configurar mi subdominio y mi hosting, pero al entrar a mi web me sale un error de DNS (ej: NXDOMAIN) o no carga la página.</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">No te preocupes, esto es completamente normal. Cuando creas o modificas un registro DNS (como un apuntamiento CNAME o Nameservers), los servidores DNS de todo el mundo tienen que copiar esa nueva información. Este proceso se llama <strong>propagación DNS</strong> y puede tardar desde 10 minutos hasta 24 horas según el proveedor y el TTL. Ten paciencia y comprueba el estado transcurrido un tiempo.</p>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="dns-column" style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+          <h4 style="margin-top: 0; color: var(--accent-color); font-size: 1.1rem;"><i class="fas fa-video-slash"></i> 3. Tengo un video configurado como banner o fondo de mi landing, pero en mi teléfono móvil no se reproduce de forma automática.</h4>
+          <p style="line-height: 1.6; font-size: 0.95rem; color: var(--text-muted);">Los navegadores web móviles modernos (Chrome, Safari, Firefox) aplican políticas de consumo de datos y batería sumamente restrictivas. Para que un video se auto-reproduzca en móviles, debe cumplir obligatoriamente tres condiciones técnicas:</p>
+          <ol style="margin-left: 2rem; color: var(--text-muted); line-height: 1.5; font-size: 0.9rem;">
+            <li>Debe estar configurado en silencio absoluto (atributo <code>muted</code>). Si tiene pista de audio audible, el móvil bloqueará la reproducción automática por completo.</li>
+            <li>Debe tener el atributo <code>playsinline</code> para que se reproduzca dentro de la caja de la web en lugar de abrirse a pantalla completa en el reproductor nativo del móvil.</li>
+            <li>El teléfono móvil no debe estar en <strong>modo de ahorro de batería</strong>. En sistemas iOS (iPhone) y Android, el ahorro de energía desactiva por completo las animaciones pesadas y las autoreproducciones de video para prolongar la autonomía del dispositivo de forma forzada.</li>
+          </ol>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;"><i class="fas fa-check-circle" style="color: #10b981;"></i> Nota: La plantilla de la Landing Page ya cuenta con las etiquetas <code>autoplay loop muted playsinline</code> programadas por defecto de forma correcta en sus contenedores.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Filtro de búsqueda interactivo en tiempo real
+    function filterWiki() {
+      const input = document.getElementById("search-input").value.toLowerCase();
+      const sections = document.querySelectorAll(".wiki-section");
+      
+      sections.forEach(section => {
+        const text = section.textContent.toLowerCase();
+        if (text.includes(input)) {
+          section.style.display = "block";
+        } else {
+          section.style.display = "none";
+        }
+      });
+    }
+
+    // Scroll espía para el menú lateral
+    window.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const navLink = document.querySelector(`.nav-item a[href="#${id}"]`);
+          if (navLink) {
+            if (entry.intersectionRatio > 0) {
+              document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+              navLink.parentElement.classList.add('active');
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll('.wiki-section').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
