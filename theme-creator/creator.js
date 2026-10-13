@@ -48,16 +48,19 @@ let profileCardBoxOpacity = 0.65;
 let isSeoTitleCustom = false;
 let isSeoDescCustom = false;
 
-// Mapeo FontAwesome por defecto
+// Mapeo FontAwesome y marcas automáticas
+const FA_BRANDS = new Set(`42-group 500px a11y-project accessible-icon accusoft adn adversal affiliatetheme airbnb algolia alipay amazon amazon-pay amilia android angellist angrycreative angular app-store app-store-ios apper apple apple-pay arch-linux artstation asymmetrik atlassian audible autoprefixer avianex aviato aws bandcamp battle-net behance bilibili bimobject bitbucket bitcoin bity black-tie blackberry blogger blogger-b bluesky bluetooth bluetooth-b board-game-geek bootstrap bots brave brave-reverse btc buffer build-awesome buromobelexperte buy-n-large buysellads canadian-maple-leaf cash-app cc-amazon-pay cc-amex cc-apple-pay cc-diners-club cc-discover cc-jcb cc-mastercard cc-paypal cc-stripe cc-visa centercode centos chrome chromecast circle-zulip claude cloudflare cloudscale cloudsmith cloudversify cmplid codeberg codepen codiepie confluence connectdevelop contao copilot cotton-bureau cpanel creative-commons creative-commons-by creative-commons-nc creative-commons-nc-eu creative-commons-nc-jp creative-commons-nd creative-commons-pd creative-commons-pd-alt creative-commons-remix creative-commons-sa creative-commons-sampling creative-commons-sampling-plus creative-commons-share creative-commons-zero critical-role css css3 css3-alt cuttlefish d-and-d d-and-d-beyond dailymotion dart-lang dashcube debian deezer delicious deploydog deskpro dev deviantart devpost dhl diaspora digg digital-ocean discord discourse disqus dochub docker dolibarr draft2digital dribbble dropbox drupal duolingo dyalog earlybirds ebay edge edge-legacy elementor eleventy ello ember empire envira erlang ethereum etsy evernote expeditedssl facebook facebook-f facebook-messenger fantasy-flight-games fedex fediverse fedora figma files-pinwheel firefox firefox-browser first-order first-order-alt firstdraft flickr flipboard flutter fly font-awesome fonticons fonticons-fi forgejo fort-awesome fort-awesome-alt forumbee foursquare free-code-camp freebsd fulcrum galactic-republic galactic-senate get-pocket gg gg-circle git git-alt gitee github github-alt gitkraken gitlab gitter glide glide-g globaleaks gofore golang goodreads goodreads-g google google-drive google-pay google-play google-plus google-plus-g google-scholar google-wallet gratipay grav gripfire grunt guilded gulp hacker-news hackerrank hashnode hips hire-a-helper hive hooli hornbill hotjar houzz html5 hubspot hugging-face ideal imdb instagram instalod intercom internet-archive internet-explorer invision ioxhost itch-io itunes itunes-note java jedi-order jenkins jira joget joomla js jsfiddle julia jxl kaggle kakao-talk keybase keycdn kickstarter kickstarter-k ko-fi korvue kubernetes laravel lastfm leanpub leetcode less lets-encrypt letterboxd line linkedin linkedin-in linktree linode linux lumon lumon-drop lyft magento mailchimp mandalorian markdown mastodon matrix mattermost maxcdn mdb medapps medium medrt meetup megaport mendeley meta microblog microsoft mintbit mix mixcloud mixer mizuni modx monero napster neos nextcloud nfc-directional nfc-symbol nimblr node node-js notion npm ns8 nutritionix obs-studio obsidian octopus-deploy odnoklassniki odysee old-republic openai opencart openid openstreetmap opensuse opera optin-monster orcid osi padlet page4 pagelines palfed pandora patreon paypal perbyte periscope phabricator phoenix-framework phoenix-squadron php pied-piper pied-piper-alt pied-piper-hat pied-piper-pp pinterest pinterest-p pix pixelfed pixiv playstation postgresql product-hunt pushed python qq quinscape quora r-project raspberry-pi ravelry react reacteurope readme rebel red-river reddit reddit-alien redhat renren replyd researchgate resolving rev roblox-creator-studio rocketchat rockrms ror rust safari salesforce sass scaleway schlix screenpal scribd searchengin sellcast sellsy servicestack shirtsinbulk shoelace shopify shopware signal-messenger simplybuilt sistrix sith sitrox sketch skyatlas skype slack slideshare snapchat solana soundcloud sourcetree space-awesome speakap speaker-deck spotify square-behance square-bluesky square-build-awesome-stroke square-deskpro square-dribbble square-facebook square-figma square-font-awesome square-font-awesome-stroke square-git square-github square-gitlab square-google-plus square-hacker-news square-instagram square-js square-lastfm square-letterboxd square-linkedin square-odnoklassniki square-pied-piper square-pinterest square-reddit square-snapchat square-steam square-threads square-tumblr square-twitter square-upwork square-viadeo square-vimeo square-web-awesome square-web-awesome-stroke square-whatsapp square-x-twitter square-xing square-youtube squarespace stack-exchange stack-overflow stackpath staylinked steam steam-symbol sticker-mule storybook strava stripe stripe-s stubber studiovinari stumbleupon stumbleupon-circle substack superpowers supple supportnow suse svelte swift symfony symfonycasts tailwind-css teamspeak telegram tencent-weibo tesla tex the-red-yeti themeco themeisle think-peaks threads threema tidal tiktok tor-browser trade-federation trello tumblr twitch twitter typescript typo3 uber ubuntu uikit ultralytics ultralytics-hub ultralytics-yolo umbraco uncharted uniregistry unison unity unreal-engine unsplash untappd ups upwork usb usps ussunnah vaadin venmo venmo-v viacoin viadeo viber vim vimeo vimeo-v vine visual-studio vk vnv vsco vuejs w3c watchman-monitoring waze web-awesome webflow weebly weibo weixin whatsapp whmcs wikipedia-w windows wirsindhandwerk wix wizards-of-the-coast wodu wolf-pack-battalion wordpress wordpress-simple wpbeginner wpexplorer wpforms wpressr x-twitter xbox xing xmpp xrp xrpl y-combinator yahoo yammer yandex yandex-international yarn yelp yoast youtube youtube-shorts zhihu zoom zulip`.split(' '));
+
 const ICON_MAP = {
-  whatsapp: 'fab fa-whatsapp',
-  telegram: 'fab fa-telegram',
-  instagram: 'fab fa-instagram',
-  linkedin: 'fab fa-linkedin-in',
-  github: 'fab fa-github',
-  youtube: 'fab fa-youtube',
-  facebook: 'fab fa-facebook-f',
-  twitter: 'fab fa-twitter',
+  whatsapp: 'fa-brands fa-whatsapp',
+  telegram: 'fa-brands fa-telegram',
+  instagram: 'fa-brands fa-instagram',
+  linkedin: 'fa-brands fa-linkedin-in',
+  github: 'fa-brands fa-github',
+  youtube: 'fa-brands fa-youtube',
+  facebook: 'fa-brands fa-facebook-f',
+  twitter: 'fa-brands fa-twitter',
+  codeberg: 'fa-brands fa-codeberg',
   mail: 'far fa-envelope',
   email: 'far fa-envelope',
   phone: 'fas fa-phone-alt',
@@ -625,20 +628,35 @@ function getIconHtml(iconName, isWhite = false) {
   if (!iconName) return '';
   const iconStr = iconName.trim();
 
-  if (iconStr.startsWith("http://") || iconStr.startsWith("https://") || iconStr.startsWith("./")) {
+  // 1. Imagen URL o ruta local
+  if (iconStr.startsWith("http://") || iconStr.startsWith("https://") || iconStr.startsWith("./") || iconStr.startsWith("/") || iconStr.startsWith("assets/")) {
     return `<img src="${iconStr}" class="link-icon-img" alt="Icono" />`;
   }
-  
-  if (iconStr.includes("fa-") || iconStr.startsWith("fab ") || iconStr.startsWith("fas ") || iconStr.startsWith("far ") || iconStr.startsWith("fa ")) {
+
+  // 2. SVG o etiqueta HTML completa directa
+  if (iconStr.startsWith("<svg") || iconStr.startsWith("<i ")) {
+    return iconStr;
+  }
+
+  // 3. Clases compuestas ya especificadas por el usuario (ej: "fa-brands fa-codeberg", "fas fa-envelope", "fab fa-github")
+  if (iconStr.startsWith("fa-brands ") || iconStr.startsWith("fa-solid ") || iconStr.startsWith("fa-regular ") ||
+      iconStr.startsWith("fab ") || iconStr.startsWith("fas ") || iconStr.startsWith("far ") ||
+      (iconStr.includes(" ") && iconStr.includes("fa-"))) {
     return `<i class="${iconStr} link-icon-fa" style="${isWhite ? 'color: var(--text-color);' : ''}"></i>`;
   }
-  
-  const faClass = ICON_MAP[iconStr.toLowerCase()];
-  if (faClass) {
-    return `<i class="${faClass} link-icon-fa" style="${isWhite ? 'color: var(--text-color);' : ''}"></i>`;
+
+  // 4. Extraer nombre limpio (si el usuario escribió "fa-codeberg" o "codeberg")
+  const cleanName = iconStr.toLowerCase().replace(/^fa-/, '');
+
+  // 5. Alias especiales predefinidos
+  const mapped = ICON_MAP[cleanName];
+  if (mapped) {
+    return `<i class="${mapped} link-icon-fa" style="${isWhite ? 'color: var(--text-color);' : ''}"></i>`;
   }
-  
-  return `<i class="fas fa-${iconStr.toLowerCase()} link-icon-fa" style="${isWhite ? 'color: var(--text-color);' : ''}"></i>`;
+
+  // 6. Detección automática por familia Font Awesome (marcas -> fa-brands, resto -> fa-solid)
+  const familyClass = FA_BRANDS.has(cleanName) ? 'fa-brands' : 'fa-solid';
+  return `<i class="${familyClass} fa-${cleanName} link-icon-fa" style="${isWhite ? 'color: var(--text-color);' : ''}"></i>`;
 }
 
 function initFormBindings() {

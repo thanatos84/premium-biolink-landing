@@ -272,7 +272,7 @@ Publica tu web en segundos desde la terminal:
     ```
 4.  Te pedirá introducir un correo y contraseña para crear tu cuenta gratuita. Confirma la carpeta y escribe el subdominio gratuito terminado en `.surge.sh` que desees.
 
-### D. Codeberg Pages ([pages.codeberg.org](https://pages.codeberg.org/))
+### D. Codeberg Pages ([codeberg.org](https://codeberg.org/))
 Alojamiento estático gratuito, sin ánimo de lucro y centrado en la privacidad:
 1.  Crea una cuenta en [Codeberg.org](https://codeberg.org).
 2.  Crea un nuevo repositorio público pulsando el botón "+" -> **New Repository** y nómbralo exactamente: `pages`.
