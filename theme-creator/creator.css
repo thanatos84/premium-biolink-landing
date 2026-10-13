@@ -147,7 +147,7 @@ body.creator-body {
 
 .editor-section summary::after {
   content: '\f107';
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'Font Awesome 7 Free', 'Font Awesome 6 Free', 'FontAwesome';
   font-weight: 900;
   margin-left: auto;
   transition: transform 0.3s ease;
