@@ -7,3 +7,7 @@ profile.jpeg
 # Documentos locales y recursos de promoción
 *.pdf
 promocion/
+
+# Empaquetado de releases y scripts locales
+*.zip
+*.ps1
